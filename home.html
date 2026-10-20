@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GoTrip: planeje, explore e viva novas histórias. Busque destinos, monte sua agenda e veja tudo no mapa.">
+  <title>GoTrip – Home</title>
+  <style>
+    body { line-height: 1.6; }
+    main { max-width: 800px; margin: 0 auto; padding: 0 16px; }
+    :focus-visible { outline: 3px solid; outline-offset: 2px; }
+    .skip-link { position: absolute; left: 8px; top: -60px; padding: 12px 16px; background: Canvas; }
+    .skip-link:focus { top: 8px; }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header>
+    <h1>GoTrip</h1>
+    <nav aria-label="Menu principal">
+      <ul>
+        <li><a href="#buscar" aria-current="page">Início</a></li>
+        <li><a href="#destinos">Destinos</a></li>
+        <li><a href="#recursos">Recursos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section id="buscar" aria-labelledby="titulo-buscar">
+      <h2 id="titulo-buscar">Para onde você quer viajar?</h2>
+      <p>Planeje, explore e <strong>viva novas histórias</strong>.</p>
+      <form action="#destinos">
+        <label for="busca">Buscar destino</label>
+        <input type="search" id="busca" name="busca">
+        <button type="submit">Buscar</button>
+      </form>
+    </section>
+
+    <section id="destinos" aria-labelledby="titulo-destinos">
+      <h2 id="titulo-destinos">Destinos em alta</h2>
+      <article>
+        <h3>Roma, Itália</h3>
+        <p>Coliseu, Fórum Romano e gastronomia.</p>
+      </article>
+      <article>
+        <h3>Paris, França</h3>
+        <p>Arte, arquitetura e cultura.</p>
+      </article>
+      <aside>
+        <h3>Dica</h3>
+        <p>Reserve os ingressos <em>com antecedência</em> para evitar filas.</p>
+        <p>Atualizado em <time datetime="2026-10-20">20 de outubro de 2026</time>.</p>
+      </aside>
+    </section>
+
+    <section id="recursos" aria-labelledby="titulo-recursos">
+      <h2 id="titulo-recursos">Recursos</h2>
+      <article>
+        <h3>Agenda</h3>
+        <p>Monte o roteiro de cada dia.</p>
+      </article>
+      <article>
+        <h3>Mapa</h3>
+        <p>Veja atrações, restaurantes e hotéis.</p>
+      </article>
+      <article>
+        <h3>Perfil</h3>
+        <p>Acompanhe suas viagens e lugares visitados.</p>
+      </article>
+
+      <h3>Perguntas frequentes</h3>
+      <details>
+        <summary>O GoTrip é gratuito?</summary>
+        <p>Sim, você pode criar sua conta e planejar viagens sem custo.</p>
+      </details>
+      <details>
+        <summary>Posso ver lugares fechados no mapa?</summary>
+        <p>Sim, os locais fechados no momento aparecem com marcador vermelho.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <nav aria-label="Menu do rodapé">
+      <ul>
+        <li><a href="#buscar">Voltar ao topo</a></li>
+        <li><a href="#destinos">Destinos</a></li>
+        <li><a href="#recursos">Recursos</a></li>
+      </ul>
+    </nav>
+    <address>
+      Contato: <a href="mailto:contato@gotrip.com">contato@gotrip.com</a>
+    </address>
+    <p>© 2026 GoTrip. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>

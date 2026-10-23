@@ -7,3 +7,202 @@
   --fonte-principal: "Montserrat";
   --fonte-secundaria: "Poppins";
 }
+
+* {
+   box-sizing: border-box;
+   margin: 0;
+}
+
+body {
+   font-family: 'Segoe UI', system-ui, sans-serif;
+   font-size: 1rem;
+   line-height: 1.6;
+   color: #f8fafc;
+   background: #020617;
+}
+
+a {
+   color: #38bdf8;
+}
+
+:focus-visible {
+   outline: 3px solid #f59e0b;
+   outline-offset: 0.5rem;
+}
+
+.skip-link {
+   position: absolute;
+   left: -100vw;
+}
+
+.skip-link:focus {
+   left: 0.5rem;
+   top: 0.5rem;
+   padding: 0.5rem;
+   background: #f59e0b;
+   color: #020617;
+}
+
+/* Topo e rodapé */
+header,
+footer {
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: space-between;
+   gap: 1rem;
+   padding: 1rem 2rem;
+   background: #0f172a;
+}
+
+header {
+   border-bottom: 1px solid #334155;
+}
+
+footer {
+   border-top: 1px solid #334155;
+   color: #94a3b8;
+   font-size: 0.875rem;
+}
+
+h1 {
+   font-size: 1.5rem;
+   font-weight: 800;
+   color: #38bdf8;
+}
+
+ul {
+   display: flex;
+   gap: 1.5rem;
+   padding: 0;
+   list-style: none;
+}
+
+nav a {
+   color: #f8fafc;
+   text-decoration: none;
+}
+
+nav a:hover,
+nav a[aria-current] {
+   color: #38bdf8;
+}
+
+address {
+   font-style: normal;
+}
+
+/* Conteúdo */
+main {
+   max-width: 64rem;
+   margin: 0 auto;
+   padding: 2rem;
+}
+
+section {
+   margin-bottom: 3rem;
+}
+
+h2 {
+   font-size: 2rem;
+   margin-bottom: 1rem;
+}
+
+h3 {
+   font-size: 1.25rem;
+}
+
+p {
+   color: #94a3b8;
+}
+
+/* Busca (destaque) */
+#buscar {
+   padding: 3rem 2rem;
+   background: #0f172a;
+   border: 1px solid #334155;
+   border-radius: 1.5rem;
+}
+
+#buscar h2 {
+   color: #38bdf8;
+}
+
+#buscar strong {
+   color: #f8fafc;
+}
+
+form {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 0.5rem;
+   margin-top: 1.5rem;
+}
+
+label {
+   flex: 1 0 100%;
+   font-weight: 600;
+}
+
+input {
+   flex: 1;
+   min-width: 12rem;
+   padding: 0.5rem 1rem;
+   font: inherit;
+   color: #f8fafc;
+   background: #1e293b;
+   border: 1px solid #334155;
+   border-radius: 1rem;
+}
+
+button {
+   padding: 0.5rem 2rem;
+   font: inherit;
+   font-weight: 700;
+   color: #020617;
+   background: #38bdf8;
+   border: 0;
+   border-radius: 4rem;
+   cursor: pointer;
+}
+
+button:hover {
+   background: #0284c7;
+   color: #f8fafc;
+}
+
+/* Cartões */
+article,
+aside,
+details {
+   padding: 1rem 1.5rem;
+   margin-bottom: 1rem;
+   background: #1e293b;
+   border: 1px solid #334155;
+   border-radius: 1rem;
+}
+
+article:hover {
+   border-color: #38bdf8;
+}
+
+article h3 {
+   color: #38bdf8;
+}
+
+aside {
+   border-color: #fb923c;
+}
+
+aside h3 {
+   color: #fb923c;
+}
+
+summary {
+   font-weight: 600;
+   cursor: pointer;
+}
+
+details p {
+   margin-top: 0.5rem;
+}

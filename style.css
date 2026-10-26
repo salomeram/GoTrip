@@ -15,7 +15,6 @@
 
 body {
    font-family: 'Segoe UI', system-ui, sans-serif;
-   font-size: 1rem;
    line-height: 1.6;
    color: #f8fafc;
    background: #020617;
@@ -23,6 +22,10 @@ body {
 
 a {
    color: #38bdf8;
+}
+
+p {
+   color: #94a3b8;
 }
 
 :focus-visible {
@@ -37,37 +40,31 @@ a {
 
 .skip-link:focus {
    left: 0.5rem;
-   top: 0.5rem;
-   padding: 0.5rem;
-   background: #f59e0b;
-   color: #020617;
 }
 
-/* Topo e rodapé */
+/* Topo, rodapé e menu */
 header,
 footer {
    display: flex;
    flex-wrap: wrap;
-   align-items: center;
    justify-content: space-between;
    gap: 1rem;
    padding: 1rem 2rem;
    background: #0f172a;
+   border: 0 solid #334155;
 }
 
 header {
-   border-bottom: 1px solid #334155;
+   border-bottom-width: 1px;
 }
 
 footer {
-   border-top: 1px solid #334155;
-   color: #94a3b8;
+   border-top-width: 1px;
    font-size: 0.875rem;
 }
 
 h1 {
    font-size: 1.5rem;
-   font-weight: 800;
    color: #38bdf8;
 }
 
@@ -81,11 +78,6 @@ ul {
 nav a {
    color: #f8fafc;
    text-decoration: none;
-}
-
-nav a:hover,
-nav a[aria-current] {
-   color: #38bdf8;
 }
 
 address {
@@ -112,11 +104,24 @@ h3 {
    font-size: 1.25rem;
 }
 
-p {
+img {
+   display: block;
+   max-width: 100%;
+   height: auto;
+   border-radius: 1rem;
+}
+
+figure {
+   margin-bottom: 2rem;
+}
+
+figcaption {
+   margin-top: 0.5rem;
+   font-size: 0.875rem;
    color: #94a3b8;
 }
 
-/* Busca (destaque) */
+/* Busca */
 #buscar {
    padding: 3rem 2rem;
    background: #0f172a;
@@ -126,10 +131,6 @@ p {
 
 #buscar h2 {
    color: #38bdf8;
-}
-
-#buscar strong {
-   color: #f8fafc;
 }
 
 form {
@@ -159,22 +160,17 @@ button {
    padding: 0.5rem 2rem;
    font: inherit;
    font-weight: 700;
-   color: #020617;
    background: #38bdf8;
    border: 0;
    border-radius: 4rem;
    cursor: pointer;
 }
 
-button:hover {
-   background: #0284c7;
-   color: #f8fafc;
-}
-
-/* Cartões */
+/* Cartões (home e sobre a equipe) */
 article,
 aside,
-details {
+details,
+main>section:not([id]) {
    padding: 1rem 1.5rem;
    margin-bottom: 1rem;
    background: #1e293b;
@@ -182,11 +178,8 @@ details {
    border-radius: 1rem;
 }
 
-article:hover {
-   border-color: #38bdf8;
-}
-
-article h3 {
+article h3,
+main>section:not([id]) h3 {
    color: #38bdf8;
 }
 
@@ -201,8 +194,4 @@ aside h3 {
 summary {
    font-weight: 600;
    cursor: pointer;
-}
-
-details p {
-   margin-top: 0.5rem;
 }

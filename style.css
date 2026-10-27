@@ -1,197 +1,982 @@
+/* ==========================================================================
+   GoTrip | style.css
+   Formato de celular: 360px de largura (base). Cresce em telas maiores.
+   Regra do projeto: Grid no layout geral, Flexbox dentro dos componentes.
+   Só HTML e CSS, sem JavaScript.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. DESIGN SYSTEM: cores, espaçamentos, raios e tipografia
+   ========================================================================== */
 :root {
-  --cor-principal: #FFFFFF;
-  --cor-texto: #FFFFFF;
-  --cor-fundo: #0F3963;
-  --cor-site: #74a5d6;
-  --cor-aviso: #C73032;
-  --fonte-principal: "Montserrat";
-  --fonte-secundaria: "Poppins";
+  /* Cores (as mesmas do protótipo hi-fi) */
+  --cor-fundo-escuro: #020617;
+  --cor-fundo: #0f172a;
+  --cor-superficie: #1e293b;
+  --cor-borda: #334155;
+  --cor-primaria: #38bdf8;
+  --cor-primaria-hover: #0284c7;
+  --cor-verde: #34d399;
+  --cor-laranja: #fb923c;
+  --cor-vermelho: #f87171;
+  --cor-perigo: #dc2626;
+  --cor-texto: #f8fafc;
+  --cor-texto-suave: #94a3b8;
+  --cor-foco: #f59e0b;
+
+  /* Espaçamentos (escala de 4px) */
+  --espaco-1: 4px;
+  --espaco-2: 8px;
+  --espaco-3: 12px;
+  --espaco-4: 16px;
+  --espaco-5: 24px;
+  --espaco-6: 32px;
+
+  /* Raios de borda */
+  --raio-md: 12px;
+  --raio-lg: 16px;
+  --raio-pilula: 999px;
+
+  /* Acessibilidade: tamanho mínimo de área de toque */
+  --alvo-toque: 48px;
+
+  /* Tipografia */
+  --fonte: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
 }
 
-* {
-   box-sizing: border-box;
-   margin: 0;
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--cor-fundo-escuro);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
 
 body {
-   font-family: 'Segoe UI', system-ui, sans-serif;
-   line-height: 1.6;
-   color: #f8fafc;
-   background: #020617;
+  margin: 0;
+  font-family: var(--fonte);
+  line-height: 1.6;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+
+  /* GRID: o body é o layout geral da tela, em uma coluna e três linhas
+     (cabeçalho, conteúdo, rodapé). A linha do meio (1fr) ocupa o espaço
+     que sobra e mantém o rodapé no fim da tela. Grid é a escolha certa
+     porque o layout é bidimensional e definido pela página. */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);   /* minmax(0, ...) impede que um filho largo estique a coluna */
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+
+  /* Formato de celular: pensado para 360px, no máximo 480px. */
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
 }
+
+h1, h2, h3, p, ul, ol, dl, dd, address, figure {
+  margin: 0;
+}
+
+h1 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
+h2 { font-size: 1.25rem; font-weight: 700; line-height: 1.3; }
+h3 { font-size: 1rem;    font-weight: 700; line-height: 1.3; }
 
 a {
-   color: #38bdf8;
+  color: var(--cor-primaria);
+  text-decoration: none;   /* visual limpo: o destaque vem de cor, borda e fundo */
 }
 
-p {
-   color: #94a3b8;
-}
+img { display: block; max-width: 100%; }
 
+/* Foco visível para navegação por teclado */
 :focus-visible {
-   outline: 3px solid #f59e0b;
-   outline-offset: 0.5rem;
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
 }
 
+/* Link "Pular para o conteúdo": fica fora da tela até receber foco */
 .skip-link {
-   position: absolute;
-   left: -100vw;
+  position: absolute;
+  left: var(--espaco-2);
+  top: -60px;
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  border-radius: var(--raio-md);
+  z-index: 10;
 }
+.skip-link:focus { top: var(--espaco-2); }
 
-.skip-link:focus {
-   left: 0.5rem;
-}
 
-/* Topo, rodapé e menu */
-header,
-footer {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-between;
-   gap: 1rem;
-   padding: 1rem 2rem;
-   background: #0f172a;
-   border: 0 solid #334155;
-}
-
+/* ==========================================================================
+   3. CABEÇALHO E MENUS
+   ========================================================================== */
 header {
-   border-bottom-width: 1px;
+  /* GRID: o cabeçalho empilha duas linhas (logo e menu) com o mesmo
+     espaço entre elas. No desktop vira duas colunas (veja o fim do arquivo). */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--espaco-3);
+  padding: var(--espaco-4);
+  border-bottom: 1px solid var(--cor-borda);
 }
 
-footer {
-   border-top-width: 1px;
-   font-size: 0.875rem;
+.logo { justify-self: start; }
+.logo img { height: 40px; width: auto; }
+
+nav ul { list-style: none; padding: 0; }
+
+/* Menu em "pílulas": usado no cabeçalho e na barra de dias da agenda */
+.pilulas {
+  /* FLEXBOX: uma única linha de itens (eixo único). Se faltar espaço,
+     a lista rola na horizontal em vez de quebrar o layout. */
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
 }
 
-h1 {
-   font-size: 1.5rem;
-   color: #38bdf8;
+.pilulas a,
+.chip {
+  /* FLEXBOX: centraliza o texto dentro do botão-link. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--alvo-toque);
+  padding: 0 10px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pilula);
+  color: var(--cor-texto-suave);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-ul {
-   display: flex;
-   gap: 1.5rem;
-   padding: 0;
-   list-style: none;
+.pilulas a:hover,
+.chip:hover {
+  color: var(--cor-texto);
+  border-color: var(--cor-primaria);
 }
 
-nav a {
-   color: #f8fafc;
-   text-decoration: none;
+.pilulas a[aria-current="page"] {
+  background: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: var(--cor-fundo-escuro);
 }
 
-address {
-   font-style: normal;
-}
 
-/* Conteúdo */
+/* ==========================================================================
+   4. CONTEÚDO PRINCIPAL (estrutura comum a todas as páginas)
+   ========================================================================== */
 main {
-   max-width: 64rem;
-   margin: 0 auto;
-   padding: 2rem;
+  /* GRID: as seções da página ficam empilhadas com o mesmo espaçamento. */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--espaco-6);
+  align-content: start;
+  padding: var(--espaco-5) var(--espaco-4);
 }
 
-section {
-   margin-bottom: 3rem;
+main > section {
+  /* GRID: dentro de cada seção, título e cartões ficam em uma coluna
+     com espaçamento uniforme. No desktop, algumas seções viram colunas. */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--espaco-3);
+  scroll-margin-top: var(--espaco-4);
 }
 
-h2 {
-   font-size: 2rem;
-   margin-bottom: 1rem;
+main > section > p { color: var(--cor-texto-suave); }
+
+.voltar {
+  /* FLEXBOX: seta e texto alinhados na mesma linha. */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  min-height: var(--alvo-toque);
+  justify-self: start;
+  color: var(--cor-texto-suave);
+  font-weight: 600;
+}
+.voltar:hover { color: var(--cor-texto); }
+
+
+/* ==========================================================================
+   5. COMPONENTES COMUNS: botões, formulários, cartões, selos
+   ========================================================================== */
+
+/* --- Botões e links em forma de botão ----------------------------------- */
+button,
+.btn {
+  /* FLEXBOX: centraliza texto e ícone dentro do botão. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-2);
+  min-height: var(--alvo-toque);
+  padding: 0 var(--espaco-5);
+  background: var(--cor-primaria);
+  color: var(--cor-fundo-escuro);
+  border: 1.5px solid var(--cor-primaria);
+  border-radius: var(--raio-md);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-h3 {
-   font-size: 1.25rem;
+button:hover,
+.btn:hover {
+  background: var(--cor-primaria-hover);
+  border-color: var(--cor-primaria-hover);
+  color: #fff;
 }
 
-img {
-   display: block;
-   max-width: 100%;
-   height: auto;
-   border-radius: 1rem;
+.btn-secundario {
+  background: transparent;
+  color: var(--cor-primaria);
 }
 
-figure {
-   margin-bottom: 2rem;
+.btn-perigo {
+  background: var(--cor-perigo);
+  border-color: var(--cor-perigo);
+  color: #fff;
+}
+.btn-perigo:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
 }
 
-figcaption {
-   margin-top: 0.5rem;
-   font-size: 0.875rem;
-   color: #94a3b8;
+.acoes {
+  /* FLEXBOX: botões lado a lado que quebram de linha se não couberem. */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-3);
+}
+.acoes .btn { flex: 1 1 140px; }
+
+/* --- Formulários -------------------------------------------------------- */
+.formulario {
+  /* GRID: campos empilhados com o mesmo espaçamento. */
+  display: grid;
+  gap: var(--espaco-4);
 }
 
-/* Busca */
-#buscar {
-   padding: 3rem 2rem;
-   background: #0f172a;
-   border: 1px solid #334155;
-   border-radius: 1.5rem;
-}
-
-#buscar h2 {
-   color: #38bdf8;
-}
-
-form {
-   display: flex;
-   flex-wrap: wrap;
-   gap: 0.5rem;
-   margin-top: 1.5rem;
+.campo {
+  /* FLEXBOX em coluna: rótulo acima do campo. */
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-2);
 }
 
 label {
-   flex: 1 0 100%;
-   font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 input {
-   flex: 1;
-   min-width: 12rem;
-   padding: 0.5rem 1rem;
-   font: inherit;
-   color: #f8fafc;
-   background: #1e293b;
-   border: 1px solid #334155;
-   border-radius: 1rem;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--alvo-toque);
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  border: 1.5px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  font: inherit;
+  font-size: 0.95rem;
 }
 
-button {
-   padding: 0.5rem 2rem;
-   font: inherit;
-   font-weight: 700;
-   background: #38bdf8;
-   border: 0;
-   border-radius: 4rem;
-   cursor: pointer;
+input::placeholder { color: var(--cor-texto-suave); }
+input:focus { border-color: var(--cor-primaria); }
+
+.formulario button { width: 100%; }
+
+.campo-busca {
+  /* FLEXBOX: campo e botão lado a lado. O campo cresce (flex: 1) e o
+     botão mantém o tamanho do conteúdo. */
+  display: flex;
+  gap: var(--espaco-2);
+}
+.campo-busca input { flex: 1; }
+.campo-busca button { flex: none; }
+
+#buscar form {
+  /* GRID: rótulo em cima e a linha do campo embaixo. */
+  display: grid;
+  gap: var(--espaco-2);
+  margin-top: var(--espaco-2);
 }
 
-/* Cartões (home e sobre a equipe) */
-article,
-aside,
-details,
-main>section:not([id]) {
-   padding: 1rem 1.5rem;
-   margin-bottom: 1rem;
-   background: #1e293b;
-   border: 1px solid #334155;
-   border-radius: 1rem;
+/* --- Cartão genérico ---------------------------------------------------- */
+.cartao,
+main article {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  padding: var(--espaco-3);
 }
 
-article h3,
-main>section:not([id]) h3 {
-   color: #38bdf8;
+main article p { color: var(--cor-texto-suave); font-size: 0.85rem; }
+
+/* Cartão com link: o link do título cobre o cartão inteiro, então a
+   área de toque é o cartão todo. */
+.card-destino,
+.card-recurso { position: relative; }
+
+.card-destino a,
+.card-recurso a {
+  color: inherit;
+  text-decoration: none;
 }
 
-aside {
-   border-color: #fb923c;
+.card-destino a::after,
+.card-recurso a::after {
+  content: "";
+  position: absolute;     /* só estica o link sobre o cartão, não é layout */
+  inset: 0;
+  border-radius: var(--raio-lg);
 }
 
-aside h3 {
-   color: #fb923c;
+.card-destino a:focus-visible,
+.card-recurso a:focus-visible { outline: none; }
+
+.card-destino a:focus-visible::after,
+.card-recurso a:focus-visible::after {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+
+/* Seta à direita: mostra que o cartão inteiro é clicável */
+.card-destino:has(a)::after,
+.card-recurso:has(a)::after {
+  content: "›";
+  margin-left: auto;
+  padding-left: var(--espaco-2);
+  color: var(--cor-texto-suave);
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.card-destino:has(a):hover,
+.card-recurso:has(a):hover { border-color: var(--cor-primaria); }
+
+/* --- Selos -------------------------------------------------------------- */
+.selo {
+  padding: 2px var(--espaco-2);
+  border-radius: var(--raio-pilula);
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--cor-primaria);
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.selo-verde    { background: rgba(52, 211, 153, 0.15); color: var(--cor-verde); }
+.selo-laranja  { background: rgba(251, 146, 60, 0.15); color: var(--cor-laranja); }
+.selo-vermelho { background: rgba(239, 68, 68, 0.15);  color: #fca5a5; }
+
+/* --- Aviso e estado vazio ----------------------------------------------- */
+.aviso {
+  /* FLEXBOX: ícone à esquerda e texto à direita. */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3) var(--espaco-4);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--raio-md);
+  color: #fca5a5;
+  font-size: 0.85rem;
+}
+
+.vazio {
+  /* FLEXBOX em coluna: mensagem e link de ação. */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espaco-2);
+  padding: var(--espaco-4);
+  border: 1.5px dashed var(--cor-borda);
+  border-radius: var(--raio-lg);
+  color: var(--cor-texto-suave);
+  font-size: 0.9rem;
+}
+
+
+/* ==========================================================================
+   6. HOME
+   ========================================================================== */
+
+/* --- Acesso rápido (botões para Agenda, Mapa e Perfil) ------------------ */
+.atalhos {
+  /* GRID: três botões com a mesma largura, lado a lado. */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espaco-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.atalhos a {
+  /* FLEXBOX em coluna: ícone acima do nome, centralizados. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-2);
+  min-height: 88px;
+  padding: var(--espaco-3);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  color: var(--cor-texto);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.atalhos a:hover { border-color: var(--cor-primaria); }
+.atalhos i { font-size: 1.5rem; }
+
+/* --- Destinos em alta --------------------------------------------------- */
+.card-destino {
+  /* FLEXBOX: foto à esquerda e texto à direita (eixo único). A foto não
+     encolhe (flex: none) e o texto ocupa o resto. */
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+}
+
+.card-destino img,
+.miniatura {
+  flex: none;
+  width: 88px;
+  height: 88px;
+  border-radius: var(--raio-md);
+}
+
+.card-destino img { object-fit: cover; }
+
+/* Miniatura com ícone, para destinos que ainda não têm foto */
+.miniatura {
+  /* FLEXBOX: centraliza o ícone dentro do quadrado. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: var(--cor-texto);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.45), var(--cor-fundo));
+}
+/* Fotos: se a imagem não carregar, o degradê aparece no lugar */
+.foto-lisboa {
+  background:
+    url("https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?auto=format&fit=crop&w=300&q=80") center / cover no-repeat,
+    linear-gradient(135deg, rgba(52, 211, 153, 0.45), var(--cor-fundo));
+}
+.foto-toquio {
+  background:
+    url("https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=300&q=80") center / cover no-repeat,
+    linear-gradient(135deg, rgba(251, 146, 60, 0.45), var(--cor-fundo));
+}
+.foto-rio {
+  background:
+    url("https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=300&q=80") center / cover no-repeat,
+    linear-gradient(135deg, rgba(56, 189, 248, 0.45), var(--cor-fundo));
+}
+.foto-nova-york {
+  background:
+    url("https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=300&q=80") center / cover no-repeat,
+    linear-gradient(135deg, rgba(251, 146, 60, 0.45), var(--cor-fundo));
+}
+
+.mini-verde   { background: linear-gradient(135deg, rgba(52, 211, 153, 0.45), var(--cor-fundo)); }
+.mini-laranja { background: linear-gradient(135deg, rgba(251, 146, 60, 0.45), var(--cor-fundo)); }
+
+.card-destino > div {
+  /* FLEXBOX em coluna: selo, título e descrição com o mesmo espaçamento. */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espaco-1);
+  min-width: 0;
+}
+
+.horario {
+  color: var(--cor-laranja) !important;
+  font-weight: 600;
+}
+
+/* Dica de viagem */
+#destinos aside {
+  /* FLEXBOX em coluna: título e parágrafos com espaçamento uniforme. */
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-2);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-left: 4px solid var(--cor-primaria);
+  border-radius: var(--raio-md);
+  padding: var(--espaco-4);
+}
+#destinos aside p { font-size: 0.85rem; }
+#destinos aside time { color: var(--cor-texto-suave); }
+
+/* --- Como funciona (lista numerada: a ordem importa) -------------------- */
+.passos {
+  /* GRID: passos empilhados no celular; 3 colunas no desktop. */
+  display: grid;
+  gap: var(--espaco-3);
+  padding: 0;
+  list-style: none;
+}
+
+.passos li {
+  /* FLEXBOX: número à esquerda e texto à direita. */
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+}
+
+.passos .numero {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--cor-primaria);
+  color: var(--cor-fundo-escuro);
+  font-weight: 800;
+}
+
+.passos li > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-1);
+}
+.passos p { color: var(--cor-texto-suave); font-size: 0.85rem; }
+
+/* --- Recursos ----------------------------------------------------------- */
+.card-recurso {
+  /* FLEXBOX: ícone à esquerda e texto à direita, alinhados ao centro. */
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+}
+
+.card-recurso .icone {
+  /* FLEXBOX: centraliza o ícone dentro do círculo. */
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--alvo-toque);
+  height: var(--alvo-toque);
+  border-radius: 50%;
+  background: var(--cor-fundo);
+  font-size: 1.25rem;
+}
+
+.icone-primaria {
+  color: var(--cor-primaria);
+  text-decoration: none;   /* visual limpo: o destaque vem de cor, borda e fundo */
+}
+.icone-verde    { color: var(--cor-verde); }
+.icone-laranja  { color: var(--cor-laranja); }
+.icone-vermelho { color: var(--cor-vermelho); }
+
+.card-recurso > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-1);
+}
+
+/* --- Perguntas frequentes e listas expansíveis -------------------------- */
+details {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
 }
 
 summary {
-   font-weight: 600;
-   cursor: pointer;
+  /* FLEXBOX: título à esquerda e o sinal +/− à direita (space-between). */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  min-height: var(--alvo-toque);
+  padding: 0 var(--espaco-4);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--cor-primaria); font-size: 1.25rem; }
+details[open] summary::after { content: "−"; }
+
+summary i { margin-right: var(--espaco-2); }
+
+details > p {
+  padding: 0 var(--espaco-4) var(--espaco-4);
+  color: var(--cor-texto-suave);
+  font-size: 0.9rem;
+}
+
+#faq { gap: var(--espaco-2); }
+#faq > h2 { margin-bottom: var(--espaco-1); }
+
+
+/* ==========================================================================
+   7. AGENDA
+   ========================================================================== */
+.dia {
+  /* GRID: título do dia e períodos empilhados. */
+  display: grid;
+  gap: var(--espaco-2);
+  scroll-margin-top: var(--espaco-4);
+}
+
+.dia h2 { color: var(--cor-primaria); }
+.dia h3 { color: var(--cor-texto-suave); font-size: 0.9rem; font-weight: 600; }
+
+.dia h3:not(:first-of-type) { margin-top: var(--espaco-2); }
+
+.destino-agenda { font-weight: 700; color: var(--cor-primaria); }
+
+
+/* ==========================================================================
+   8. MAPA
+   ========================================================================== */
+.mapa {
+  /* GRID: o mapa é uma grade de 10 x 10. Cada marcador é posicionado em
+     uma célula (grid-column / grid-row), sem position: absolute. As linhas
+     do fundo simulam as ruas. */
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  aspect-ratio: 1 / 1.1;
+  background-color: #16213a;
+  background-image:
+    linear-gradient(var(--cor-borda) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cor-borda) 1px, transparent 1px);
+  background-size: 10% 10%;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  overflow: hidden;
+}
+
+.pino {
+  /* FLEXBOX: centraliza o ícone dentro do marcador redondo. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  place-self: center;
+  width: var(--alvo-toque);
+  height: var(--alvo-toque);
+  border-radius: 50%;
+  background: var(--cor-superficie);
+  border: 2px solid var(--cor-primaria);
+  color: var(--cor-primaria);
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.pino-verde   { border-color: var(--cor-verde); color: var(--cor-verde); }
+.pino-fechado {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+  color: #fca5a5;
+}
+
+.pino-1 { grid-column: 5; grid-row: 3; }
+.pino-2 { grid-column: 3; grid-row: 6; }
+.pino-3 { grid-column: 8; grid-row: 7; }
+
+.legenda {
+  /* FLEXBOX: três itens distribuídos na mesma linha. A legenda ocupa a
+     última linha da grade do mapa. */
+  grid-column: 1 / -1;
+  grid-row: 10;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espaco-2);
+  margin: var(--espaco-2);
+  padding: var(--espaco-2) var(--espaco-3);
+  list-style: none;
+  background: rgba(15, 23, 42, 0.92);
+  border-radius: var(--raio-md);
+  font-size: 0.75rem;
+}
+
+.legenda i { margin-right: var(--espaco-1); }
+
+.lista-lugares {
+  /* GRID: lista de lugares com o mesmo espaçamento entre os itens. */
+  display: grid;
+  gap: var(--espaco-2);
+  padding: 0;
+  list-style: none;
+}
+
+.lista-lugares li {
+  /* FLEXBOX: nome e categoria à esquerda, status à direita. */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+}
+
+.lista-lugares small { display: block; color: var(--cor-texto-suave); }
+
+
+/* ==========================================================================
+   9. DETALHES DO LUGAR
+   ========================================================================== */
+.foto-destaque {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--raio-lg);
+}
+
+.dados {
+  /* GRID: uma linha para cada informação (endereço, ingresso, horários). */
+  display: grid;
+  gap: var(--espaco-3);
+  padding: var(--espaco-4);
+  font-size: 0.9rem;
+}
+
+.dados div {
+  /* FLEXBOX em coluna: rótulo acima do valor. */
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dados dt { font-weight: 700; }
+.dados dd { color: var(--cor-texto-suave); }
+.dados div:nth-child(1) dt { color: var(--cor-primaria); }
+.dados div:nth-child(2) dt { color: var(--cor-verde); }
+.dados div:nth-child(3) dt { color: var(--cor-laranja); }
+
+
+/* ==========================================================================
+   10. PERFIL
+   ========================================================================== */
+.perfil-topo {
+  /* FLEXBOX em coluna: foto, nome e título centralizados. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espaco-1);
+  text-align: center;
+}
+
+.perfil-topo img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--cor-primaria);
+  margin-bottom: var(--espaco-2);
+}
+
+.perfil-topo h1 { font-size: 1.4rem; }
+.perfil-topo p { color: var(--cor-texto-suave); font-size: 0.85rem; }
+
+.estatisticas {
+  /* GRID: três contadores com a mesma largura. */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espaco-3);
+}
+
+.estatisticas div {
+  /* FLEXBOX em coluna invertida: o número aparece acima do rótulo, mas o
+     rótulo (dt) vem primeiro no HTML, que é a ordem correta para leitores
+     de tela. */
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding: var(--espaco-3);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+}
+
+.estatisticas dd { font-size: 1.25rem; font-weight: 800; }
+.estatisticas dt { font-size: 0.75rem; color: var(--cor-texto-suave); }
+.estatisticas div:nth-child(1) dd { color: var(--cor-primaria); }
+.estatisticas div:nth-child(2) dd { color: var(--cor-verde); }
+.estatisticas div:nth-child(3) dd { color: var(--cor-laranja); }
+
+.menu-perfil {
+  /* GRID: os três grupos expansíveis empilhados. */
+  display: grid;
+  gap: var(--espaco-2);
+}
+
+.lista-simples {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: 0;
+  padding: 0 var(--espaco-4) var(--espaco-4);
+  list-style: none;
+  color: var(--cor-texto-suave);
+  font-size: 0.9rem;
+}
+
+.chips {
+  /* FLEXBOX: etiquetas que quebram de linha quando acabam o espaço. */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+  margin: 0;
+  padding: 0 var(--espaco-4) var(--espaco-4);
+  list-style: none;
+}
+
+.chips li {
+  padding: var(--espaco-1) var(--espaco-3);
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pilula);
+  font-size: 0.85rem;
+}
+
+
+/* ==========================================================================
+   10b. SOBRE (equipe)
+   ========================================================================== */
+figure { margin: 0; }
+
+.foto-equipe {
+  /* FLEXBOX em coluna: foto e legenda centralizadas, uma sobre a outra. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espaco-2);
+  text-align: center;
+}
+
+.foto-equipe img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: var(--raio-lg);
+}
+
+.foto-equipe figcaption { color: var(--cor-texto-suave); font-size: 0.85rem; }
+
+.equipe {
+  /* GRID: um cartão por pessoa, empilhados no celular e lado a lado no desktop. */
+  display: grid;
+  gap: var(--espaco-3);
+}
+
+.membro {
+  /* FLEXBOX em coluna: nome, habilidade e link com o mesmo espaçamento. */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espaco-2);
+}
+
+.membro h2 { font-size: 1.1rem; }
+
+
+/* ==========================================================================
+   11. RODAPÉ
+   ========================================================================== */
+footer {
+  /* GRID: menu, contato e copyright empilhados com espaçamento uniforme. */
+  display: grid;
+  gap: var(--espaco-3);
+  padding: var(--espaco-5) var(--espaco-4);
+  border-top: 1px solid var(--cor-borda);
+  font-size: 0.9rem;
+}
+
+/* No rodapé as pílulas quebram de linha em vez de rolar na horizontal */
+footer .pilulas {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
+footer .pilulas a,
+footer .chip { min-height: 40px; font-size: 0.85rem; }
+
+footer address {
+  /* FLEXBOX: a etiqueta de e-mail fica alinhada à esquerda. */
+  display: flex;
+  font-style: normal;
+}
+
+footer .chip { color: var(--cor-texto); }
+footer p { color: var(--cor-texto-suave); font-size: 0.8rem; }
+
+
+/* ==========================================================================
+   12. RESPONSIVO: telas maiores que o celular (a partir de 768px)
+   A base acima é o celular de 360px. Daqui para cima só mudamos as
+   colunas do Grid; os componentes (Flexbox) continuam iguais.
+   ========================================================================== */
+@media (min-width: 768px) {
+  body { max-width: 960px; }
+
+  header {
+    /* GRID: logo à esquerda e menu à direita, em duas colunas. */
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  }
+  header nav { justify-self: end; }
+
+  main { padding: var(--espaco-6) var(--espaco-5); }
+
+  /* GRID: destinos em 2 colunas; título e dica ocupam a largura toda. */
+  #destinos { grid-template-columns: repeat(2, 1fr); }
+
+  /* GRID: recursos em 3 colunas. */
+  #recursos { grid-template-columns: repeat(3, 1fr); }
+
+  #destinos > h2,
+  #destinos > aside,
+  #recursos > h2 { grid-column: 1 / -1; }
+
+  /* GRID: os 3 passos lado a lado. */
+  .passos { grid-template-columns: repeat(3, 1fr); }
+
+  #buscar form,
+  .formulario,
+  .mapa { max-width: 560px; }
+
+  /* GRID: as duas integrantes da equipe lado a lado. */
+  .equipe { grid-template-columns: repeat(2, 1fr); }
+
+  footer { padding-inline: var(--espaco-5); }
 }

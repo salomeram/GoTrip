@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Veja atrações, restaurantes e hotéis no mapa do GoTrip e descubra o que está fechado.">
+  <title>GoTrip | Mapa</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="topo">
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header>
+    <a href="index.html" class="logo">
+      <!-- Ajuste width e height para as dimensões reais do seu SVG -->
+      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40">
+    </a>
+
+    <nav aria-label="Menu principal">
+      <ul class="pilulas">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="index.html#destinos">Destinos</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section aria-labelledby="titulo-mapa">
+      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+      <h1 id="titulo-mapa">Mapa</h1>
+      <p>Atrações, restaurantes e hotéis perto do Fórum Romano, em Roma.</p>
+
+      <div class="mapa" role="group" aria-label="Mapa com uma atração, um restaurante fechado e um hotel">
+        <a class="pino pino-1" href="detalhes.html" aria-label="Fórum Romano, aberto">
+          <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+        </a>
+        <span class="pino pino-fechado pino-2" role="img" aria-label="Restaurante, fechado no momento">
+          <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+        </span>
+        <span class="pino pino-verde pino-3" role="img" aria-label="Hotel, aberto">
+          <i class="fa-solid fa-bed" aria-hidden="true"></i>
+        </span>
+
+        <ul class="legenda">
+          <li><i class="fa-solid fa-camera icone-primaria" aria-hidden="true"></i>Atrações</li>
+          <li><i class="fa-solid fa-utensils icone-laranja" aria-hidden="true"></i>Restaurantes</li>
+          <li><i class="fa-solid fa-bed icone-verde" aria-hidden="true"></i>Hotéis</li>
+        </ul>
+      </div>
+
+      <div class="aviso">
+        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+        <p>Lugares com marcador vermelho estão fechados no momento.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-lugares">
+      <h2 id="titulo-lugares">Lugares no mapa</h2>
+      <ul class="lista-lugares">
+        <li>
+          <div><strong>Fórum Romano</strong><small>Atração</small></div>
+          <span class="selo selo-verde">Aberto</span>
+        </li>
+        <li>
+          <div><strong>Restaurante</strong><small>Gastronomia</small></div>
+          <span class="selo selo-vermelho">Fechado</span>
+        </li>
+        <li>
+          <div><strong>Hotel</strong><small>Hospedagem</small></div>
+          <span class="selo selo-verde">Aberto</span>
+        </li>
+      </ul>
+    </section>
+
+    <div class="acoes">
+      <a class="btn" href="agenda.html"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Ver minha agenda</a>
+      <a class="btn btn-secundario" href="index.html">Voltar ao início</a>
+    </div>
+  </main>
+
+  <footer>
+    <nav aria-label="Menu do rodapé">
+      <ul class="pilulas">
+        <li><a href="#topo">Voltar ao topo</a></li>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#destinos">Destinos</a></li>
+        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="mapa.html">Mapa</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="login.html">Entrar</a></li>
+        <li><a href="cadastro.html">Criar conta</a></li>
+      </ul>
+    </nav>
+    <address>
+      <a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a>
+    </address>
+    <p>© 2026 GoTrip. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Crie sua conta GoTrip e comece a planejar sua próxima viagem.">
+  <title>GoTrip | Criar conta</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="topo">
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header>
+    <a href="index.html" class="logo">
+      <!-- Ajuste width e height para as dimensões reais do seu SVG -->
+      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40">
+    </a>
+
+    <nav aria-label="Menu principal">
+      <ul class="pilulas">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="index.html#destinos">Destinos</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section aria-labelledby="titulo-cadastro">
+      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+      <h1 id="titulo-cadastro">Crie a sua conta</h1>
+      <!-- Sem back-end ainda: o envio abre a home. Quando houver back-end, troque action, use method="post" e adicione name em cada campo. -->
+      <form class="formulario" action="index.html" method="get">
+        <div class="campo">
+          <label for="reg-nome">Nome completo</label>
+          <input type="text" id="reg-nome" placeholder="Ex.: Isabella Villa Torres" autocomplete="name" required>
+        </div>
+        <div class="campo">
+          <label for="reg-email">E-mail</label>
+          <input type="email" id="reg-email" placeholder="isa@gotrip.com" autocomplete="email" required>
+        </div>
+        <div class="campo">
+          <label for="reg-cpf">CPF</label>
+          <input type="text" id="reg-cpf" placeholder="000.000.000-00" inputmode="numeric"
+                 pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" title="Digite o CPF no formato 000.000.000-00" required>
+        </div>
+        <div class="campo">
+          <label for="reg-telefone">Telefone</label>
+          <input type="tel" id="reg-telefone" placeholder="(11) 99999-9999" autocomplete="tel" required>
+        </div>
+        <button type="submit">Criar conta</button>
+      </form>
+      <p>Já tem conta?</p>
+      <a class="btn btn-secundario" href="login.html">Entrar</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav aria-label="Menu do rodapé">
+      <ul class="pilulas">
+        <li><a href="#topo">Voltar ao topo</a></li>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#destinos">Destinos</a></li>
+        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="mapa.html">Mapa</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="login.html">Entrar</a></li>
+        <li><a href="cadastro.html">Criar conta</a></li>
+      </ul>
+    </nav>
+    <address>
+      <a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a>
+    </address>
+    <p>© 2026 GoTrip. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>

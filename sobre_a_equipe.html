@@ -1,47 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sobre a equipe | GoTrip</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <header>
-      <h1>GoTrip</h1>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Conheça Isabella Villa e Salomé Ramírez, criadoras do GoTrip.">
+  <title>Sobre a equipe | GoTrip</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="topo">
 
-    <main>
-      <h2>Sobre a equipe</h2>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-      <figure>
-        <img
-          src="isaesalo.jpg"
-          alt="Isabella e Salomé"
-          width="350"
-        />
+  <header>
+    <a href="index.html" class="logo">
+      <!-- Ajuste width e height para as dimensões reais do seu SVG -->
+      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40">
+    </a>
+
+    <nav aria-label="Menu principal">
+      <ul class="pilulas">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="index.html#destinos">Destinos</a></li>
+        <li><a href="sobre.html" aria-current="page">Sobre</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section aria-labelledby="titulo-sobre">
+      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+      <h1 id="titulo-sobre">Sobre a equipe</h1>
+
+      <figure class="foto-equipe">
+        <img src="isaesalo.jpg" alt="Isabella e Salomé" width="350">
         <figcaption>Isabella Villa e Salomé Ramírez, criadoras do GoTrip</figcaption>
       </figure>
 
-      <section aria-labelledby="isabella">
-        <h3 id="isabella">Isabella Villa</h3>
-        <p>Habilidade: desenhar.</p>
-        <p>
-          <a href="https://www.instagram.com/isavtos_/">Instagram de Isabella (@isavtos_)</a>
-        </p>
-      </section>
+      <div class="equipe">
+        <article class="membro" aria-labelledby="isabella">
+          <h2 id="isabella">Isabella Villa</h2>
+          <p>Habilidade: desenhar.</p>
+          <a class="btn btn-secundario" href="https://www.instagram.com/isavtos_/"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram de Isabella (@isavtos_)</a>
+        </article>
 
-      <section aria-labelledby="salome">
-        <h3 id="salome">Salomé Ramírez</h3>
-        <p>Habilidade: fazer sobremesas.</p>
-        <p>
-          <a href="https://www.instagram.com/00_8sr/">Instagram de Salomé (@00_8sr)</a>
-        </p>
-      </section>
-    </main>
+        <article class="membro" aria-labelledby="salome">
+          <h2 id="salome">Salomé Ramírez</h2>
+          <p>Habilidade: fazer sobremesas.</p>
+          <a class="btn btn-secundario" href="https://www.instagram.com/00_8sr/"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram de Salomé (@00_8sr)</a>
+        </article>
+      </div>
+    </section>
 
-    <footer>
-      <p>&copy; 2026 GoTrip</p>
-    </footer>
-  </body>
+    <div class="acoes">
+      <a class="btn" href="index.html">Voltar ao início</a>
+      <a class="btn btn-secundario" href="cadastro.html">Criar conta</a>
+    </div>
+  </main>
+
+  <footer>
+    <nav aria-label="Menu do rodapé">
+      <ul class="pilulas">
+        <li><a href="#topo">Voltar ao topo</a></li>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#destinos">Destinos</a></li>
+        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="mapa.html">Mapa</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="login.html">Entrar</a></li>
+        <li><a href="cadastro.html">Criar conta</a></li>
+      </ul>
+    </nav>
+    <address>
+      <a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a>
+    </address>
+    <p>© 2026 GoTrip. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
 </html>

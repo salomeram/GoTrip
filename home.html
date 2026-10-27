@@ -1,3 +1,4 @@
+<!-- ===== index.html ===== -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -5,80 +6,161 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="GoTrip: planeje, explore e viva novas histórias. Busque destinos, monte sua agenda e veja tudo no mapa.">
   <title>GoTrip | Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
-  <style>
-    body { line-height: 1.6; }
-    main { max-width: 800px; margin: 0 auto; padding: 0 16px; }
-    :focus-visible { outline: 3px solid; outline-offset: 2px; }
-    .skip-link { position: absolute; left: 8px; top: -60px; padding: 12px 16px; background: Canvas; }
-    .skip-link:focus { top: 8px; }
-  </style>
-</head>
-<body class="home">
+<body id="topo">
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header>
     <a href="index.html" class="logo">
-      <img src="logo-gotrip-texto.svg" alt="GoTrip">
+      <!-- Ajuste width e height para as dimensões reais do seu SVG -->
+      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40">
     </a>
 
     <nav aria-label="Menu principal">
-      <ul>
+      <ul class="pilulas">
         <li><a href="index.html" aria-current="page">Início</a></li>
-        <li><a href="#destinos">Destinos</a></li>
-        <li><a href="#recursos">Recursos</a></li>
+        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="index.html#destinos">Destinos</a></li>
         <li><a href="sobre.html">Sobre</a></li>
       </ul>
     </nav>
-
   </header>
-  
+
   <main id="conteudo">
     <section id="buscar" aria-labelledby="titulo-buscar">
-      <h2 id="titulo-buscar">Para onde você quer viajar?</h2>
+      <h1 id="titulo-buscar">Para onde você quer viajar?</h1>
       <p>Planeje, explore e <strong>viva novas histórias</strong>.</p>
-      <form action="#destinos">
+      <!-- Sem back-end ainda: a busca leva aos destinos. Troque action pela rota real depois. -->
+      <form action="index.html#destinos" method="get" role="search">
         <label for="busca">Buscar destino</label>
-        <input type="search" id="busca" name="busca">
-        <button type="submit">Buscar</button>
+        <div class="campo-busca">
+          <input type="search" id="busca" name="busca" placeholder="Cidade ou país" autocomplete="off">
+          <button type="submit">Buscar</button>
+        </div>
       </form>
+      <div class="acoes">
+        <a class="btn" href="cadastro.html">Criar conta</a>
+        <a class="btn btn-secundario" href="login.html">Entrar</a>
+      </div>
+    </section>
+
+    <section id="atalhos" aria-labelledby="titulo-atalhos">
+      <h2 id="titulo-atalhos">Acesso rápido</h2>
+      <ul class="atalhos">
+        <li><a href="agenda.html"><i class="fa-solid fa-calendar-check icone-verde" aria-hidden="true"></i><span>Agenda</span></a></li>
+        <li><a href="mapa.html"><i class="fa-solid fa-map-location-dot icone-primaria" aria-hidden="true"></i><span>Mapa</span></a></li>
+        <li><a href="perfil.html"><i class="fa-solid fa-user-gear icone-laranja" aria-hidden="true"></i><span>Perfil</span></a></li>
+      </ul>
     </section>
 
     <section id="destinos" aria-labelledby="titulo-destinos">
       <h2 id="titulo-destinos">Destinos em alta</h2>
-      <article>
-        <h3>Roma, Itália</h3>
-        <p>Coliseu, Fórum Romano e gastronomia.</p>
+      <article class="card-destino">
+        <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80" alt="Ruínas históricas do Fórum Romano sob o céu azul" width="88" height="88" loading="lazy">
+        <div>
+          <span class="selo">Mais visitado</span>
+          <h3><a href="detalhes.html">Roma, Itália</a></h3>
+          <p>Coliseu, Fórum Romano e gastronomia.</p>
+        </div>
       </article>
-      <article>
-        <h3>Paris, França</h3>
-        <p>Arte, arquitetura e cultura.</p>
+      <article class="card-destino">
+        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=300&q=80" alt="Torre Eiffel iluminada ao anoitecer em Paris" width="88" height="88" loading="lazy">
+        <div>
+          <span class="selo selo-verde">Europa</span>
+          <h3>Paris, França</h3>
+          <p>Arte, arquitetura e cultura.</p>
+        </div>
       </article>
-      <aside>
+      <article class="card-destino">
+        <span class="miniatura foto-lisboa" role="img" aria-label="Vista de Lisboa, Portugal"></span>
+        <div>
+          <span class="selo selo-verde">Europa</span>
+          <h3>Lisboa, Portugal</h3>
+          <p>Miradouros, bondes e pastéis de nata.</p>
+        </div>
+      </article>
+      <article class="card-destino">
+        <span class="miniatura foto-toquio" role="img" aria-label="Vista de Tóquio, Japão"></span>
+        <div>
+          <span class="selo selo-laranja">Ásia</span>
+          <h3>Tóquio, Japão</h3>
+          <p>Templos, tecnologia e culinária.</p>
+        </div>
+      </article>
+      <article class="card-destino">
+        <span class="miniatura foto-rio" role="img" aria-label="Vista do Rio de Janeiro, Brasil"></span>
+        <div>
+          <span class="selo">Brasil</span>
+          <h3>Rio de Janeiro, Brasil</h3>
+          <p>Praias, Cristo Redentor e Pão de Açúcar.</p>
+        </div>
+      </article>
+      <article class="card-destino">
+        <span class="miniatura foto-nova-york" role="img" aria-label="Vista de Nova York, EUA"></span>
+        <div>
+          <span class="selo selo-laranja">Américas</span>
+          <h3>Nova York, EUA</h3>
+          <p>Central Park, museus e Broadway.</p>
+        </div>
+      </article>
+      <aside aria-label="Dica de viagem">
         <h3>Dica</h3>
         <p>Reserve os ingressos <em>com antecedência</em> para evitar filas.</p>
         <p>Atualizado em <time datetime="2026-10-20">20 de outubro de 2026</time>.</p>
       </aside>
     </section>
 
+    <section id="como-funciona" aria-labelledby="titulo-como">
+      <h2 id="titulo-como">Como funciona</h2>
+      <ol class="passos">
+        <li>
+          <span class="numero" aria-hidden="true">1</span>
+          <div><h3>Busque</h3><p>Encontre cidades, países e pontos turísticos.</p></div>
+        </li>
+        <li>
+          <span class="numero" aria-hidden="true">2</span>
+          <div><h3>Planeje</h3><p>Adicione lugares à agenda de cada dia.</p></div>
+        </li>
+        <li>
+          <span class="numero" aria-hidden="true">3</span>
+          <div><h3>Explore</h3><p>Siga o roteiro e veja tudo no mapa.</p></div>
+        </li>
+      </ol>
+    </section>
+
     <section id="recursos" aria-labelledby="titulo-recursos">
       <h2 id="titulo-recursos">Recursos</h2>
-      <article>
-        <h3>Agenda</h3>
-        <p>Monte o roteiro de cada dia.</p>
+      <article class="card-recurso">
+        <span class="icone icone-verde"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i></span>
+        <div><h3><a href="agenda.html">Agenda</a></h3><p>Monte o roteiro de cada dia.</p></div>
       </article>
-      <article>
-        <h3>Mapa</h3>
-        <p>Veja atrações, restaurantes e hotéis.</p>
+      <article class="card-recurso">
+        <span class="icone icone-primaria"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i></span>
+        <div><h3><a href="mapa.html">Mapa</a></h3><p>Veja atrações, restaurantes e hotéis.</p></div>
       </article>
-      <article>
-        <h3>Perfil</h3>
-        <p>Acompanhe suas viagens e lugares visitados.</p>
+      <article class="card-recurso">
+        <span class="icone icone-laranja"><i class="fa-solid fa-user-gear" aria-hidden="true"></i></span>
+        <div><h3><a href="perfil.html">Perfil</a></h3><p>Acompanhe suas viagens e lugares visitados.</p></div>
       </article>
+      <article class="card-recurso">
+        <span class="icone icone-primaria"><i class="fa-solid fa-landmark" aria-hidden="true"></i></span>
+        <div><h3><a href="detalhes.html">Detalhes dos lugares</a></h3><p>Endereço, ingresso e horários de cada ponto turístico.</p></div>
+      </article>
+      <article class="card-recurso">
+        <span class="icone icone-vermelho"><i class="fa-solid fa-door-closed" aria-hidden="true"></i></span>
+        <div><h3><a href="mapa.html">Lugares fechados</a></h3><p>O marcador vermelho avisa quando o local está fechado.</p></div>
+      </article>
+      <article class="card-recurso">
+        <span class="icone icone-verde"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i></span>
+        <div><h3><a href="perfil.html">Histórico</a></h3><p>Reveja suas viagens e os lugares que já visitou.</p></div>
+      </article>
+    </section>
 
-      <h3>Perguntas frequentes</h3>
+    <section id="faq" aria-labelledby="titulo-faq">
+      <h2 id="titulo-faq">Perguntas frequentes</h2>
       <details>
         <summary>O GoTrip é gratuito?</summary>
         <p>Sim, você pode criar sua conta e planejar viagens sem custo.</p>
@@ -87,19 +169,34 @@
         <summary>Posso ver lugares fechados no mapa?</summary>
         <p>Sim, os locais fechados no momento aparecem com marcador vermelho.</p>
       </details>
+      <details>
+        <summary>Como adiciono um lugar à agenda?</summary>
+        <p>Abra os detalhes do lugar e use o botão Adicionar à agenda.</p>
+      </details>
+      <details>
+        <summary>Quais dados preciso para criar a conta?</summary>
+        <p>Nome completo, e-mail, CPF e telefone.</p>
+      </details>
     </section>
   </main>
 
   <footer>
     <nav aria-label="Menu do rodapé">
-      <ul>
-        <li><a href="#buscar">Voltar ao topo</a></li>
-        <li><a href="#destinos">Destinos</a></li>
-        <li><a href="#recursos">Recursos</a></li>
+      <ul class="pilulas">
+        <li><a href="#topo">Voltar ao topo</a></li>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#destinos">Destinos</a></li>
+        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="mapa.html">Mapa</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="login.html">Entrar</a></li>
+        <li><a href="cadastro.html">Criar conta</a></li>
       </ul>
     </nav>
     <address>
-      Contato: <a href="mailto:contato@gotrip.com">contato@gotrip.com</a>
+      <a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a>
     </address>
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>

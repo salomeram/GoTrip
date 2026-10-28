@@ -7,22 +7,22 @@
   <title>GoTrip | Perfil</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="microinteracoes.css">
 </head>
 <body id="topo">
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header>
-    <a href="index.html" class="logo">
-      <!-- Ajuste width e height para as dimensões reais do seu SVG -->
-      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40">
+    <a href="home.html" class="logo">
+      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="120" height="40">
     </a>
 
     <nav aria-label="Menu principal">
       <ul class="pilulas">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
+        <li><a href="home.html">Início</a></li>
+        <li><a href="home.html#recursos">Recursos</a></li>
+        <li><a href="home.html#destinos">Destinos</a></li>
         <li><a href="sobre.html">Sobre</a></li>
       </ul>
     </nav>
@@ -30,10 +30,17 @@
 
   <main id="conteudo">
     <section aria-labelledby="titulo-perfil">
-      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+      <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+
+      <p id="perfil-aviso" class="aviso" hidden>
+        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+        <span>Você ainda não entrou. <a href="login.html">Entrar</a> ou <a href="cadastro.html">criar conta</a>.</span>
+      </p>
+
       <div class="perfil-topo">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Foto de perfil de Isabella Villa Torres" width="80" height="80">
-        <h1 id="titulo-perfil">Isabella Villa Torres</h1>
+        <!-- Avatar com as iniciais da pessoa (preenchido pelo script no final da página) -->
+        <span class="avatar" id="avatar" aria-hidden="true">?</span>
+        <h1 id="titulo-perfil" data-usuario-nome>Visitante</h1>
         <p>Viajante Exploradora</p>
       </div>
 
@@ -73,16 +80,16 @@
       </details>
     </section>
 
-    <a class="btn btn-perigo" href="login.html"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Sair da conta</a>
+    <a class="btn btn-perigo" id="sair" href="login.html"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Sair da conta</a>
   </main>
 
   <footer>
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
         <li><a href="#topo">Voltar ao topo</a></li>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="home.html">Início</a></li>
+        <li><a href="home.html#destinos">Destinos</a></li>
+        <li><a href="home.html#recursos">Recursos</a></li>
         <li><a href="agenda.html">Agenda</a></li>
         <li><a href="mapa.html">Mapa</a></li>
         <li><a href="perfil.html">Perfil</a></li>
@@ -97,5 +104,23 @@
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
 
+  <script src="usuario.js"></script>
+  <script>
+    (function () {
+      var usuario = GoTripUsuario.atual();
+      var avatar = document.getElementById('avatar');
+
+      if (usuario) {
+        var partes = usuario.nome.trim().split(/\s+/);
+        var iniciais = partes[0].charAt(0) + (partes.length > 1 ? partes[partes.length - 1].charAt(0) : '');
+        avatar.textContent = iniciais.toUpperCase();
+      } else {
+        document.getElementById('perfil-aviso').hidden = false;
+      }
+
+      // "Sair da conta" apaga a sessão e segue para o login
+      document.getElementById('sair').addEventListener('click', GoTripUsuario.sair);
+    })();
+  </script>
 </body>
 </html>

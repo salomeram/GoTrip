@@ -2,7 +2,6 @@
    GoTrip | style.css
    Formato de celular: 360px de largura (base). Cresce em telas maiores.
    Regra do projeto: Grid no layout geral, Flexbox dentro dos componentes.
-   Só HTML e CSS, sem JavaScript.
    ========================================================================== */
 
 
@@ -15,8 +14,9 @@
   --cor-fundo: #0f172a;
   --cor-superficie: #1e293b;
   --cor-borda: #334155;
+  --cor-borda-campo: #7c8ba1;            /* borda de campos: contraste mínimo de 3:1 */
   --cor-primaria: #38bdf8;
-  --cor-primaria-hover: #0284c7;
+  --cor-primaria-hover: #0369a1;         /* texto branco sobre este azul: contraste acima de 4,5:1 */
   --cor-verde: #34d399;
   --cor-laranja: #fb923c;
   --cor-vermelho: #f87171;
@@ -54,6 +54,9 @@
 *::after {
   box-sizing: border-box;
 }
+
+/* O atributo hidden sempre esconde, mesmo em elementos com display definido */
+[hidden] { display: none !important; }
 
 html {
   background: var(--cor-fundo-escuro);
@@ -154,6 +157,7 @@ nav ul { list-style: none; padding: 0; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   min-height: var(--alvo-toque);
   padding: 0 10px;
   border: 1px solid var(--cor-borda);
@@ -294,7 +298,7 @@ input {
   padding: var(--espaco-3) var(--espaco-4);
   background: var(--cor-superficie);
   color: var(--cor-texto);
-  border: 1.5px solid var(--cor-borda);
+  border: 1.5px solid var(--cor-borda-campo);
   border-radius: var(--raio-md);
   font: inherit;
   font-size: 0.95rem;
@@ -304,6 +308,16 @@ input::placeholder { color: var(--cor-texto-suave); }
 input:focus { border-color: var(--cor-primaria); }
 
 .formulario button { width: 100%; }
+
+/* Mensagens de erro (role="alert"): só aparecem quando não estão hidden */
+[role="alert"]:not([hidden]) {
+  padding: var(--espaco-3) var(--espaco-4);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--raio-md);
+  color: #fca5a5;
+  font-size: 0.85rem;
+}
 
 .campo-busca {
   /* FLEXBOX: campo e botão lado a lado. O campo cresce (flex: 1) e o
@@ -360,10 +374,12 @@ main article p { color: var(--cor-texto-suave); font-size: 0.85rem; }
   outline-offset: 2px;
 }
 
-/* Seta à direita: mostra que o cartão inteiro é clicável */
+/* Seta à direita: mostra que o cartão inteiro é clicável.
+   A segunda declaração (com / "") diz ao leitor de tela para não ler a seta. */
 .card-destino:has(a)::after,
 .card-recurso:has(a)::after {
   content: "›";
+  content: "›" / "";
   margin-left: auto;
   padding-left: var(--espaco-2);
   color: var(--cor-texto-suave);
@@ -380,7 +396,7 @@ main article p { color: var(--cor-texto-suave); font-size: 0.85rem; }
   border-radius: var(--raio-pilula);
   background: rgba(56, 189, 248, 0.15);
   color: var(--cor-primaria);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -401,6 +417,7 @@ main article p { color: var(--cor-texto-suave); font-size: 0.85rem; }
   color: #fca5a5;
   font-size: 0.85rem;
 }
+.aviso a { color: inherit; text-decoration: underline; }
 
 .vazio {
   /* FLEXBOX em coluna: mensagem e link de ação. */
@@ -469,7 +486,10 @@ main article p { color: var(--cor-texto-suave); font-size: 0.85rem; }
   border-radius: var(--raio-md);
 }
 
-.card-destino img { object-fit: cover; }
+.card-destino img {
+  object-fit: cover;
+  background: var(--cor-fundo);   /* aparece enquanto a foto carrega */
+}
 
 /* Miniatura com ícone, para destinos que ainda não têm foto */
 .miniatura {
@@ -480,27 +500,6 @@ main article p { color: var(--cor-texto-suave); font-size: 0.85rem; }
   font-size: 1.75rem;
   color: var(--cor-texto);
   background: linear-gradient(135deg, rgba(56, 189, 248, 0.45), var(--cor-fundo));
-}
-/* Fotos: se a imagem não carregar, o degradê aparece no lugar */
-.foto-lisboa {
-  background:
-    url("https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?auto=format&fit=crop&w=300&q=80") center / cover no-repeat,
-    linear-gradient(135deg, rgba(52, 211, 153, 0.45), var(--cor-fundo));
-}
-.foto-toquio {
-  background:
-    url("https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=300&q=80") center / cover no-repeat,
-    linear-gradient(135deg, rgba(251, 146, 60, 0.45), var(--cor-fundo));
-}
-.foto-rio {
-  background:
-    url("https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=300&q=80") center / cover no-repeat,
-    linear-gradient(135deg, rgba(56, 189, 248, 0.45), var(--cor-fundo));
-}
-.foto-nova-york {
-  background:
-    url("https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=300&q=80") center / cover no-repeat,
-    linear-gradient(135deg, rgba(251, 146, 60, 0.45), var(--cor-fundo));
 }
 
 .mini-verde   { background: linear-gradient(135deg, rgba(52, 211, 153, 0.45), var(--cor-fundo)); }
@@ -519,6 +518,10 @@ main article p { color: var(--cor-texto-suave); font-size: 0.85rem; }
   color: var(--cor-laranja) !important;
   font-weight: 600;
 }
+
+/* Mensagem do resultado da busca (lida por leitores de tela) */
+#resultado-busca { font-size: 0.9rem; color: var(--cor-texto-suave); }
+#resultado-busca:empty { display: none; }
 
 /* Dica de viagem */
 #destinos aside {
@@ -631,8 +634,9 @@ summary {
 }
 
 summary::-webkit-details-marker { display: none; }
-summary::after { content: "+"; color: var(--cor-primaria); font-size: 1.25rem; }
-details[open] summary::after { content: "−"; }
+/* O sinal +/− é só visual: a segunda declaração (com / "") evita que o leitor de tela o leia */
+summary::after { content: "+"; content: "+" / ""; color: var(--cor-primaria); font-size: 1.25rem; }
+details[open] summary::after { content: "−"; content: "−" / ""; }
 
 summary i { margin-right: var(--espaco-2); }
 
@@ -667,6 +671,8 @@ details > p {
 /* ==========================================================================
    8. MAPA
    ========================================================================== */
+
+/* --- Mapa de grade (protótipo antigo) ----------------------------------- */
 .mapa {
   /* GRID: o mapa é uma grade de 10 x 10. Cada marcador é posicionado em
      uma célula (grid-column / grid-row), sem position: absolute. As linhas
@@ -712,24 +718,83 @@ details > p {
 .pino-2 { grid-column: 3; grid-row: 6; }
 .pino-3 { grid-column: 8; grid-row: 7; }
 
-.legenda {
-  /* FLEXBOX: três itens distribuídos na mesma linha. A legenda ocupa a
-     última linha da grade do mapa. */
+/* A legenda posicionada na grade vale só dentro do mapa de grade */
+.mapa .legenda {
   grid-column: 1 / -1;
   grid-row: 10;
-  display: flex;
   justify-content: space-between;
   gap: var(--espaco-2);
   margin: var(--espaco-2);
   padding: var(--espaco-2) var(--espaco-3);
-  list-style: none;
   background: rgba(15, 23, 42, 0.92);
   border-radius: var(--raio-md);
-  font-size: 0.75rem;
 }
 
 .legenda i { margin-right: var(--espaco-1); }
 
+/* --- Mapas reais (Leaflet / OpenStreetMap) ------------------------------ */
+#mapa-geral {
+  height: 420px;
+  width: 100%;
+  border-radius: var(--raio-lg);
+  position: relative;
+  z-index: 0;     /* evita que o mapa passe por cima do cabeçalho */
+}
+
+.mapa-real iframe,
+.mapa-real #mapa-toquio {
+  display: block;
+  width: 100%;
+  height: 320px;
+  border: 0;
+  border-radius: var(--raio-lg);
+}
+
+.mapa-real #mapa-toquio {
+  position: relative;
+  z-index: 0;
+}
+
+/* Pinos: o estado aparece por cor + forma + símbolo (não só por cor) */
+.pin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  vertical-align: middle;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+.pin-azul     { background: #3b82f6; border-radius: 4px; }   /* quadrado */
+.pin-verde    { background: #15803d; }                        /* círculo com ✓ */
+.pin-vermelho { background: #b91c1c; }                        /* círculo com ✕ */
+.pin-verde::after    { content: "\2713"; }
+.pin-vermelho::after { content: "\2715"; }
+
+/* Legenda do mapa real: itens em linha, com pino e texto */
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+}
+.legenda li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* --- Lista de lugares --------------------------------------------------- */
 .lista-lugares {
   /* GRID: lista de lugares com o mesmo espaçamento entre os itens. */
   display: grid;
@@ -789,7 +854,7 @@ details > p {
    10. PERFIL
    ========================================================================== */
 .perfil-topo {
-  /* FLEXBOX em coluna: foto, nome e título centralizados. */
+  /* FLEXBOX em coluna: foto/avatar, nome e título centralizados. */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -803,6 +868,23 @@ details > p {
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid var(--cor-primaria);
+  margin-bottom: var(--espaco-2);
+}
+
+/* Avatar com as iniciais da pessoa (usado quando não há foto) */
+.avatar {
+  /* FLEXBOX: centraliza as iniciais dentro do círculo. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--cor-superficie);
+  border: 3px solid var(--cor-primaria);
+  color: var(--cor-primaria);
+  font-size: 1.75rem;
+  font-weight: 800;
   margin-bottom: var(--espaco-2);
 }
 
@@ -830,7 +912,7 @@ details > p {
 }
 
 .estatisticas dd { font-size: 1.25rem; font-weight: 800; }
-.estatisticas dt { font-size: 0.75rem; color: var(--cor-texto-suave); }
+.estatisticas dt { font-size: 0.8rem; color: var(--cor-texto-suave); }
 .estatisticas div:nth-child(1) dd { color: var(--cor-primaria); }
 .estatisticas div:nth-child(2) dd { color: var(--cor-verde); }
 .estatisticas div:nth-child(3) dd { color: var(--cor-laranja); }
@@ -958,13 +1040,14 @@ footer p { color: var(--cor-texto-suave); font-size: 0.8rem; }
 
   main { padding: var(--espaco-6) var(--espaco-5); }
 
-  /* GRID: destinos em 2 colunas; título e dica ocupam a largura toda. */
+  /* GRID: destinos em 2 colunas; título, mensagem da busca e dica ocupam a largura toda. */
   #destinos { grid-template-columns: repeat(2, 1fr); }
 
   /* GRID: recursos em 3 colunas. */
   #recursos { grid-template-columns: repeat(3, 1fr); }
 
   #destinos > h2,
+  #destinos > #resultado-busca,
   #destinos > aside,
   #recursos > h2 { grid-column: 1 / -1; }
 

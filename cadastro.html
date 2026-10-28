@@ -7,22 +7,22 @@
   <title>GoTrip | Criar conta</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="microinteracoes.css">
 </head>
 <body id="topo">
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header>
-    <a href="index.html" class="logo">
-      <!-- Ajuste width e height para as dimensões reais do seu SVG -->
-      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40">
+    <a href="home.html" class="logo">
+      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="120" height="40">
     </a>
 
     <nav aria-label="Menu principal">
       <ul class="pilulas">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
+        <li><a href="home.html">Início</a></li>
+        <li><a href="home.html#recursos">Recursos</a></li>
+        <li><a href="home.html#destinos">Destinos</a></li>
         <li><a href="sobre.html">Sobre</a></li>
       </ul>
     </nav>
@@ -30,17 +30,17 @@
 
   <main id="conteudo">
     <section aria-labelledby="titulo-cadastro">
-      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+      <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
       <h1 id="titulo-cadastro">Crie a sua conta</h1>
-      <!-- Sem back-end ainda: o envio abre a home. Quando houver back-end, troque action, use method="post" e adicione name em cada campo. -->
-      <form class="formulario" action="index.html" method="get">
+      <!-- Sem back-end ainda: o nome e o e-mail ficam guardados no navegador (usuario.js). Quando houver back-end, troque este envio por uma chamada ao servidor. -->
+      <form id="form-cadastro" class="formulario" action="perfil.html" method="get">
         <div class="campo">
           <label for="reg-nome">Nome completo</label>
-          <input type="text" id="reg-nome" placeholder="Ex.: Isabella Villa Torres" autocomplete="name" required>
+          <input type="text" id="reg-nome" placeholder="Ex.: Maria Souza" autocomplete="name" required>
         </div>
         <div class="campo">
           <label for="reg-email">E-mail</label>
-          <input type="email" id="reg-email" placeholder="isa@gotrip.com" autocomplete="email" required>
+          <input type="email" id="reg-email" placeholder="exemplo@gotrip.com" autocomplete="email" required>
         </div>
         <div class="campo">
           <label for="reg-cpf">CPF</label>
@@ -51,6 +51,7 @@
           <label for="reg-telefone">Telefone</label>
           <input type="tel" id="reg-telefone" placeholder="(11) 99999-9999" autocomplete="tel" required>
         </div>
+        <p id="cadastro-erro" role="alert" hidden></p>
         <button type="submit">Criar conta</button>
       </form>
       <p>Já tem conta?</p>
@@ -62,9 +63,9 @@
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
         <li><a href="#topo">Voltar ao topo</a></li>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="home.html">Início</a></li>
+        <li><a href="home.html#destinos">Destinos</a></li>
+        <li><a href="home.html#recursos">Recursos</a></li>
         <li><a href="agenda.html">Agenda</a></li>
         <li><a href="mapa.html">Mapa</a></li>
         <li><a href="perfil.html">Perfil</a></li>
@@ -79,5 +80,21 @@
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
 
+  <script src="usuario.js"></script>
+  <script>
+    document.getElementById('form-cadastro').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nome = document.getElementById('reg-nome').value;
+      var email = document.getElementById('reg-email').value;
+      var erro = document.getElementById('cadastro-erro');
+
+      if (GoTripUsuario.criarConta(nome, email)) {
+        window.location.href = 'perfil.html';
+      } else {
+        erro.textContent = 'Não foi possível salvar sua conta neste navegador. Verifique se o armazenamento não está bloqueado.';
+        erro.hidden = false;
+      }
+    });
+  </script>
 </body>
 </html>

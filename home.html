@@ -1,4 +1,3 @@
-<!-- ===== index.html ===== -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,22 +7,39 @@
   <title>GoTrip | Home</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="microinteracoes.css">
+  <style>
+    /* Acessibilidade: foco visível e menos movimento (podem ir para style.css) */
+    a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+    #resultado-busca { margin: 8px 0 0; font-size: 0.9rem; }
+    .card-destino[hidden] { display: none; }
+  </style>
 </head>
 <body id="topo">
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header>
-    <a href="index.html" class="logo">
-      <!-- Ajuste width e height para as dimensões reais do seu SVG -->
-      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40">
+    <a href="home.html" class="logo">
+      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="120" height="40">
     </a>
 
     <nav aria-label="Menu principal">
       <ul class="pilulas">
-        <li><a href="index.html" aria-current="page">Início</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
+        <li><a href="home.html" aria-current="page">Início</a></li>
+        <li><a href="home.html#recursos">Recursos</a></li>
+        <li><a href="home.html#destinos">Destinos</a></li>
         <li><a href="sobre.html">Sobre</a></li>
       </ul>
     </nav>
@@ -33,8 +49,7 @@
     <section id="buscar" aria-labelledby="titulo-buscar">
       <h1 id="titulo-buscar">Para onde você quer viajar?</h1>
       <p>Planeje, explore e <strong>viva novas histórias</strong>.</p>
-      <!-- Sem back-end ainda: a busca leva aos destinos. Troque action pela rota real depois. -->
-      <form action="index.html#destinos" method="get" role="search">
+      <form id="form-busca" action="home.html#destinos" method="get" role="search">
         <label for="busca">Buscar destino</label>
         <div class="campo-busca">
           <input type="search" id="busca" name="busca" placeholder="Cidade ou país" autocomplete="off">
@@ -58,6 +73,7 @@
 
     <section id="destinos" aria-labelledby="titulo-destinos">
       <h2 id="titulo-destinos">Destinos em alta</h2>
+      <p id="resultado-busca" role="status" aria-live="polite"></p>
       <article class="card-destino">
         <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80" alt="Ruínas históricas do Fórum Romano sob o céu azul" width="88" height="88" loading="lazy">
         <div>
@@ -70,42 +86,43 @@
         <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=300&q=80" alt="Torre Eiffel iluminada ao anoitecer em Paris" width="88" height="88" loading="lazy">
         <div>
           <span class="selo selo-verde">Europa</span>
-          <h3>Paris, França</h3>
+          <h3><a href="paris.html">Paris, França</a></h3>
           <p>Arte, arquitetura e cultura.</p>
         </div>
       </article>
-      <article class="card-destino">
-        <span class="miniatura foto-lisboa" role="img" aria-label="Vista de Lisboa, Portugal"></span>
-        <div>
-          <span class="selo selo-verde">Europa</span>
-          <h3>Lisboa, Portugal</h3>
-          <p>Miradouros, bondes e pastéis de nata.</p>
-        </div>
-      </article>
-      <article class="card-destino">
-        <span class="miniatura foto-toquio" role="img" aria-label="Vista de Tóquio, Japão"></span>
-        <div>
-          <span class="selo selo-laranja">Ásia</span>
-          <h3>Tóquio, Japão</h3>
-          <p>Templos, tecnologia e culinária.</p>
-        </div>
-      </article>
-      <article class="card-destino">
-        <span class="miniatura foto-rio" role="img" aria-label="Vista do Rio de Janeiro, Brasil"></span>
-        <div>
-          <span class="selo">Brasil</span>
-          <h3>Rio de Janeiro, Brasil</h3>
-          <p>Praias, Cristo Redentor e Pão de Açúcar.</p>
-        </div>
-      </article>
-      <article class="card-destino">
-        <span class="miniatura foto-nova-york" role="img" aria-label="Vista de Nova York, EUA"></span>
-        <div>
-          <span class="selo selo-laranja">Américas</span>
-          <h3>Nova York, EUA</h3>
-          <p>Central Park, museus e Broadway.</p>
-        </div>
-      </article>
+    <article class="card-destino">
+  <img src="https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?auto=format&fit=crop&w=300&q=80" alt="Vista de Lisboa, Portugal" width="88" height="88" loading="lazy">
+  <div>
+    <span class="selo selo-verde">Europa</span>
+    <h3><a href="lisboa.html">Lisboa, Portugal</a></h3>
+    <p>Miradouros, bondes e pastéis de nata.</p>
+  </div>
+</article>
+<article class="card-destino">
+  <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=300&q=80" alt="Vista de Tóquio, Japão" width="88" height="88" loading="lazy">
+  <div>
+    <span class="selo selo-laranja">Ásia</span>
+    <h3><a href="toquio.html">Tóquio, Japão</a></h3>
+    <p>Templos, tecnologia e culinária.</p>
+  </div>
+</article>
+<article class="card-destino">
+  <img src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=300&q=80" alt="Vista do Rio de Janeiro, Brasil" width="88" height="88" loading="lazy">
+  <div>
+    <span class="selo">Brasil</span>
+    <h3><a href="rio.html">Rio de Janeiro, Brasil</a></h3>
+    <p>Praias, Cristo Redentor e Pão de Açúcar.</p>
+  </div>
+</article>
+<article class="card-destino">
+  <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=300&q=80" alt="Vista de Nova York, EUA" width="88" height="88" loading="lazy">
+  <div>
+    <span class="selo selo-laranja">Américas</span>
+    <h3><a href="novayork.html">Nova York, EUA</a></h3>
+    <p>Central Park, museus e Broadway.</p>
+  </div>
+</article>
+
       <aside aria-label="Dica de viagem">
         <h3>Dica</h3>
         <p>Reserve os ingressos <em>com antecedência</em> para evitar filas.</p>
@@ -167,7 +184,7 @@
       </details>
       <details>
         <summary>Posso ver lugares fechados no mapa?</summary>
-        <p>Sim, os locais fechados no momento aparecem com marcador vermelho.</p>
+        <p>Sim, os locais fechados no momento aparecem com marcador vermelho e o símbolo ✕.</p>
       </details>
       <details>
         <summary>Como adiciono um lugar à agenda?</summary>
@@ -184,9 +201,9 @@
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
         <li><a href="#topo">Voltar ao topo</a></li>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
+        <li><a href="home.html">Início</a></li>
+        <li><a href="home.html#destinos">Destinos</a></li>
+        <li><a href="home.html#recursos">Recursos</a></li>
         <li><a href="agenda.html">Agenda</a></li>
         <li><a href="mapa.html">Mapa</a></li>
         <li><a href="perfil.html">Perfil</a></li>
@@ -201,5 +218,41 @@
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
 
+  <script>
+    // Busca de destinos: filtra os cards e avisa o resultado a quem usa leitor de tela
+    (function () {
+      var form = document.getElementById('form-busca');
+      var campo = document.getElementById('busca');
+      var aviso = document.getElementById('resultado-busca');
+      var cards = document.querySelectorAll('#destinos .card-destino');
+
+      function normalizar(t) {
+        return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      }
+
+      function filtrar(termo) {
+        var q = normalizar(termo.trim());
+        var achados = 0;
+        cards.forEach(function (card) {
+          var visivel = !q || normalizar(card.textContent).indexOf(q) !== -1;
+          card.hidden = !visivel;
+          if (visivel) achados++;
+        });
+        if (!q) aviso.textContent = '';
+        else if (achados === 0) aviso.textContent = 'Nenhum destino encontrado para "' + termo.trim() + '".';
+        else aviso.textContent = achados + (achados === 1 ? ' destino encontrado.' : ' destinos encontrados.');
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        filtrar(campo.value);
+        document.getElementById('destinos').scrollIntoView();
+      });
+
+      // Se chegou com ?busca=... na URL
+      var params = new URLSearchParams(location.search);
+      if (params.get('busca')) { campo.value = params.get('busca'); filtrar(campo.value); }
+    })();
+  </script>
 </body>
 </html>

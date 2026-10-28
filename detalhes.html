@@ -3,71 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Endereço, ingresso e horários do Fórum Romano, em Roma.">
-  <title>GoTrip | Fórum Romano</title>
+  <meta name="description" content="Endereço, ingresso e horários dos pontos turísticos de Roma.">
+  <title>GoTrip | Roma, Itália</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="microinteracoes.css">
 </head>
 <body id="topo">
-
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-
   <header>
-    <a href="index.html" class="logo">
-      <!-- Ajuste width e height para as dimensões reais do seu SVG -->
-      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40">
-    </a>
-
-    <nav aria-label="Menu principal">
-      <ul class="pilulas">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-      </ul>
-    </nav>
+    <a href="home.html" class="logo"><img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40"></a>
+    <nav aria-label="Menu principal"><ul class="pilulas"><li><a href="home.html">Início</a></li><li><a href="home.html#recursos">Recursos</a></li><li><a href="home.html#destinos">Destinos</a></li><li><a href="sobre.html">Sobre</a></li></ul></nav>
   </header>
-
   <main id="conteudo">
     <section aria-labelledby="titulo-detalhes">
-      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
-      <h1 id="titulo-detalhes">Fórum Romano</h1>
-      <img class="foto-destaque" src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80" alt="Fotografia panorâmica do Fórum Romano" width="600" height="180">
-      <p>O Fórum Romano, no coração da cidade e em frente ao Coliseu, é uma cápsula do tempo da história desta praça pública. Foi o centro político e comercial da Roma Antiga.</p>
-
+      <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+      <h1 id="titulo-detalhes">Pontos turísticos de Roma</h1>
+      <p>Endereço, ingresso e horários dos lugares para visitar em Roma. Toque em um nome para ir direto a ele.</p>
+      <nav aria-label="Pontos turísticos"><ul class="pilulas"><li><a href="#coliseu">Coliseu</a></li><li><a href="#forum-romano">Fórum Romano</a></li><li><a href="#vaticano">Vaticano</a></li><li><a href="#fontana-di-trevi">Fontana di Trevi</a></li><li><a href="#panteao">Panteão</a></li><li><a href="#trastevere">Trastevere</a></li><li><a href="#trattoria">Trattoria do Centro</a></li><li><a href="#museu">Museu</a></li></ul></nav>
+    </section>
+    <section id="coliseu" aria-labelledby="titulo-coliseu">
+      <h2 id="titulo-coliseu">Coliseu</h2>
+      <img class="foto-destaque" src="https://commons.wikimedia.org/wiki/Special:FilePath/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg?width=600" alt="Coliseu de Roma ao entardecer" width="600" height="180">
+      <p>O maior anfiteatro da Roma Antiga, um dos pontos mais visitados da Itália.</p>
       <dl class="dados cartao">
-        <div><dt>Endereço</dt><dd>Via della Salara Vecchia, 5/6, 00186 Roma.</dd></div>
-        <div><dt>Ingresso</dt><dd>€29 (29 euros).</dd></div>
-        <div><dt>Horários</dt><dd>Abre todos os dias às 8h30 e fecha entre 16h30 e 19h15.</dd></div>
+        <div><dt>Endereço</dt><dd>Piazza del Colosseo, 1, Roma</dd></div>
+        <div><dt>Ingresso</dt><dd>Reserve com antecedência para evitar filas.</dd></div>
+        <div><dt>Horários</dt><dd>Confirme o horário atualizado no site oficial antes de ir.</dd></div>
       </dl>
-
       <div class="acoes">
         <a class="btn" href="agenda.html"><i class="fa-solid fa-plus" aria-hidden="true"></i> Adicionar à agenda</a>
         <a class="btn btn-secundario" href="mapa.html">Ver no mapa</a>
       </div>
     </section>
+    <section id="forum-romano" aria-labelledby="titulo-forum-romano">
+      <h2 id="titulo-forum-romano">Fórum Romano</h2>
+      <img class="foto-destaque" src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80" alt="Fotografia panorâmica do Fórum Romano" width="600" height="180">
+      <p>O Fórum Romano, no coração da cidade e em frente ao Coliseu, é uma cápsula do tempo da história desta praça pública. Foi o centro político e comercial da Roma Antiga.</p>
+      <dl class="dados cartao">
+        <div><dt>Endereço</dt><dd>Via della Salara Vecchia, 5/6, 00186 Roma.</dd></div>
+        <div><dt>Ingresso</dt><dd>€29 (29 euros).</dd></div>
+        <div><dt>Horários</dt><dd>Abre todos os dias às 8h30 e fecha entre 16h30 e 19h15.</dd></div>
+      </dl>
+      <div class="acoes">
+        <a class="btn" href="agenda.html"><i class="fa-solid fa-plus" aria-hidden="true"></i> Adicionar à agenda</a>
+        <a class="btn btn-secundario" href="mapa.html">Ver no mapa</a>
+      </div>
+    </section>
+    <section id="vaticano" aria-labelledby="titulo-vaticano">
+      <h2 id="titulo-vaticano">Vaticano</h2>
+      <img class="foto-destaque" src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_Peter%27s_Basilica_facade%2C_Rome%2C_Italy.jpg?width=600" alt="Fachada da Basílica de São Pedro, no Vaticano" width="600" height="180">
+      <p>Basílica de São Pedro, Praça de São Pedro e Museus Vaticanos.</p>
+      <dl class="dados cartao">
+        <div><dt>Endereço</dt><dd>Viale Vaticano, Cidade do Vaticano</dd></div>
+        <div><dt>Ingresso</dt><dd>A Basílica e os museus têm entradas diferentes. Reserve com antecedência.</dd></div>
+        <div><dt>Horários</dt><dd>Confirme o horário atualizado no site oficial antes de ir.</dd></div>
+      </dl>
+      <div class="acoes">
+        <a class="btn" href="agenda.html"><i class="fa-solid fa-plus" aria-hidden="true"></i> Adicionar à agenda</a>
+        <a class="btn btn-secundario" href="mapa.html">Ver no mapa</a>
+      </div>
+    </section>
+    <section id="fontana-di-trevi" aria-labelledby="titulo-fontana-di-trevi">
+      <h2 id="titulo-fontana-di-trevi">Fontana di Trevi</h2>
+      <img class="foto-destaque" src="https://commons.wikimedia.org/wiki/Special:FilePath/Trevi_Fountain%2C_Rome%2C_Italy_2_-_May_2007.jpg?width=600" alt="Fontana di Trevi, em Roma" width="600" height="180">
+      <p>Uma das fontes mais famosas do mundo, no centro histórico de Roma.</p>
+      <dl class="dados cartao">
+        <div><dt>Endereço</dt><dd>Piazza di Trevi, Roma</dd></div>
+        <div><dt>Ingresso</dt><dd>Confira no site oficial se há regras de acesso à fonte.</dd></div>
+        <div><dt>Horários</dt><dd>Vá cedo ou à noite para fugir da multidão.</dd></div>
+      </dl>
+      <div class="acoes">
+        <a class="btn" href="agenda.html"><i class="fa-solid fa-plus" aria-hidden="true"></i> Adicionar à agenda</a>
+        <a class="btn btn-secundario" href="mapa.html">Ver no mapa</a>
+      </div>
+    </section>
+    <section id="panteao" aria-labelledby="titulo-panteao">
+      <h2 id="titulo-panteao">Panteão</h2>
+      <img class="foto-destaque" src="https://commons.wikimedia.org/wiki/Special:FilePath/Rome_Pantheon_front.jpg?width=600" alt="Fachada do Panteão, em Roma" width="600" height="180">
+      <p>Templo romano com a famosa cúpula de concreto, hoje uma igreja.</p>
+      <dl class="dados cartao">
+        <div><dt>Endereço</dt><dd>Piazza della Rotonda, Roma</dd></div>
+        <div><dt>Ingresso</dt><dd>Confira no site oficial se a entrada é paga.</dd></div>
+        <div><dt>Horários</dt><dd>Confirme o horário atualizado no site oficial antes de ir.</dd></div>
+      </dl>
+      <div class="acoes">
+        <a class="btn" href="agenda.html"><i class="fa-solid fa-plus" aria-hidden="true"></i> Adicionar à agenda</a>
+        <a class="btn btn-secundario" href="mapa.html">Ver no mapa</a>
+      </div>
+    </section>
+    <section id="trastevere" aria-labelledby="titulo-trastevere">
+      <h2 id="titulo-trastevere">Trastevere</h2>
+      <div class="foto-destaque miniatura mini-verde" role="img" aria-label="Bairro de Trastevere, em Roma"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i></div>
+      <p>Bairro de ruas estreitas, restaurantes e vida noturna.</p>
+      <dl class="dados cartao">
+        <div><dt>Endereço</dt><dd>Bairro de Trastevere, Roma</dd></div>
+        <div><dt>Ingresso</dt><dd>Passeio livre, sem ingresso.</dd></div>
+        <div><dt>Horários</dt><dd>Os restaurantes e bares têm horários próprios.</dd></div>
+      </dl>
+      <div class="acoes">
+        <a class="btn" href="agenda.html"><i class="fa-solid fa-plus" aria-hidden="true"></i> Adicionar à agenda</a>
+        <a class="btn btn-secundario" href="mapa.html">Ver no mapa</a>
+      </div>
+    </section>
+    <section id="trattoria" aria-labelledby="titulo-trattoria">
+      <h2 id="titulo-trattoria">Trattoria do Centro (exemplo)</h2>
+      <div class="foto-destaque miniatura mini-verde" role="img" aria-label="Restaurante de exemplo"><i class="fa-solid fa-utensils" aria-hidden="true"></i></div>
+      <p>Cozinha romana tradicional. Dados de exemplo para o projeto.</p>
+      <dl class="dados cartao">
+        <div><dt>Endereço</dt><dd>[Endereço do restaurante]</dd></div>
+        <div><dt>Ingresso</dt><dd>Sem ingresso. Consumo no local.</dd></div>
+        <div><dt>Horários</dt><dd>[Horário de funcionamento]</dd></div>
+      </dl>
+      <div class="acoes">
+        <a class="btn" href="agenda.html"><i class="fa-solid fa-plus" aria-hidden="true"></i> Adicionar à agenda</a>
+        <a class="btn btn-secundario" href="mapa.html">Ver no mapa</a>
+      </div>
+    </section>
+    <section id="museu" aria-labelledby="titulo-museu">
+      <h2 id="titulo-museu">Museu (exemplo)</h2>
+      <div class="foto-destaque miniatura mini-laranja" role="img" aria-label="Museu de exemplo"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></div>
+      <p>Museu de exemplo para mostrar o estado de lugar fechado.</p>
+      <p class="aviso"><i class="fa-solid fa-door-closed" aria-hidden="true"></i><span>Este lugar está fechado no momento.</span></p>
+      <dl class="dados cartao">
+        <div><dt>Endereço</dt><dd>[Endereço do museu]</dd></div>
+        <div><dt>Ingresso</dt><dd>[Valor do ingresso]</dd></div>
+        <div><dt>Horários</dt><dd>[Horário de funcionamento]</dd></div>
+      </dl>
+      <div class="acoes">
+        <a class="btn" href="agenda.html"><i class="fa-solid fa-plus" aria-hidden="true"></i> Adicionar à agenda</a>
+        <a class="btn btn-secundario" href="mapa.html">Ver no mapa</a>
+      </div>
+    </section>
+    <p><small>Fotos: Wikimedia Commons (licenças Creative Commons) e Unsplash.</small></p>
   </main>
-
   <footer>
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
-        <li><a href="#topo">Voltar ao topo</a></li>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
-        <li><a href="agenda.html">Agenda</a></li>
-        <li><a href="mapa.html">Mapa</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="login.html">Entrar</a></li>
-        <li><a href="cadastro.html">Criar conta</a></li>
+        <li><a href="#topo">Voltar ao topo</a></li><li><a href="home.html">Início</a></li>
+        <li><a href="home.html#destinos">Destinos</a></li><li><a href="home.html#recursos">Recursos</a></li>
+        <li><a href="agenda.html">Agenda</a></li><li><a href="mapa.html">Mapa</a></li>
+        <li><a href="perfil.html">Perfil</a></li><li><a href="sobre.html">Sobre</a></li>
+        <li><a href="login.html">Entrar</a></li><li><a href="cadastro.html">Criar conta</a></li>
       </ul>
     </nav>
-    <address>
-      <a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a>
-    </address>
+    <address><a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a></address>
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
-
 </body>
 </html>

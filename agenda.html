@@ -3,111 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Monte o roteiro de cada dia da sua viagem com o GoTrip.">
+  <meta name="description" content="Roteiro da viagem dia a dia.">
   <title>GoTrip | Agenda</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="microinteracoes.css">
 </head>
 <body id="topo">
-
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-
   <header>
-    <a href="index.html" class="logo">
-      <!-- Ajuste width e height para as dimensões reais do seu SVG -->
-      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40">
-    </a>
-
-    <nav aria-label="Menu principal">
-      <ul class="pilulas">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-      </ul>
-    </nav>
+    <a href="home.html" class="logo"><img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40"></a>
+    <nav aria-label="Menu principal"><ul class="pilulas"><li><a href="home.html">Início</a></li><li><a href="home.html#recursos">Recursos</a></li><li><a href="home.html#destinos">Destinos</a></li><li><a href="sobre.html">Sobre</a></li></ul></nav>
   </header>
-
   <main id="conteudo">
-    <section aria-labelledby="titulo-agenda">
-      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
-      <h1 id="titulo-agenda">Minha agenda</h1>
-      <p class="destino-agenda">Lugar: Roma, Itália</p>
-      <nav aria-label="Dias da viagem">
-        <ul class="pilulas">
-          <li><a href="#dia-14">Seg 14</a></li>
-          <li><a href="#dia-15">Ter 15</a></li>
-          <li><a href="#dia-16">Qua 16</a></li>
-        </ul>
-      </nav>
+    <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar</a>
+    <section aria-labelledby="t">
+      <h1 id="t">Agenda</h1>
+      <p>Roteiro de exemplo para Roma. Toque em um lugar para ver os detalhes.</p>
+      <nav aria-label="Dias da viagem"><ul class="pilulas"><li><a href="#dia-1">Dia 1</a></li><li><a href="#dia-2">Dia 2</a></li><li><a href="#dia-3">Dia 3</a></li></ul></nav>
     </section>
-
-    <section class="dia" id="dia-14" aria-labelledby="titulo-dia-14">
-      <h2 id="titulo-dia-14">Segunda, 14</h2>
-      <h3>Manhã</h3>
-      <article class="card-destino">
-        <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80" alt="Ruínas históricas do Fórum Romano" width="88" height="88" loading="lazy">
-        <div>
-          <h3><a href="detalhes.html">Fórum Romano</a></h3>
-          <p class="horario"><i class="fa-regular fa-clock" aria-hidden="true"></i> 09:00 – 11:00</p>
-        </div>
-      </article>
+    <section class="dia" id="dia-1" aria-labelledby="dia-1-t">
+      <h2 id="dia-1-t">Dia 1</h2>
+      <h3>Manhã</h3><article><p class="destino-agenda"><a href="detalhes.html#coliseu">Coliseu</a></p><p class="horario">9h00 às 11h30</p></article>
+      <h3>Tarde</h3><article><p class="destino-agenda"><a href="detalhes.html#forum-romano">Fórum Romano</a></p><p class="horario">14h00 às 16h00</p></article>
     </section>
-
-    <section class="dia" id="dia-15" aria-labelledby="titulo-dia-15">
-      <h2 id="titulo-dia-15">Terça, 15</h2>
-      <div class="vazio">
-        <p>Nenhuma atividade planejada para este dia.</p>
-        <a class="btn btn-secundario" href="mapa.html">Explorar o mapa</a>
-      </div>
+    <section class="dia" id="dia-2" aria-labelledby="dia-2-t">
+      <h2 id="dia-2-t">Dia 2</h2>
+      <h3>Manhã</h3><article><p class="destino-agenda"><a href="detalhes.html#vaticano">Vaticano</a></p><p class="horario">8h30 às 11h00</p></article>
+      <h3>Tarde</h3><article><p class="destino-agenda"><a href="detalhes.html#fontana-di-trevi">Fontana di Trevi</a></p><p class="horario">15h00 às 16h00</p></article>
     </section>
-
-    <section class="dia" id="dia-16" aria-labelledby="titulo-dia-16">
-      <h2 id="titulo-dia-16">Quarta, 16</h2>
-      <h3>Manhã</h3>
-      <article class="card-destino">
-        <img src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=300&q=80" alt="Fontana di Trevi em Roma" width="88" height="88" loading="lazy">
-        <div>
-          <h3><a href="detalhes.html">Fontana di Trevi</a></h3>
-          <p class="horario"><i class="fa-regular fa-clock" aria-hidden="true"></i> 10:00 – 11:00</p>
-        </div>
-      </article>
-      <h3>Tarde</h3>
-      <article class="card-destino">
-        <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80" alt="Coliseu de Roma" width="88" height="88" loading="lazy">
-        <div>
-          <h3><a href="detalhes.html">Coliseu Romano</a></h3>
-          <p class="horario"><i class="fa-regular fa-clock" aria-hidden="true"></i> 16:00 – 18:00</p>
-        </div>
-      </article>
+    <section class="dia" id="dia-3" aria-labelledby="dia-3-t">
+      <h2 id="dia-3-t">Dia 3</h2>
+      <h3>Manhã</h3><article><p class="destino-agenda"><a href="detalhes.html#panteao">Panteão</a></p><p class="horario">10h00 às 11h00</p></article>
+      <h3>Tarde</h3><article><p class="destino-agenda"><a href="detalhes.html#trastevere">Trastevere</a></p><p class="horario">16h00 às 19h00</p></article>
     </section>
-
-    <div class="acoes">
-      <a class="btn" href="mapa.html"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Ver no mapa</a>
-      <a class="btn btn-secundario" href="index.html">Voltar ao início</a>
-    </div>
   </main>
-
   <footer>
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
-        <li><a href="#topo">Voltar ao topo</a></li>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
-        <li><a href="agenda.html">Agenda</a></li>
-        <li><a href="mapa.html">Mapa</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="login.html">Entrar</a></li>
-        <li><a href="cadastro.html">Criar conta</a></li>
+        <li><a href="#topo">Voltar ao topo</a></li><li><a href="home.html">Início</a></li>
+        <li><a href="home.html#destinos">Destinos</a></li><li><a href="home.html#recursos">Recursos</a></li>
+        <li><a href="agenda.html">Agenda</a></li><li><a href="mapa.html">Mapa</a></li>
+        <li><a href="perfil.html">Perfil</a></li><li><a href="sobre.html">Sobre</a></li>
+        <li><a href="login.html">Entrar</a></li><li><a href="cadastro.html">Criar conta</a></li>
       </ul>
     </nav>
-    <address>
-      <a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a>
-    </address>
+    <address><a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a></address>
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
-
+</body>
+</html>
 </body>
 </html>

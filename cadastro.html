@@ -15,15 +15,16 @@
 
   <header>
     <a href="home.html" class="logo">
-      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="120" height="40">
+      <img src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
     </a>
-
     <nav aria-label="Menu principal">
       <ul class="pilulas">
         <li><a href="home.html">Início</a></li>
-        <li><a href="home.html#recursos">Recursos</a></li>
-        <li><a href="home.html#destinos">Destinos</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="destinos.html">Destinos</a></li>
+        <li><a href="mapa.html">Mapa</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="sobre_a_equipe.html">Sobre</a></li>
       </ul>
     </nav>
   </header>
@@ -32,24 +33,19 @@
     <section aria-labelledby="titulo-cadastro">
       <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
       <h1 id="titulo-cadastro">Crie a sua conta</h1>
-      <!-- Sem back-end ainda: o nome e o e-mail ficam guardados no navegador (usuario.js). Quando houver back-end, troque este envio por uma chamada ao servidor. -->
-      <form id="form-cadastro" class="formulario" action="perfil.html" method="get">
+      <!-- Sem back-end ainda: o nome e o e-mail ficam guardados no navegador (usuario.js). A senha ainda não é guardada nem verificada. -->
+      <form id="form-cadastro" class="formulario" method="post">
         <div class="campo">
           <label for="reg-nome">Nome completo</label>
-          <input type="text" id="reg-nome" placeholder="Ex.: Maria Souza" autocomplete="name" required>
+          <input type="text" id="reg-nome" name="nome" placeholder="Ex.: Maria Souza" autocomplete="name" required>
         </div>
         <div class="campo">
           <label for="reg-email">E-mail</label>
-          <input type="email" id="reg-email" placeholder="exemplo@gotrip.com" autocomplete="email" required>
+          <input type="email" id="reg-email" name="email" placeholder="exemplo@gotrip.com" autocomplete="email" required>
         </div>
         <div class="campo">
-          <label for="reg-cpf">CPF</label>
-          <input type="text" id="reg-cpf" placeholder="000.000.000-00" inputmode="numeric"
-                 pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" title="Digite o CPF no formato 000.000.000-00" required>
-        </div>
-        <div class="campo">
-          <label for="reg-telefone">Telefone</label>
-          <input type="tel" id="reg-telefone" placeholder="(11) 99999-9999" autocomplete="tel" required>
+          <label for="reg-senha">Senha</label>
+          <input type="password" id="reg-senha" name="senha" placeholder="Mínimo de 8 caracteres" autocomplete="new-password" minlength="8" required>
         </div>
         <p id="cadastro-erro" role="alert" hidden></p>
         <button type="submit">Criar conta</button>
@@ -62,16 +58,9 @@
   <footer>
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
-        <li><a href="#topo">Voltar ao topo</a></li>
-        <li><a href="home.html">Início</a></li>
-        <li><a href="home.html#destinos">Destinos</a></li>
-        <li><a href="home.html#recursos">Recursos</a></li>
-        <li><a href="agenda.html">Agenda</a></li>
-        <li><a href="mapa.html">Mapa</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="login.html">Entrar</a></li>
-        <li><a href="cadastro.html">Criar conta</a></li>
+        <li><a href="como-funciona.html">Como funciona</a></li>
+        <li><a href="ajuda.html">Ajuda</a></li>
+        <li><a href="sobre_a_equipe.html">Sobre</a></li>
       </ul>
     </nav>
     <address>
@@ -84,15 +73,26 @@
   <script>
     document.getElementById('form-cadastro').addEventListener('submit', function (e) {
       e.preventDefault();
-      var nome = document.getElementById('reg-nome').value;
-      var email = document.getElementById('reg-email').value;
       var erro = document.getElementById('cadastro-erro');
 
-      if (GoTripUsuario.criarConta(nome, email)) {
-        window.location.href = 'perfil.html';
-      } else {
-        erro.textContent = 'Não foi possível salvar sua conta neste navegador. Verifique se o armazenamento não está bloqueado.';
+      function mostrarErro(texto) {
+        erro.textContent = texto;
         erro.hidden = false;
+        erro.setAttribute('tabindex', '-1');
+        erro.focus();
+      }
+
+      if (typeof GoTripUsuario === 'undefined') {
+        mostrarErro('Não foi possível carregar o sistema de conta. Confira se o arquivo usuario.js está na mesma pasta das páginas.');
+        return;
+      }
+      var nome = document.getElementById('reg-nome').value;
+      var email = document.getElementById('reg-email').value;
+
+      if (GoTripUsuario.criarConta(nome, email)) {
+        window.location.href = 'perfil.html?aviso=conta-criada';
+      } else {
+        mostrarErro('Não foi possível salvar sua conta neste navegador. Verifique se o armazenamento não está bloqueado.');
       }
     });
   </script>

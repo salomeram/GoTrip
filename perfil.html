@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Acompanhe suas viagens, os lugares que visitou e seu histórico no GoTrip.">
+  <meta name="description" content="Acompanhe suas viagens e os lugares que visitou no GoTrip.">
   <title>GoTrip | Perfil</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
@@ -15,15 +15,16 @@
 
   <header>
     <a href="home.html" class="logo">
-      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="120" height="40">
+      <img src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
     </a>
-
     <nav aria-label="Menu principal">
       <ul class="pilulas">
         <li><a href="home.html">Início</a></li>
-        <li><a href="home.html#recursos">Recursos</a></li>
-        <li><a href="home.html#destinos">Destinos</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="destinos.html">Destinos</a></li>
+        <li><a href="mapa.html">Mapa</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="perfil.html" aria-current="page">Perfil</a></li>
+        <li><a href="sobre_a_equipe.html">Sobre</a></li>
       </ul>
     </nav>
   </header>
@@ -32,16 +33,20 @@
     <section aria-labelledby="titulo-perfil">
       <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
 
+      <p id="perfil-boasvindas" class="aviso aviso-ok" role="status" hidden>
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        <span id="perfil-boasvindas-texto"></span>
+      </p>
+
       <p id="perfil-aviso" class="aviso" hidden>
         <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
         <span>Você ainda não entrou. <a href="login.html">Entrar</a> ou <a href="cadastro.html">criar conta</a>.</span>
       </p>
 
       <div class="perfil-topo">
-        <!-- Avatar com as iniciais da pessoa (preenchido pelo script no final da página) -->
         <span class="avatar" id="avatar" aria-hidden="true">?</span>
-        <h1 id="titulo-perfil" data-usuario-nome>Visitante</h1>
-        <p>Viajante Exploradora</p>
+        <h1 id="titulo-perfil">Visitante</h1>
+        <p>Viajante</p>
       </div>
 
       <dl class="estatisticas">
@@ -55,10 +60,10 @@
       <details>
         <summary><span><i class="fa-solid fa-plane icone-primaria" aria-hidden="true"></i>Minhas viagens</span></summary>
         <ul class="lista-simples">
-          <li>Roma, Itália</li>
-          <li>Paris, França</li>
-          <li>Lisboa, Portugal</li>
-          <li>Rio de Janeiro, Brasil</li>
+          <li><a href="roma.html">Roma, Itália</a></li>
+          <li><a href="paris.html">Paris, França</a></li>
+          <li><a href="lisboa.html">Lisboa, Portugal</a></li>
+          <li><a href="rio.html">Rio de Janeiro, Brasil</a></li>
           <li>Florianópolis, Brasil</li>
         </ul>
       </details>
@@ -70,32 +75,17 @@
           <li>Alfama</li><li>Cristo Redentor</li><li>Pão de Açúcar</li><li>Praia da Joaquina</li>
         </ul>
       </details>
-      <details>
-        <summary><span><i class="fa-solid fa-clock-rotate-left icone-laranja" aria-hidden="true"></i>Histórico</span></summary>
-        <ul class="lista-simples">
-          <li>Adicionou a Fontana di Trevi à agenda</li>
-          <li>Consultou o mapa de Roma</li>
-          <li>Buscou por Lisboa</li>
-        </ul>
-      </details>
     </section>
 
-    <a class="btn btn-perigo" id="sair" href="login.html"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Sair da conta</a>
+    <a class="btn btn-perigo" id="sair" href="login.html" hidden><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Sair da conta</a>
   </main>
 
   <footer>
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
-        <li><a href="#topo">Voltar ao topo</a></li>
-        <li><a href="home.html">Início</a></li>
-        <li><a href="home.html#destinos">Destinos</a></li>
-        <li><a href="home.html#recursos">Recursos</a></li>
-        <li><a href="agenda.html">Agenda</a></li>
-        <li><a href="mapa.html">Mapa</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="login.html">Entrar</a></li>
-        <li><a href="cadastro.html">Criar conta</a></li>
+        <li><a href="comofunciona.html">Como funciona</a></li>
+        <li><a href="ajuda.html">Ajuda</a></li>
+        <li><a href="sobre_a_equipe.html">Sobre</a></li>
       </ul>
     </nav>
     <address>
@@ -107,19 +97,39 @@
   <script src="usuario.js"></script>
   <script>
     (function () {
-      var usuario = GoTripUsuario.atual();
+      var usuario = (typeof GoTripUsuario !== 'undefined') ? GoTripUsuario.atual() : null;
       var avatar = document.getElementById('avatar');
+      var params = new URLSearchParams(location.search);
 
       if (usuario) {
-        var partes = usuario.nome.trim().split(/\s+/);
-        var iniciais = partes[0].charAt(0) + (partes.length > 1 ? partes[partes.length - 1].charAt(0) : '');
+        var nome = (usuario.nome || '').trim();
+        var partes = nome ? nome.split(/\s+/) : [];
+        var iniciais = partes.length
+          ? partes[0].charAt(0) + (partes.length > 1 ? partes[partes.length - 1].charAt(0) : '')
+          : '?';
         avatar.textContent = iniciais.toUpperCase();
+        if (nome) document.getElementById('titulo-perfil').textContent = nome;
+        document.getElementById('sair').hidden = false;
+
+        var aviso = params.get('aviso');
+        var texto = aviso === 'conta-criada' ? 'Conta criada com sucesso. Bem-vindo(a) ao GoTrip!'
+                  : aviso === 'entrou' ? 'Você entrou na sua conta.' : '';
+        if (texto) {
+          var caixa = document.getElementById('perfil-boasvindas');
+          caixa.hidden = false;
+          // preenche depois de exibir, para o leitor de tela anunciar
+          setTimeout(function () {
+            document.getElementById('perfil-boasvindas-texto').textContent = texto;
+          }, 100);
+        }
       } else {
         document.getElementById('perfil-aviso').hidden = false;
       }
 
       // "Sair da conta" apaga a sessão e segue para o login
-      document.getElementById('sair').addEventListener('click', GoTripUsuario.sair);
+      document.getElementById('sair').addEventListener('click', function () {
+        if (typeof GoTripUsuario !== 'undefined') GoTripUsuario.sair();
+      });
     })();
   </script>
 </body>

@@ -7,34 +7,35 @@
   <title>Sobre a equipe | GoTrip</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="microinteracoes.css">
 </head>
 <body id="topo">
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header>
-    <a href="index.html" class="logo">
-      <!-- Ajuste width e height para as dimensões reais do seu SVG -->
-      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip" width="120" height="40">
+    <a href="home.html" class="logo">
+      <img src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
     </a>
-
     <nav aria-label="Menu principal">
       <ul class="pilulas">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
-        <li><a href="sobre.html" aria-current="page">Sobre</a></li>
+        <li><a href="home.html">Início</a></li>
+        <li><a href="destinos.html">Destinos</a></li>
+        <li><a href="mapa.html">Mapa</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="sobre_a_equipe.html" aria-current="page">Sobre</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="conteudo">
     <section aria-labelledby="titulo-sobre">
-      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+      <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
       <h1 id="titulo-sobre">Sobre a equipe</h1>
 
       <figure class="foto-equipe">
-        <img src="isaesalo.jpg" alt="Isabella e Salomé" width="350">
+        <img src="isaesalo.jpg" alt="Isabella e Salomé" width="350" height="350" loading="lazy">
         <figcaption>Isabella Villa e Salomé Ramírez, criadoras do GoTrip</figcaption>
       </figure>
 
@@ -42,19 +43,19 @@
         <article class="membro" aria-labelledby="isabella">
           <h2 id="isabella">Isabella Villa</h2>
           <p>Habilidade: desenhar.</p>
-          <a class="btn btn-secundario" href="https://www.instagram.com/isavtos_/"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram de Isabella (@isavtos_)</a>
+          <a class="btn btn-secundario" href="https://www.instagram.com/isavtos_/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram de Isabella (@isavtos_)<span class="sr-only"> (abre em nova aba)</span></a>
         </article>
 
         <article class="membro" aria-labelledby="salome">
           <h2 id="salome">Salomé Ramírez</h2>
           <p>Habilidade: fazer sobremesas.</p>
-          <a class="btn btn-secundario" href="https://www.instagram.com/00_8sr/"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram de Salomé (@00_8sr)</a>
+          <a class="btn btn-secundario" href="https://www.instagram.com/00_8sr/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram de Salomé (@00_8sr)<span class="sr-only"> (abre em nova aba)</span></a>
         </article>
       </div>
     </section>
 
     <div class="acoes">
-      <a class="btn" href="index.html">Voltar ao início</a>
+      <a class="btn" href="destinos.html">Ver destinos</a>
       <a class="btn btn-secundario" href="cadastro.html">Criar conta</a>
     </div>
   </main>
@@ -62,16 +63,9 @@
   <footer>
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
-        <li><a href="#topo">Voltar ao topo</a></li>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="index.html#destinos">Destinos</a></li>
-        <li><a href="index.html#recursos">Recursos</a></li>
-        <li><a href="agenda.html">Agenda</a></li>
-        <li><a href="mapa.html">Mapa</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="login.html">Entrar</a></li>
-        <li><a href="cadastro.html">Criar conta</a></li>
+        <li><a href="como-funciona.html">Como funciona</a></li>
+        <li><a href="ajuda.html">Ajuda</a></li>
+        <li><a href="sobre_a_equipe.html" aria-current="page">Sobre</a></li>
       </ul>
     </nav>
     <address>

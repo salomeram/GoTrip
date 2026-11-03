@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Escolha uma cidade para ver os pontos turísticos.">
+  <title>GoTrip | Destinos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="microinteracoes.css">
+</head>
+<body id="topo">
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header>
+    <a href="home.html" class="logo">
+      <img src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
+    </a>
+    <nav aria-label="Menu principal">
+      <ul class="pilulas">
+        <li><a href="home.html">Início</a></li>
+        <li><a href="destinos.html" aria-current="page">Destinos</a></li>
+        <li><a href="mapa.html">Mapa</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="sobre_a_equipe.html">Sobre</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section aria-labelledby="titulo-destinos">
+      <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+      <h1 id="titulo-destinos">Destinos</h1>
+      <form id="form-busca" action="destinos.html" method="get" role="search">
+        <label for="busca">Buscar destino</label>
+        <div class="campo-busca">
+          <input type="search" id="busca" name="busca" placeholder="Cidade ou país" autocomplete="off">
+          <button type="submit"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Buscar</button>
+        </div>
+      </form>
+      <p id="resultado-busca" role="status" aria-live="polite"></p>
+      <div class="lista-cartoes">
+        <article class="card-destino">
+          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80" alt="Ruínas do Fórum Romano sob o céu azul" width="88" height="88" loading="lazy">
+          <div>
+            <span class="selo selo-verde">Europa</span>
+            <h2><a href="roma.html">Roma, Itália</a></h2>
+            <p>Coliseu, Fórum Romano e gastronomia.</p>
+          </div>
+        </article>
+        <article class="card-destino">
+          <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=300&q=80" alt="Torre Eiffel iluminada ao anoitecer em Paris" width="88" height="88" loading="lazy">
+          <div>
+            <span class="selo selo-verde">Europa</span>
+            <h2><a href="paris.html">Paris, França</a></h2>
+            <p>Arte, arquitetura e cultura à beira do Sena.</p>
+          </div>
+        </article>
+        <article class="card-destino">
+          <img src="https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?auto=format&fit=crop&w=300&q=80" alt="Vista de Lisboa, Portugal" width="88" height="88" loading="lazy">
+          <div>
+            <span class="selo selo-verde">Europa</span>
+            <h2><a href="lisboa.html">Lisboa, Portugal</a></h2>
+            <p>Miradouros, bondes e pastéis de nata.</p>
+          </div>
+        </article>
+        <article class="card-destino">
+          <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=300&q=80" alt="Vista de Tóquio, Japão" width="88" height="88" loading="lazy">
+          <div>
+            <span class="selo selo-laranja">Ásia</span>
+            <h2><a href="toquio.html">Tóquio, Japão</a></h2>
+            <p>Templos, tecnologia e culinária.</p>
+          </div>
+        </article>
+        <article class="card-destino">
+          <img src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=300&q=80" alt="Vista do Rio de Janeiro, Brasil" width="88" height="88" loading="lazy">
+          <div>
+            <span class="selo">Brasil</span>
+            <h2><a href="rio.html">Rio de Janeiro, Brasil</a></h2>
+            <p>Praias, Cristo Redentor e Pão de Açúcar.</p>
+          </div>
+        </article>
+        <article class="card-destino">
+          <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=300&q=80" alt="Vista de Nova York, EUA" width="88" height="88" loading="lazy">
+          <div>
+            <span class="selo selo-laranja">Américas</span>
+            <h2><a href="novayork.html">Nova York, EUA</a></h2>
+            <p>Central Park, museus e Broadway.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <nav aria-label="Menu do rodapé">
+      <ul class="pilulas">
+        <li><a href="comofunciona.html">Como funciona</a></li>
+        <li><a href="ajuda.html">Ajuda</a></li>
+        <li><a href="sobre_a_equipe.html">Sobre</a></li>
+      </ul>
+    </nav>
+    <address>
+      <a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a>
+    </address>
+    <p>© 2026 GoTrip. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // Busca de destinos: filtra os cards enquanto a pessoa digita e avisa o resultado a quem usa leitor de tela
+    (function () {
+      var form = document.getElementById('form-busca');
+      var campo = document.getElementById('busca');
+      var aviso = document.getElementById('resultado-busca');
+      var cards = document.querySelectorAll('.card-destino');
+
+      function normalizar(t) {
+        return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      }
+
+      function filtrar(termo) {
+        var q = normalizar(termo.trim());
+        var achados = 0;
+        cards.forEach(function (card) {
+          var visivel = !q || normalizar(card.textContent).indexOf(q) !== -1;
+          card.hidden = !visivel;
+          if (visivel) achados++;
+        });
+        if (!q) aviso.textContent = '';
+        else if (achados === 0) aviso.textContent = 'Nenhum destino encontrado para "' + termo.trim() + '". Tente outro nome ou limpe a busca.';
+        else aviso.textContent = achados + (achados === 1 ? ' destino encontrado.' : ' destinos encontrados.');
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        filtrar(campo.value);
+      });
+      campo.addEventListener('input', function () { filtrar(campo.value); });
+
+      var params = new URLSearchParams(location.search);
+      if (params.get('busca')) { campo.value = params.get('busca'); filtrar(campo.value); }
+    })();
+  </script>
+</body>
+</html>

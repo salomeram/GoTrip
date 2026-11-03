@@ -15,15 +15,16 @@
 
   <header>
     <a href="home.html" class="logo">
-      <img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="120" height="40">
+      <img src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
     </a>
-
     <nav aria-label="Menu principal">
       <ul class="pilulas">
         <li><a href="home.html">Início</a></li>
-        <li><a href="home.html#recursos">Recursos</a></li>
-        <li><a href="home.html#destinos">Destinos</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="destinos.html">Destinos</a></li>
+        <li><a href="mapa.html">Mapa</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="sobre_a_equipe.html">Sobre</a></li>
       </ul>
     </nav>
   </header>
@@ -33,15 +34,15 @@
       <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
       <h1 id="titulo-login">Entrar</h1>
       <p>Planeje, explore e <strong>viva novas histórias</strong>.</p>
-      <!-- Sem back-end ainda: o login reconhece contas criadas neste navegador (usuario.js). A senha ainda não é verificada. Quando houver back-end, troque este envio por uma chamada ao servidor. -->
-      <form id="form-login" class="formulario" action="perfil.html" method="get">
+      <!-- Sem back-end ainda: o login reconhece contas criadas neste navegador (usuario.js). A senha ainda não é verificada. -->
+      <form id="form-login" class="formulario" method="post">
         <div class="campo">
-          <label for="login-email">Endereço de e-mail</label>
-          <input type="email" id="login-email" placeholder="exemplo@gotrip.com" autocomplete="email" required>
+          <label for="login-email">E-mail</label>
+          <input type="email" id="login-email" name="email" placeholder="exemplo@gotrip.com" autocomplete="email" aria-describedby="login-erro" required>
         </div>
         <div class="campo">
           <label for="login-senha">Senha</label>
-          <input type="password" id="login-senha" placeholder="••••••••" autocomplete="current-password" required>
+          <input type="password" id="login-senha" name="senha" placeholder="••••••••" autocomplete="current-password" required>
         </div>
         <p id="login-erro" role="alert" hidden></p>
         <button type="submit">Entrar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
@@ -54,16 +55,9 @@
   <footer>
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
-        <li><a href="#topo">Voltar ao topo</a></li>
-        <li><a href="home.html">Início</a></li>
-        <li><a href="home.html#destinos">Destinos</a></li>
-        <li><a href="home.html#recursos">Recursos</a></li>
-        <li><a href="agenda.html">Agenda</a></li>
-        <li><a href="mapa.html">Mapa</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="login.html">Entrar</a></li>
-        <li><a href="cadastro.html">Criar conta</a></li>
+        <li><a href="comofunciona.html">Como funciona</a></li>
+        <li><a href="ajuda.html">Ajuda</a></li>
+        <li><a href="sobre_a_equipe.html">Sobre</a></li>
       </ul>
     </nav>
     <address>
@@ -72,22 +66,6 @@
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
 
-  <script src="usuario.js"></script>
-  <script>
-    document.getElementById('form-login').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = document.getElementById('login-email').value;
-      var erro = document.getElementById('login-erro');
-
-      if (GoTripUsuario.entrar(email)) {
-        window.location.href = 'perfil.html';
-      } else {
-        erro.textContent = 'Não encontramos uma conta com esse e-mail neste navegador. Confira o e-mail ou crie uma conta.';
-        erro.hidden = false;
-        document.getElementById('login-email').focus();
-      }
-    });
-  </script>
+  
 </body>
-</html>
 </html>

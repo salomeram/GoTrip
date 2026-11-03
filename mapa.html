@@ -3,302 +3,173 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Veja atrações, restaurantes e hotéis no mapa.">
+  <meta name="description" content="Escolha uma cidade e veja os lugares no mapa.">
   <title>GoTrip | Mapa</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="microinteracoes.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-  <style>
-    /* Estilos do mapa geral e do mapa de Tóquio (podem ser movidos para style.css) */
-    #mapa-geral {
-      height: 420px;
-      width: 100%;
-      border-radius: 16px;
-      position: relative;
-      z-index: 0;
-    }
-    .mapa-real #mapa-toquio {
-      height: 320px !important;
-      width: 100%;
-      border-radius: 16px;
-      position: relative;
-      z-index: 0;
-    }
-    /* Estado indicado por cor + forma + símbolo (não só por cor) */
-    .pin {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 3px solid #fff;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-      vertical-align: middle;
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      line-height: 1;
-    }
-    .pin-azul     { background: #3b82f6; border-radius: 4px; }          /* quadrado */
-    .pin-verde    { background: #15803d; }                               /* círculo com ✓ */
-    .pin-vermelho { background: #b91c1c; }                               /* círculo com ✕ */
-    .pin-verde::after    { content: "\2713"; }
-    .pin-vermelho::after { content: "\2715"; }
-
-    /* Foco visível e respeito a quem reduz movimento */
-    a:focus-visible, button:focus-visible, summary:focus-visible,
-    input:focus-visible, .leaflet-marker-icon:focus-visible {
-      outline: 3px solid #93c5fd;
-      outline-offset: 3px;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
-    .legenda {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      list-style: none;
-      padding: 0;
-      margin: 12px 0 0;
-      font-size: 0.85rem;
-    }
-    .legenda li {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-  </style>
 </head>
 <body id="topo">
+
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
   <header>
-    <a href="home.html" class="logo"><img src="https://raw.githubusercontent.com/salomeram/GoTrip/6ecac5e0859f4c365372da74a2aea7fc2bba347f/logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="120" height="40"></a>
-    <nav aria-label="Menu principal"><ul class="pilulas"><li><a href="home.html">Início</a></li><li><a href="home.html#recursos">Recursos</a></li><li><a href="home.html#destinos">Destinos</a></li><li><a href="sobre.html">Sobre</a></li></ul></nav>
+    <a href="home.html" class="logo">
+      <img src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
+    </a>
+    <nav aria-label="Menu principal">
+      <ul class="pilulas">
+        <li><a href="home.html">Início</a></li>
+        <li><a href="destinos.html">Destinos</a></li>
+        <li><a href="mapa.html" aria-current="page">Mapa</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="sobre_a_equipe.html">Sobre</a></li>
+      </ul>
+    </nav>
   </header>
+
   <main id="conteudo">
-    <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar</a>
-    <section aria-labelledby="titulo-mapa">
+    <section id="vista-escolha" aria-labelledby="titulo-mapa">
+      <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
       <h1 id="titulo-mapa">Mapa</h1>
-      <p>Cada mapa marca a atração principal do destino. Clique ou toque em um nome para ver os detalhes do lugar.</p>
-      <nav aria-label="Destinos no mapa"><ul class="pilulas"><li><a href="#roma">Roma</a></li><li><a href="#paris">Paris</a></li><li><a href="#lisboa">Lisboa</a></li><li><a href="#toquio">Tóquio</a></li><li><a href="#rio">Rio de Janeiro</a></li><li><a href="#nova-york">Nova York</a></li></ul></nav>
+      <p>Escolha uma cidade para ver no mapa.</p>
+      <div class="lista-cartoes">
+        <article class="card-recurso">
+          <span class="icone icone-primaria"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+          <div><h2><a href="mapa.html?cidade=roma">Roma, Itália</a></h2><p>8 lugares no mapa</p></div>
+        </article>
+        <article class="card-recurso">
+          <span class="icone icone-primaria"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+          <div><h2><a href="mapa.html?cidade=paris">Paris, França</a></h2><p>3 lugares no mapa</p></div>
+        </article>
+        <article class="card-recurso">
+          <span class="icone icone-primaria"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+          <div><h2><a href="mapa.html?cidade=lisboa">Lisboa, Portugal</a></h2><p>2 lugares no mapa</p></div>
+        </article>
+        <article class="card-recurso">
+          <span class="icone icone-primaria"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+          <div><h2><a href="mapa.html?cidade=toquio">Tóquio, Japão</a></h2><p>2 lugares no mapa</p></div>
+        </article>
+        <article class="card-recurso">
+          <span class="icone icone-primaria"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+          <div><h2><a href="mapa.html?cidade=rio">Rio de Janeiro, Brasil</a></h2><p>3 lugares no mapa</p></div>
+        </article>
+        <article class="card-recurso">
+          <span class="icone icone-primaria"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+          <div><h2><a href="mapa.html?cidade=nova-york">Nova York, EUA</a></h2><p>3 lugares no mapa</p></div>
+        </article>
+      </div>
+      <p class="aviso"><i class="fa-solid fa-door-closed" aria-hidden="true"></i><span>Lugares fechados aparecem com marcador vermelho no mapa da cidade.</span></p>
     </section>
 
-    <section aria-labelledby="titulo-mapa-geral">
-      <h2 id="titulo-mapa-geral">Todos os lugares</h2>
-      <div id="mapa-geral" role="region" aria-label="Mapa com todos os lugares, incluindo os fechados"></div>
+    <section id="vista-cidade" aria-labelledby="titulo-cidade" hidden>
+      <a class="voltar" href="mapa.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Escolher outra cidade</a>
+      <h1 id="titulo-cidade"></h1>
+      <div id="mapa-cidade" role="region" aria-label="Mapa"></div>
       <ul class="legenda">
-        <li><span class="pin pin-azul" aria-hidden="true"></span> Atração (quadrado azul)</li>
-        <li><span class="pin pin-verde" aria-hidden="true"></span> Aberto (círculo verde com ✓)</li>
-        <li><span class="pin pin-vermelho" aria-hidden="true"></span> Fechado (círculo vermelho com ✕)</li>
+        <li><span class="pin pin-azul" aria-hidden="true"></span> Atração e outros lugares</li>
+        <li><span class="pin pin-verde" aria-hidden="true"></span> Aberto</li>
+        <li><span class="pin pin-vermelho" aria-hidden="true"></span> Fechado</li>
       </ul>
+      <div id="cidade-info"></div>
     </section>
-
-    <section id="roma" aria-labelledby="titulo-roma">
-      <h2 id="titulo-roma">Roma, Itália</h2>
-      <div class="mapa-real">
-        <iframe title="Mapa de Roma, Itália, com Coliseu marcado" src="https://www.openstreetmap.org/export/embed.html?bbox=12.44%2C41.865%2C12.53%2C41.925&amp;layer=mapnik&amp;marker=41.8902%2C12.4922" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      <p><a aria-label="Abrir mapa maior de Roma, Itália em uma nova aba" href="https://www.openstreetmap.org/?mlat=41.8902&amp;mlon=12.4922#map=16/41.8902/12.4922" target="_blank" rel="noopener">Abrir mapa maior</a> em uma nova aba.</p>
-      <ul class="lista-lugares">
-        <li><div><a href="detalhes.html#coliseu">Coliseu</a><small><a aria-label="Ver Coliseu no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=41.8902&amp;mlon=12.4922#map=16/41.8902/12.4922" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="detalhes.html#forum-romano">Fórum Romano</a><small><a aria-label="Ver Fórum Romano no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=41.8925&amp;mlon=12.4853#map=16/41.8925/12.4853" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="detalhes.html#vaticano">Vaticano</a><small><a aria-label="Ver Vaticano no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=41.9022&amp;mlon=12.4539#map=16/41.9022/12.4539" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="detalhes.html#fontana-di-trevi">Fontana di Trevi</a><small><a aria-label="Ver Fontana di Trevi no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=41.9009&amp;mlon=12.4833#map=16/41.9009/12.4833" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="detalhes.html#panteao">Panteão</a><small><a aria-label="Ver Panteão no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=41.8986&amp;mlon=12.4769#map=16/41.8986/12.4769" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="detalhes.html#trastevere">Trastevere</a><small><a aria-label="Ver Trastevere no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=41.8869&amp;mlon=12.47#map=16/41.8869/12.47" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo selo-verde">Bairro</span></li>
-        <li data-lat="41.8992" data-lng="12.4731"><div><a href="detalhes.html#trattoria">Trattoria do Centro (exemplo)</a><small>Dados de exemplo</small></div><span class="selo selo-verde">Aberto</span></li>
-        <li data-lat="41.8934" data-lng="12.4828"><div><a href="detalhes.html#museu">Museu (exemplo)</a><small>Dados de exemplo</small></div><span class="selo selo-vermelho">Fechado</span></li>
-      </ul>
-    </section>
-
-    <section id="paris" aria-labelledby="titulo-paris">
-      <h2 id="titulo-paris">Paris, França</h2>
-      <div class="mapa-real">
-        <iframe title="Mapa de Paris, França, com Torre Eiffel marcado" src="https://www.openstreetmap.org/export/embed.html?bbox=2.27%2C48.835%2C2.36%2C48.885&amp;layer=mapnik&amp;marker=48.8584%2C2.2945" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      <p><a aria-label="Abrir mapa maior de Paris, França em uma nova aba" href="https://www.openstreetmap.org/?mlat=48.8584&amp;mlon=2.2945#map=16/48.8584/2.2945" target="_blank" rel="noopener">Abrir mapa maior</a> em uma nova aba.</p>
-      <ul class="lista-lugares">
-        <li><div><a href="paris.html#torre-eiffel">Torre Eiffel</a><small><a aria-label="Ver Torre Eiffel no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=48.8584&amp;mlon=2.2945#map=16/48.8584/2.2945" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="paris.html#louvre">Museu do Louvre</a><small><a aria-label="Ver Museu do Louvre no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=48.8606&amp;mlon=2.3376#map=16/48.8606/2.3376" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="paris.html#rio-sena">Rio Sena</a><small><a aria-label="Ver Rio Sena no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=48.857&amp;mlon=2.3413#map=16/48.857/2.3413" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo selo-verde">Passeio</span></li>
-      </ul>
-    </section>
-
-    <section id="lisboa" aria-labelledby="titulo-lisboa">
-      <h2 id="titulo-lisboa">Lisboa, Portugal</h2>
-      <div class="mapa-real">
-        <iframe title="Mapa de Lisboa, Portugal, com Torre de Belém marcado" src="https://www.openstreetmap.org/export/embed.html?bbox=-9.25%2C38.68%2C-9.12%2C38.74&amp;layer=mapnik&amp;marker=38.6916%2C-9.216" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      <p><a aria-label="Abrir mapa maior de Lisboa, Portugal em uma nova aba" href="https://www.openstreetmap.org/?mlat=38.6916&amp;mlon=-9.216#map=16/38.6916/-9.216" target="_blank" rel="noopener">Abrir mapa maior</a> em uma nova aba.</p>
-      <ul class="lista-lugares">
-        <li><div><a href="lisboa.html#torre-de-belem">Torre de Belém</a><small><a aria-label="Ver Torre de Belém no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=38.6916&amp;mlon=-9.216#map=16/38.6916/-9.216" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="lisboa.html#eletrico-28">Elétrico 28 (Martim Moniz)</a><small><a aria-label="Ver Elétrico 28 (Martim Moniz) no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=38.7172&amp;mlon=-9.136#map=16/38.7172/-9.136" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo selo-verde">Passeio</span></li>
-        <li><div><a href="lisboa.html#pasteis-de-belem">Pastéis de Belém</a><small><a aria-label="Ver Pastéis de Belém no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=38.6975&amp;mlon=-9.2032#map=16/38.6975/-9.2032" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo selo-laranja">Comer</span></li>
-      </ul>
-    </section>
-
-    <section id="toquio" aria-labelledby="titulo-toquio">
-      <h2 id="titulo-toquio">Tóquio, Japão</h2>
-      <div class="mapa-real">
-        <div id="mapa-toquio" role="region" aria-label="Mapa de Tóquio, Japão, com Templo Senso-ji marcado"></div>
-      </div>
-      <p><a aria-label="Abrir mapa maior de Tóquio, Japão em uma nova aba" href="https://www.openstreetmap.org/?mlat=35.7148&amp;mlon=139.7967#map=16/35.7148/139.7967" target="_blank" rel="noopener">Abrir mapa maior</a> em uma nova aba.</p>
-      <ul class="lista-lugares">
-        <li><div><a href="toquio.html#senso-ji">Templo Senso-ji</a><small><a aria-label="Ver Templo Senso-ji no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=35.7148&amp;mlon=139.7967#map=16/35.7148/139.7967" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="toquio.html#shibuya">Shibuya</a><small><a aria-label="Ver Shibuya no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=35.6595&amp;mlon=139.7005#map=16/35.6595/139.7005" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo selo-verde">Bairro</span></li>
-        <li><div><a href="toquio.html#culinaria">Culinária</a><small>Sem localização no mapa</small></div><span class="selo selo-laranja">Comer</span></li>
-      </ul>
-    </section>
-
-    <section id="rio" aria-labelledby="titulo-rio">
-      <h2 id="titulo-rio">Rio de Janeiro, Brasil</h2>
-      <div class="mapa-real">
-        <iframe title="Mapa de Rio de Janeiro, Brasil, com Cristo Redentor marcado" src="https://www.openstreetmap.org/export/embed.html?bbox=-43.3%2C-23.0%2C-43.12%2C-22.9&amp;layer=mapnik&amp;marker=-22.9519%2C-43.2105" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      <p><a aria-label="Abrir mapa maior de Rio de Janeiro, Brasil em uma nova aba" href="https://www.openstreetmap.org/?mlat=-22.9519&amp;mlon=-43.2105#map=16/-22.9519/-43.2105" target="_blank" rel="noopener">Abrir mapa maior</a> em uma nova aba.</p>
-      <ul class="lista-lugares">
-        <li><div><a href="rio.html#cristo-redentor">Cristo Redentor</a><small><a aria-label="Ver Cristo Redentor no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=-22.9519&amp;mlon=-43.2105#map=16/-22.9519/-43.2105" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="rio.html#pao-de-acucar">Pão de Açúcar</a><small><a aria-label="Ver Pão de Açúcar no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=-22.9496&amp;mlon=-43.1547#map=16/-22.9496/-43.1547" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-        <li><div><a href="rio.html#praias">Praias (Copacabana)</a><small><a aria-label="Ver Praias (Copacabana) no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=-22.9711&amp;mlon=-43.1822#map=16/-22.9711/-43.1822" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo selo-verde">Praia</span></li>
-      </ul>
-    </section>
-
-    <section id="nova-york" aria-labelledby="titulo-nova-york">
-      <h2 id="titulo-nova-york">Nova York, EUA</h2>
-      <div class="mapa-real">
-        <iframe title="Mapa de Nova York, EUA, com Central Park marcado" src="https://www.openstreetmap.org/export/embed.html?bbox=-74.02%2C40.72%2C-73.93%2C40.8&amp;layer=mapnik&amp;marker=40.7829%2C-73.9654" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      <p><a aria-label="Abrir mapa maior de Nova York, EUA em uma nova aba" href="https://www.openstreetmap.org/?mlat=40.7829&amp;mlon=-73.9654#map=16/40.7829/-73.9654" target="_blank" rel="noopener">Abrir mapa maior</a> em uma nova aba.</p>
-      <ul class="lista-lugares">
-        <li><div><a href="novayork.html#central-park">Central Park</a><small><a aria-label="Ver Central Park no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=40.7829&amp;mlon=-73.9654#map=16/40.7829/-73.9654" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo selo-verde">Parque</span></li>
-        <li><div><a href="novayork.html#broadway">Broadway (Times Square)</a><small><a aria-label="Ver Broadway (Times Square) no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=40.759&amp;mlon=-73.9845#map=16/40.759/-73.9845" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo selo-laranja">Teatros</span></li>
-        <li><div><a href="novayork.html#museus-ny">Museus (MET)</a><small><a aria-label="Ver Museus (MET) no OpenStreetMap (abre em nova aba)" href="https://www.openstreetmap.org/?mlat=40.7794&amp;mlon=-73.9632#map=16/40.7794/-73.9632" target="_blank" rel="noopener">Ver no OpenStreetMap</a></small></div><span class="selo ">Atração</span></li>
-      </ul>
-    </section>
-
-    <p><small>Mapas: © colaboradores do OpenStreetMap e OpenFreeMap.</small></p>
   </main>
 
   <footer>
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
-        <li><a href="#topo">Voltar ao topo</a></li><li><a href="home.html">Início</a></li>
-        <li><a href="home.html#destinos">Destinos</a></li><li><a href="home.html#recursos">Recursos</a></li>
-        <li><a href="agenda.html">Agenda</a></li><li><a href="mapa.html">Mapa</a></li>
-        <li><a href="perfil.html">Perfil</a></li><li><a href="sobre.html">Sobre</a></li>
-        <li><a href="login.html">Entrar</a></li><li><a href="cadastro.html">Criar conta</a></li>
+        <li><a href="comofunciona.html">Como funciona</a></li>
+        <li><a href="ajuda.html">Ajuda</a></li>
+        <li><a href="sobre_a_equipe.html">Sobre</a></li>
       </ul>
     </nav>
-    <address><a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a></address>
+    <address>
+      <a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a>
+    </address>
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
 
-  <!-- Leaflet -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@maplibre/maplibre-gl-leaflet@0.1.4/leaflet-maplibre-gl.js"></script>
   <script>
-    // Mapa base gratuito (sem chave de API), com nomes em alfabeto latino
-    function adicionarMapaBase(mapa) {
+    var DADOS = {"roma": {"nome": "Roma, Itália", "lugares": [{"id": "coliseu", "nome": "Coliseu", "lat": 41.8902, "lng": 12.4922, "estado": "azul", "selo": "Atração", "endereco": "Piazza del Colosseo, 1, Roma", "pagina": "coliseu.html"}, {"id": "forum-romano", "nome": "Fórum Romano", "lat": 41.8925, "lng": 12.4853, "estado": "azul", "selo": "Atração", "endereco": "Via della Salara Vecchia, 5/6, Roma", "pagina": "forumromano.html"}, {"id": "vaticano", "nome": "Vaticano", "lat": 41.9022, "lng": 12.4539, "estado": "azul", "selo": "Atração", "endereco": "Viale Vaticano, Cidade do Vaticano", "pagina": "vaticano.html"}, {"id": "fontana-di-trevi", "nome": "Fontana di Trevi", "lat": 41.9009, "lng": 12.4833, "estado": "azul", "selo": "Atração", "endereco": "Piazza di Trevi, Roma", "pagina": "fontanaditrevi.html"}, {"id": "panteao", "nome": "Panteão", "lat": 41.8986, "lng": 12.4769, "estado": "azul", "selo": "Atração", "endereco": "Piazza della Rotonda, Roma", "pagina": "panteao.html"}, {"id": "trastevere", "nome": "Trastevere", "lat": 41.8869, "lng": 12.47, "estado": "azul", "selo": "Bairro", "endereco": "Bairro de Trastevere, Roma", "pagina": "transtevere.html"}, {"id": "trattoria", "nome": "Trattoria do Centro", "lat": 41.8992, "lng": 12.4731, "estado": "verde", "selo": "Aberto", "endereco": "Centro histórico, Roma", "pagina": "trattoria.html"}, {"id": "museu", "nome": "Museu", "lat": 41.8934, "lng": 12.4828, "estado": "vermelho", "selo": "Fechado", "endereco": "Centro histórico, Roma", "pagina": "museu.html"}]}, "paris": {"nome": "Paris, França", "lugares": [{"id": "torre-eiffel", "nome": "Torre Eiffel", "lat": 48.8584, "lng": 2.2945, "estado": "azul", "selo": "Atração", "endereco": "Champ de Mars, 5 Avenue Anatole France, 75007 Paris", "pagina": "torreeiffel.html"}, {"id": "louvre", "nome": "Museu do Louvre", "lat": 48.8606, "lng": 2.3376, "estado": "azul", "selo": "Atração", "endereco": "Rue de Rivoli, 75001 Paris", "pagina": "louvre.html"}, {"id": "rio-sena", "nome": "Rio Sena", "lat": 48.857, "lng": 2.3413, "estado": "azul", "selo": "Passeio", "endereco": "Margens do Sena, Paris", "pagina": "riosena.html"}]}, "lisboa": {"nome": "Lisboa, Portugal", "lugares": [{"id": "torre-de-belem", "nome": "Torre de Belém", "lat": 38.6916, "lng": -9.216, "estado": "azul", "selo": "Atração", "endereco": "Av. Brasília, 1400-038 Lisboa", "pagina": "torredebelem.html"}, {"id": "eletrico-28", "nome": "Elétrico 28 (Martim Moniz)", "lat": 38.7172, "lng": -9.136, "estado": "azul", "selo": "Passeio", "endereco": "Percurso entre Martim Moniz e Campo de Ourique, Lisboa", "pagina": "eletrico28.html"}]}, "toquio": {"nome": "Tóquio, Japão", "lugares": [{"id": "senso-ji", "nome": "Templo Senso-ji", "lat": 35.7148, "lng": 139.7967, "estado": "azul", "selo": "Atração", "endereco": "2-3-1 Asakusa, Taito City, Tóquio", "pagina": "sensoji.html"}, {"id": "shibuya", "nome": "Shibuya", "lat": 35.6595, "lng": 139.7005, "estado": "azul", "selo": "Bairro", "endereco": "Shibuya, Tóquio", "pagina": "shibuya.html"}]}, "rio": {"nome": "Rio de Janeiro, Brasil", "lugares": [{"id": "cristo-redentor", "nome": "Cristo Redentor", "lat": -22.9519, "lng": -43.2105, "estado": "azul", "selo": "Atração", "endereco": "Parque Nacional da Tijuca, Alto da Boa Vista, Rio de Janeiro", "pagina": "cristoredentor.html"}, {"id": "pao-de-acucar", "nome": "Pão de Açúcar", "lat": -22.9496, "lng": -43.1547, "estado": "azul", "selo": "Atração", "endereco": "Av. Pasteur, 520, Urca, Rio de Janeiro", "pagina": "paodeacucar.html"}, {"id": "praias", "nome": "Praias (Copacabana)", "lat": -22.9711, "lng": -43.1822, "estado": "azul", "selo": "Praia", "endereco": "Zona Sul, Rio de Janeiro", "pagina": "praias.html"}]}, "nova-york": {"nome": "Nova York, EUA", "lugares": [{"id": "central-park", "nome": "Central Park", "lat": 40.7829, "lng": -73.9654, "estado": "azul", "selo": "Parque", "endereco": "Manhattan, entre a 59th Street e a 110th Street", "pagina": "centralpark.html"}, {"id": "broadway", "nome": "Broadway (Times Square)", "lat": 40.759, "lng": -73.9845, "estado": "azul", "selo": "Teatros", "endereco": "Theater District, Manhattan", "pagina": "broadway.html"}, {"id": "museus-ny", "nome": "Museus (MET)", "lat": 40.7794, "lng": -73.9632, "estado": "azul", "selo": "Atração", "endereco": "MET: 1000 Fifth Avenue. MoMA: 11 West 53rd Street.", "pagina": "museusny.html"}]}};
+
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var chave = params.get('cidade');
+      // hasOwnProperty evita que "?cidade=constructor" ou "__proto__" passem como cidade válida
+      if (!chave || !Object.prototype.hasOwnProperty.call(DADOS, chave)) return;   // sem cidade válida: fica a tela de escolha
+      var cidade = DADOS[chave];
+
+      var lugar = null;
+      cidade.lugares.forEach(function (l) { if (l.id === params.get('lugar')) lugar = l; });
+
+      document.getElementById('vista-escolha').hidden = true;
+      document.getElementById('vista-cidade').hidden = false;
+      document.getElementById('titulo-cidade').textContent = lugar ? lugar.nome : cidade.nome;
+      document.title = 'GoTrip | Mapa de ' + (lugar ? lugar.nome : cidade.nome);
+      document.getElementById('mapa-cidade').setAttribute('aria-label', 'Mapa de ' + (lugar ? lugar.nome : cidade.nome));
+
+      var mostrar = lugar ? [lugar] : cidade.lugares;
+
+      // Mapa base gratuito (sem chave de API)
+      var mapa = L.map('mapa-cidade');
       var attr = '© <a href="https://openfreemap.org">OpenFreeMap</a> © <a href="https://www.openmaptiles.org/">OpenMapTiles</a> Dados de <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
       if (L.maplibreGL) {
         L.maplibreGL({ style: 'https://tiles.openfreemap.org/styles/liberty', attribution: attr }).addTo(mapa);
       } else {
-        // reserva caso o WebGL não esteja disponível
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 18, attribution: 'Tiles © Esri'
         }).addTo(mapa);
       }
-    }
-  </script>
-
-  <!-- Mapa geral: todos os lugares (abertos, fechados e atrações) -->
-  <script>
-    (function () {
-      var mapa = L.map('mapa-geral').setView([30, 10], 2);
-      adicionarMapaBase(mapa);
 
       function icone(cor) {
-        return L.divIcon({
-          className: '',
-          html: '<span class="pin pin-' + cor + '"></span>',
-          iconSize: [18, 18],
-          iconAnchor: [9, 9],
-          popupAnchor: [0, -10]
-        });
+        return L.divIcon({ className: '', html: '<span class="pin pin-' + cor + '"></span>',
+          iconSize: [18, 18], iconAnchor: [9, 9], popupAnchor: [0, -10] });
       }
 
       var pontos = [];
-
-      document.querySelectorAll('.lista-lugares li').forEach(function (li) {
-        var lat, lng;
-        var linkMapa = li.querySelector('a[href*="mlat="]');
-
-        if (linkMapa) {
-          var url = new URL(linkMapa.href);
-          lat = parseFloat(url.searchParams.get('mlat'));
-          lng = parseFloat(url.searchParams.get('mlon'));
-        } else if (li.dataset.lat && li.dataset.lng) {
-          lat = parseFloat(li.dataset.lat);
-          lng = parseFloat(li.dataset.lng);
-        } else {
-          return; // sem localização
-        }
-
-        var linkNome = li.querySelector('div > a');
-        var selo = li.querySelector('.selo');
-        var cidade = li.closest('section').querySelector('h2').textContent;
-
-        var cor = 'azul';
-        if (selo.classList.contains('selo-vermelho')) cor = 'vermelho';
-        else if (selo.textContent.trim() === 'Aberto') cor = 'verde';
-
-        L.marker([lat, lng], { icon: icone(cor), title: linkNome.textContent, alt: linkNome.textContent + ', ' + cidade + ', ' + selo.textContent.trim() })
+      mostrar.forEach(function (l) {
+        // o title inclui o estado (ex.: "Fechado"), que é o que leitores de tela leem no marcador
+        var m = L.marker([l.lat, l.lng], { icon: icone(l.estado), title: l.nome + ', ' + l.selo, alt: l.nome + ', ' + l.selo })
           .addTo(mapa)
-          .bindPopup(
-            '<strong>' + linkNome.textContent + '</strong><br>' +
-            cidade + '<br>' + selo.textContent + '<br>' +
-            '<a href="' + linkNome.getAttribute('href') + '">Ver detalhes</a>'
-          );
-
-        pontos.push([lat, lng]);
+          .bindPopup('<strong>' + l.nome + '</strong><br>' + l.selo + '<br><a href="' + l.pagina + '">Ver detalhes</a>');
+        if (lugar) m.openPopup();
+        pontos.push([l.lat, l.lng]);
       });
 
-      if (pontos.length) mapa.fitBounds(pontos, { padding: [30, 30] });
+      if (pontos.length === 1) mapa.setView(pontos[0], 15);
+      else mapa.fitBounds(pontos, { padding: [30, 30] });
       setTimeout(function () { mapa.invalidateSize(); }, 200);
-    })();
-  </script>
 
-  <!-- Mapa de Tóquio com nomes em alfabeto latino -->
-  <script>
-    (function () {
-      var mapaToquio = L.map('mapa-toquio').setView([35.7148, 139.7967], 13);
+      // Informações abaixo do mapa
+      var info = document.getElementById('cidade-info');
+      function el(tag, texto, cls) { var e = document.createElement(tag); if (texto) e.textContent = texto; if (cls) e.className = cls; return e; }
+      function link(texto, href, cls) { var a = el('a', texto, cls); a.href = href; return a; }
 
-      adicionarMapaBase(mapaToquio);
-
-      var pinToquio = L.divIcon({
-        className: '',
-        html: '<span class="pin pin-azul"></span>',
-        iconSize: [18, 18],
-        iconAnchor: [9, 9],
-        popupAnchor: [0, -10]
-      });
-
-      L.marker([35.7148, 139.7967], { icon: pinToquio, title: 'Templo Senso-ji', alt: 'Templo Senso-ji, Tóquio, Atração' })
-        .addTo(mapaToquio)
-        .bindPopup('<strong>Templo Senso-ji</strong><br>Tóquio, Japão');
-
-      setTimeout(function () { mapaToquio.invalidateSize(); }, 200);
+      if (lugar) {
+        var bloco = el('div', '', 'acoes');
+        bloco.appendChild(link('Ver detalhes do lugar', lugar.pagina, 'btn'));
+        bloco.appendChild(link('Ver todos os lugares de ' + cidade.nome.split(',')[0], 'mapa.html?cidade=' + chave, 'btn btn-secundario'));
+        info.appendChild(el('p', lugar.endereco));
+        info.appendChild(bloco);
+      } else {
+        info.appendChild(el('h2', 'Lugares em ' + cidade.nome.split(',')[0]));
+        var ul = el('ul', '', 'lista-lugares');
+        cidade.lugares.forEach(function (l) {
+          var li = el('li');
+          var d = el('div');
+          d.appendChild(link(l.nome, 'mapa.html?cidade=' + chave + '&lugar=' + l.id));
+          var selo = el('span', l.selo, 'selo' + (l.estado === 'verde' ? ' selo-verde' : l.estado === 'vermelho' ? ' selo-vermelho' : ''));
+          li.appendChild(d); li.appendChild(selo); ul.appendChild(li);
+        });
+        info.appendChild(ul);
+        info.appendChild(el('p', 'Selecione um lugar para ver só ele no mapa.'));
+      }
     })();
   </script>
 </body>

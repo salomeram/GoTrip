@@ -1063,3 +1063,78 @@ footer p { color: var(--cor-texto-suave); font-size: 0.8rem; }
 
   footer { padding-inline: var(--espaco-5); }
 }
+
+/* =========================================
+   MAPA REAL DO GOTRIP
+========================================= */
+
+#mapa-cidade {
+  width: 100%;
+  height: 420px;
+  min-height: 320px;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  background: #e5e7eb;
+}
+
+/* Controles de zoom */
+#mapa-cidade .leaflet-control-zoom a {
+  color: #1e293b;
+}
+
+/* Créditos do mapa */
+#mapa-cidade .leaflet-control-attribution {
+  font-size: 10px;
+}
+
+/* Popup dos marcadores */
+#mapa-cidade .leaflet-popup-content-wrapper {
+  border-radius: 10px;
+}
+
+#mapa-cidade .leaflet-popup-content {
+  font-family: var(--fonte);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Link do popup */
+#mapa-cidade .leaflet-popup-content a {
+  color: #0369a1;
+  font-weight: 700;
+}
+
+/* Mensagem de erro */
+#erro-mapa {
+  color: var(--cor-vermelho);
+  font-size: 0.85rem;
+}
+
+/* Lista de lugares */
+#cidade-info {
+  display: grid;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-4);
+}
+
+#cidade-info h2 {
+  margin-bottom: var(--espaco-2);
+}
+
+/* Ajuste para celular */
+@media (max-width: 480px) {
+  #mapa-cidade {
+    height: 350px;
+    min-height: 300px;
+  }
+}
+
+/* Ajuste para telas maiores */
+@media (min-width: 768px) {
+  #mapa-cidade {
+    height: 500px;
+  }
+}

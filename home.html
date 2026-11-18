@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="GoTrip: planeje, explore e viva novas histórias. Busque destinos, monte sua agenda e veja tudo no mapa.">
   <title>GoTrip | Home</title>
+  <link rel="icon" type="image/png" href="favicon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="microinteracoes.css">
-</head>
-<body id="topo">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./microinteracoes.css">
 
+  <script src="script.js" defer></script>
+</head>
+
+<body id="topo">
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header>
@@ -33,13 +35,18 @@
     <section id="buscar" aria-labelledby="titulo-buscar">
       <h1 id="titulo-buscar">Para onde você quer viajar?</h1>
       <p>Planeje, explore e <strong>viva novas histórias</strong>.</p>
+
       <form action="destinos.html" method="get" role="search">
         <label for="busca">Buscar destino</label>
         <div class="campo-busca">
           <input type="search" id="busca" name="busca" placeholder="Cidade ou país" autocomplete="off">
-          <button type="submit"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Buscar</button>
+          <button type="submit">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            Buscar
+          </button>
         </div>
       </form>
+
       <div class="acoes">
         <a class="btn" href="destinos.html">Explorar destinos</a>
       </div>
@@ -47,6 +54,7 @@
 
     <section aria-labelledby="titulo-alta">
       <h2 id="titulo-alta">Destinos em alta</h2>
+
       <div class="lista-cartoes">
         <article class="card-destino">
           <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80" alt="Ruínas do Fórum Romano sob o céu azul" width="88" height="88" loading="lazy">
@@ -56,6 +64,7 @@
             <p>Coliseu, Fórum Romano e gastronomia.</p>
           </div>
         </article>
+
         <article class="card-destino">
           <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=300&q=80" alt="Torre Eiffel iluminada ao anoitecer em Paris" width="88" height="88" loading="lazy">
           <div>
@@ -64,6 +73,7 @@
             <p>Arte, arquitetura e cultura à beira do Sena.</p>
           </div>
         </article>
+
         <article class="card-destino">
           <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=300&q=80" alt="Vista de Tóquio, Japão" width="88" height="88" loading="lazy">
           <div>
@@ -73,6 +83,7 @@
           </div>
         </article>
       </div>
+
       <div class="acoes">
         <a class="btn btn-secundario" href="destinos.html">Ver todos os destinos</a>
       </div>
@@ -87,11 +98,17 @@
         <li><a href="sobre_a_equipe.html">Sobre</a></li>
       </ul>
     </nav>
+
     <address>
-      <a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a>
+      <a class="chip" href="mailto:contato@gotrip.com">
+        <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+        contato@gotrip.com
+      </a>
     </address>
+
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
 
+  <script src="script.js" defer></script>
 </body>
 </html>

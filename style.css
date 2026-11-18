@@ -83,10 +83,10 @@ body {
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
 
-  /* Formato de celular: pensado para 360px, no máximo 480px. */
+  /* Ocupa toda a largura disponível, sem limitar o site a uma coluna estreita. */
   width: 100%;
-  max-width: 480px;
-  margin-inline: auto;
+  max-width: none;
+  margin-inline: 0;
 }
 
 h1, h2, h3, p, ul, ol, dl, dd, address, figure {
@@ -1029,7 +1029,7 @@ footer p { color: var(--cor-texto-suave); font-size: 0.8rem; }
    colunas do Grid; os componentes (Flexbox) continuam iguais.
    ========================================================================== */
 @media (min-width: 768px) {
-  body { max-width: 960px; }
+  body { width: 100%; max-width: none; }
 
   header {
     /* GRID: logo à esquerda e menu à direita, em duas colunas. */
@@ -1056,12 +1056,44 @@ footer p { color: var(--cor-texto-suave); font-size: 0.8rem; }
 
   #buscar form,
   .formulario,
-  .mapa { max-width: 560px; }
+  .mapa { max-width: none; width: 100%; }
 
   /* GRID: as duas integrantes da equipe lado a lado. */
   .equipe { grid-template-columns: repeat(2, 1fr); }
 
   footer { padding-inline: var(--espaco-5); }
+}
+
+
+/* Ajustes para monitores grandes: melhor aproveitamento da largura da tela */
+@media (min-width: 1200px) {
+  header {
+    padding-inline: clamp(18px, 2vw, 32px);
+  }
+
+  main {
+    padding: 36px clamp(18px, 2vw, 32px);
+  }
+
+  #destinos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 20px;
+    row-gap: 18px;
+  }
+
+  #destinos > h2,
+  #destinos > #resultado-busca,
+  #destinos > aside {
+    grid-column: 1 / -1;
+  }
+
+  .card-destino {
+    min-width: 0;
+  }
+
+  footer {
+    padding-inline: clamp(18px, 2vw, 32px);
+  }
 }
 
 /* =========================================
@@ -1136,5 +1168,17 @@ footer p { color: var(--cor-texto-suave); font-size: 0.8rem; }
 @media (min-width: 768px) {
   #mapa-cidade {
     height: 500px;
+  }
+}
+
+/* Telas muito largas: conteúdo amplo, sem margens laterais exageradas */
+@media (min-width: 1600px) {
+  main {
+    padding-inline: 36px;
+  }
+
+  header,
+  footer {
+    padding-inline: 36px;
   }
 }

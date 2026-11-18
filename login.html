@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Entre na sua conta GoTrip para ver sua agenda, seu mapa e suas viagens.">
   <title>GoTrip | Entrar</title>
+  <link rel="icon" type="image/png" href="favicon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="microinteracoes.css">
@@ -66,6 +67,31 @@
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
 
+<script src="usuario.js"></script>
+
+<script>
+  document.getElementById('form-login').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var erro = document.getElementById('login-erro');
+    var email = document.getElementById('login-email').value;
+
+    erro.hidden = true;
+
+    if (typeof GoTripUsuario === 'undefined') {
+      erro.textContent = 'Não foi possível carregar o sistema de conta.';
+      erro.hidden = false;
+      return;
+    }
+
+    if (GoTripUsuario.entrar(email)) {
+      window.location.href = 'perfil.html?aviso=entrou';
+    } else {
+      erro.textContent = 'E-mail não encontrado. Confira seus dados ou crie uma conta.';
+      erro.hidden = false;
+    }
+  });
+</script>
   
 </body>
 </html>

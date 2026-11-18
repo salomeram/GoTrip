@@ -40,57 +40,18 @@
           <button type="submit"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Buscar</button>
         </div>
       </form>
+      <label for="filtro-cidade">Filtrar por cidade</label>
+      <select id="filtro-cidade" name="cidade">
+        <option value="">Todas as cidades</option>
+        <option value="Roma">Roma</option>
+        <option value="Paris">Paris</option>
+        <option value="Lisboa">Lisboa</option>
+        <option value="Tóquio">Tóquio</option>
+        <option value="Rio de Janeiro">Rio de Janeiro</option>
+        <option value="Nova York">Nova York</option>
+      </select>
       <p id="resultado-busca" role="status" aria-live="polite"></p>
-      <div class="lista-cartoes">
-        <article class="card-destino">
-          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80" alt="Ruínas do Fórum Romano sob o céu azul" width="88" height="88" loading="lazy">
-          <div>
-            <span class="selo selo-verde">Europa</span>
-            <h2><a href="roma.html">Roma, Itália</a></h2>
-            <p>Coliseu, Fórum Romano e gastronomia.</p>
-          </div>
-        </article>
-        <article class="card-destino">
-          <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=300&q=80" alt="Torre Eiffel iluminada ao anoitecer em Paris" width="88" height="88" loading="lazy">
-          <div>
-            <span class="selo selo-verde">Europa</span>
-            <h2><a href="paris.html">Paris, França</a></h2>
-            <p>Arte, arquitetura e cultura à beira do Sena.</p>
-          </div>
-        </article>
-        <article class="card-destino">
-          <img src="https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?auto=format&fit=crop&w=300&q=80" alt="Vista de Lisboa, Portugal" width="88" height="88" loading="lazy">
-          <div>
-            <span class="selo selo-verde">Europa</span>
-            <h2><a href="lisboa.html">Lisboa, Portugal</a></h2>
-            <p>Miradouros, bondes e pastéis de nata.</p>
-          </div>
-        </article>
-        <article class="card-destino">
-          <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=300&q=80" alt="Vista de Tóquio, Japão" width="88" height="88" loading="lazy">
-          <div>
-            <span class="selo selo-laranja">Ásia</span>
-            <h2><a href="toquio.html">Tóquio, Japão</a></h2>
-            <p>Templos, tecnologia e culinária.</p>
-          </div>
-        </article>
-        <article class="card-destino">
-          <img src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=300&q=80" alt="Vista do Rio de Janeiro, Brasil" width="88" height="88" loading="lazy">
-          <div>
-            <span class="selo">Brasil</span>
-            <h2><a href="rio.html">Rio de Janeiro, Brasil</a></h2>
-            <p>Praias, Cristo Redentor e Pão de Açúcar.</p>
-          </div>
-        </article>
-        <article class="card-destino">
-          <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=300&q=80" alt="Vista de Nova York, EUA" width="88" height="88" loading="lazy">
-          <div>
-            <span class="selo selo-laranja">Américas</span>
-            <h2><a href="novayork.html">Nova York, EUA</a></h2>
-            <p>Central Park, museus e Broadway.</p>
-          </div>
-        </article>
-      </div>
+      <div class="lista-cartoes" id="lista-pontos" aria-live="polite"></div>
     </section>
   </main>
 
@@ -108,40 +69,6 @@
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
 
-  <script>
-    // Busca de destinos: filtra os cards enquanto a pessoa digita e avisa o resultado a quem usa leitor de tela
-    (function () {
-      var form = document.getElementById('form-busca');
-      var campo = document.getElementById('busca');
-      var aviso = document.getElementById('resultado-busca');
-      var cards = document.querySelectorAll('.card-destino');
-
-      function normalizar(t) {
-        return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      }
-
-      function filtrar(termo) {
-        var q = normalizar(termo.trim());
-        var achados = 0;
-        cards.forEach(function (card) {
-          var visivel = !q || normalizar(card.textContent).indexOf(q) !== -1;
-          card.hidden = !visivel;
-          if (visivel) achados++;
-        });
-        if (!q) aviso.textContent = '';
-        else if (achados === 0) aviso.textContent = 'Nenhum destino encontrado para "' + termo.trim() + '". Tente outro nome ou limpe a busca.';
-        else aviso.textContent = achados + (achados === 1 ? ' destino encontrado.' : ' destinos encontrados.');
-      }
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        filtrar(campo.value);
-      });
-      campo.addEventListener('input', function () { filtrar(campo.value); });
-
-      var params = new URLSearchParams(location.search);
-      if (params.get('busca')) { campo.value = params.get('busca'); filtrar(campo.value); }
-    })();
-  </script>
+  <script src="script.js" defer></script>
 </body>
 </html>

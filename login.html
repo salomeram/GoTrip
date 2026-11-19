@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Entre na sua conta GoTrip para ver sua agenda, seu mapa e suas viagens.">
   <title>GoTrip | Entrar</title>
-  <link rel="icon" type="image/png" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="microinteracoes.css">
@@ -15,12 +15,13 @@
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header>
-    <a href="home.html" class="logo">
-      <img src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
+    <a href="index.html" class="logo">
+      <img class="logo-tema-escuro" src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
+      <img class="logo-tema-claro" src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
     </a>
     <nav aria-label="Menu principal">
       <ul class="pilulas">
-        <li><a href="home.html">Início</a></li>
+        <li><a href="index.html">Início</a></li>
         <li><a href="destinos.html">Destinos</a></li>
         <li><a href="mapa.html">Mapa</a></li>
         <li><a href="agenda.html">Agenda</a></li>
@@ -32,11 +33,11 @@
 
   <main id="conteudo">
     <section aria-labelledby="titulo-login">
-      <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
       <h1 id="titulo-login">Entrar</h1>
       <p>Planeje, explore e <strong>viva novas histórias</strong>.</p>
-      <!-- Sem back-end ainda: o login reconhece contas criadas neste navegador (usuario.js). A senha ainda não é verificada. -->
-      <form id="form-login" class="formulario" method="post">
+      <!-- Sem servidor ainda: o login reconhece contas criadas neste navegador (usuario.js). A senha ainda não é verificada. -->
+      <form id="form-login" class="formulario" method="post" novalidate>
         <div class="campo">
           <label for="login-email">E-mail</label>
           <input type="email" id="login-email" name="email" placeholder="exemplo@gotrip.com" autocomplete="email" aria-describedby="login-erro" required>
@@ -67,31 +68,8 @@
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
   </footer>
 
-<script src="usuario.js"></script>
-
-<script>
-  document.getElementById('form-login').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    var erro = document.getElementById('login-erro');
-    var email = document.getElementById('login-email').value;
-
-    erro.hidden = true;
-
-    if (typeof GoTripUsuario === 'undefined') {
-      erro.textContent = 'Não foi possível carregar o sistema de conta.';
-      erro.hidden = false;
-      return;
-    }
-
-    if (GoTripUsuario.entrar(email)) {
-      window.location.href = 'perfil.html?aviso=entrou';
-    } else {
-      erro.textContent = 'E-mail não encontrado. Confira seus dados ou crie uma conta.';
-      erro.hidden = false;
-    }
-  });
-</script>
-  
+  <script src="usuario.js"></script>
+  <script src="login.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

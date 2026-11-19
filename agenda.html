@@ -3,24 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Roteiro da viagem dia a dia.">
+  <meta name="description" content="Roteiro da viagem em calendário, dia a dia.">
   <title>GoTrip | Agenda</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="microinteracoes.css">
+  <script src="agenda.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body id="topo">
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header>
-    <a href="home.html" class="logo">
-      <img src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
+    <a href="index.html" class="logo">
+      <img class="logo-tema-escuro" src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
+      <img class="logo-tema-claro" src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
     </a>
     <nav aria-label="Menu principal">
       <ul class="pilulas">
-        <li><a href="home.html">Início</a></li>
+        <li><a href="index.html">Início</a></li>
         <li><a href="destinos.html">Destinos</a></li>
         <li><a href="mapa.html">Mapa</a></li>
         <li><a href="agenda.html" aria-current="page">Agenda</a></li>
@@ -32,31 +35,28 @@
 
   <main id="conteudo">
     <section aria-labelledby="titulo-agenda">
-      <a class="voltar" href="home.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
+      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
       <h1 id="titulo-agenda">Agenda</h1>
-      <p>Roteiro de exemplo para Roma. Toque em um lugar para ver os detalhes.</p>
-      <nav aria-label="Dias da viagem"><ul class="pilulas"><li><a href="#dia-1">Dia 1</a></li><li><a href="#dia-2">Dia 2</a></li><li><a href="#dia-3">Dia 3</a></li></ul></nav>
-    </section>
-    <section class="dia" id="dia-1" aria-labelledby="dia-1-t">
-      <h2 id="dia-1-t">Dia 1</h2>
-      <h3>Manhã</h3>
-      <article class="item-agenda"><div><p class="destino-agenda"><a href="coliseu.html">Coliseu</a></p><p class="horario">9h00 às 11h30</p></div></article>
-      <h3>Tarde</h3>
-      <article class="item-agenda"><div><p class="destino-agenda"><a href="forumromano.html">Fórum Romano</a></p><p class="horario">14h00 às 16h00</p></div></article>
-    </section>
-    <section class="dia" id="dia-2" aria-labelledby="dia-2-t">
-      <h2 id="dia-2-t">Dia 2</h2>
-      <h3>Manhã</h3>
-      <article class="item-agenda"><div><p class="destino-agenda"><a href="vaticano.html">Vaticano</a></p><p class="horario">8h30 às 11h00</p></div></article>
-      <h3>Tarde</h3>
-      <article class="item-agenda"><div><p class="destino-agenda"><a href="fontanaditrevi.html">Fontana di Trevi</a></p><p class="horario">15h00 às 16h00</p></div></article>
-    </section>
-    <section class="dia" id="dia-3" aria-labelledby="dia-3-t">
-      <h2 id="dia-3-t">Dia 3</h2>
-      <h3>Manhã</h3>
-      <article class="item-agenda"><div><p class="destino-agenda"><a href="panteao.html">Panteão</a></p><p class="horario">10h00 às 11h00</p></div></article>
-      <h3>Tarde</h3>
-      <article class="item-agenda"><div><p class="destino-agenda"><a href="trastevere.html">Trastevere</a></p><p class="horario">16h00 às 19h00</p></div></article>
+      <p>Toque em um dia do calendário para ver ou anotar uma atividade.</p>
+
+      <div class="calendario-caixa">
+        <div class="calendario-topo">
+          <button type="button" id="cal-antes" class="botao-cal" aria-label="Mês anterior">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <h2 id="cal-mes">Carregando…</h2>
+          <button type="button" id="cal-depois" class="botao-cal" aria-label="Mês seguinte">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+          <button type="button" id="cal-hoje" class="botao-cal botao-hoje">Hoje</button>
+        </div>
+
+        <div class="calendario" id="calendario" role="grid" aria-label="Calendário da viagem"></div>
+      </div>
+
+      <p id="agenda-aviso" class="aviso" role="alert" hidden></p>
+
+      <section class="dia-selecionado" id="dia-selecionado" aria-live="polite"></section>
     </section>
   </main>
 

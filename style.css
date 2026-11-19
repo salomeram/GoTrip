@@ -43,6 +43,35 @@
 
   /* Tipografia */
   --fonte: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+
+  /* Cores que mudam junto com o tema */
+  --cor-alerta-texto: #fca5a5;
+  --cor-mapa-fundo: #16213a;
+  --cor-legenda-fundo: rgba(15, 23, 42, 0.92);
+  --cor-sombra: rgb(0 0 0 / .35);
+}
+
+/* TEMA CLARO: o botão do cabeçalho coloca data-theme="claro" no <html>.
+   Só trocamos as variáveis; todo o resto do site continua igual. */
+[data-theme="claro"] {
+  --cor-fundo-escuro: #e2e8f0;
+  --cor-fundo: #f8fafc;
+  --cor-superficie: #ffffff;
+  --cor-borda: #cbd5e1;
+  --cor-borda-campo: #64748b;
+  --cor-primaria: #0369a1;
+  --cor-primaria-hover: #075985;
+  --cor-verde: #047857;
+  --cor-laranja: #c2410c;
+  --cor-vermelho: #b91c1c;
+  --cor-texto: #0f172a;
+  --cor-texto-suave: #475569;
+  --cor-foco: #b45309;
+
+  --cor-alerta-texto: #b91c1c;
+  --cor-mapa-fundo: #e2e8f0;
+  --cor-legenda-fundo: rgba(255, 255, 255, 0.95);
+  --cor-sombra: rgb(15 23 42 / .15);
 }
 
 
@@ -59,6 +88,7 @@
 [hidden] { display: none !important; }
 
 html {
+  font-size: 112.5%;   /* letra base de 18px (antes 16px): todo o texto do site fica maior */
   background: var(--cor-fundo-escuro);
   -webkit-text-size-adjust: 100%;
 }
@@ -93,9 +123,9 @@ h1, h2, h3, p, ul, ol, dl, dd, address, figure {
   margin: 0;
 }
 
-h1 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
-h2 { font-size: 1.25rem; font-weight: 700; line-height: 1.3; }
-h3 { font-size: 1rem;    font-weight: 700; line-height: 1.3; }
+h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
+h2 { font-size: 1.3rem;  font-weight: 700; line-height: 1.3; }
+h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
 
 a {
   color: var(--cor-primaria);
@@ -128,16 +158,37 @@ img { display: block; max-width: 100%; }
    3. CABEÇALHO E MENUS
    ========================================================================== */
 header {
-  /* GRID: o cabeçalho empilha duas linhas (logo e menu) com o mesmo
-     espaço entre elas. No desktop vira duas colunas (veja o fim do arquivo). */
+  /* GRID: no celular, logo e botão de tema na primeira linha e o menu
+     embaixo. No desktop vira três colunas: logo | menu no meio | tema. */
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
   gap: var(--espaco-3);
   padding: var(--espaco-4);
   border-bottom: 1px solid var(--cor-borda);
 }
 
+header nav {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  min-width: 0;
+}
+
 .logo { justify-self: start; }
+
+/* Botão de tema claro/escuro (criado pelo script.js) */
+.botao-tema {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  width: var(--alvo-toque);
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  border-color: var(--cor-borda);
+  color: var(--cor-texto);
+  font-size: 1.1rem;
+}
 .logo img { height: 40px; width: auto; }
 
 nav ul { list-style: none; padding: 0; }
@@ -159,11 +210,11 @@ nav ul { list-style: none; padding: 0; }
   justify-content: center;
   gap: 8px;
   min-height: var(--alvo-toque);
-  padding: 0 10px;
+  padding: 0 14px;
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-pilula);
   color: var(--cor-texto-suave);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
@@ -315,7 +366,7 @@ input:focus { border-color: var(--cor-primaria); }
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.3);
   border-radius: var(--raio-md);
-  color: #fca5a5;
+  color: var(--cor-alerta-texto);
   font-size: 0.85rem;
 }
 
@@ -402,7 +453,7 @@ main article p { color: var(--cor-texto-suave); font-size: 0.85rem; }
 }
 .selo-verde    { background: rgba(52, 211, 153, 0.15); color: var(--cor-verde); }
 .selo-laranja  { background: rgba(251, 146, 60, 0.15); color: var(--cor-laranja); }
-.selo-vermelho { background: rgba(239, 68, 68, 0.15);  color: #fca5a5; }
+.selo-vermelho { background: rgba(239, 68, 68, 0.15);  color: var(--cor-alerta-texto); }
 
 /* --- Aviso e estado vazio ----------------------------------------------- */
 .aviso {
@@ -414,10 +465,17 @@ main article p { color: var(--cor-texto-suave); font-size: 0.85rem; }
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.3);
   border-radius: var(--raio-md);
-  color: #fca5a5;
+  color: var(--cor-alerta-texto);
   font-size: 0.85rem;
 }
 .aviso a { color: inherit; text-decoration: underline; }
+
+/* Aviso de sucesso: o mesmo aviso, mas verde. */
+.aviso-ok {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.45);
+  color: var(--cor-verde);
+}
 
 .vazio {
   /* FLEXBOX em coluna: mensagem e link de ação. */
@@ -651,8 +709,213 @@ details > p {
 
 
 /* ==========================================================================
-   7. AGENDA
+   7. AGENDA — CALENDÁRIO
    ========================================================================== */
+
+/* Caixa que segura o mês inteiro. */
+.calendario-caixa {
+  padding: var(--espaco-4);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+}
+
+.calendario-topo {
+  /* FLEXBOX: mês no meio, setas e "Hoje" nas pontas. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-2);
+  margin-bottom: var(--espaco-3);
+}
+
+.calendario-topo h2 {
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  min-width: 11ch;
+  text-align: center;
+}
+
+.botao-cal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--alvo-toque);
+  min-height: var(--alvo-toque);
+  padding: 0 var(--espaco-3);
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pilula);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.botao-cal:hover { border-color: var(--cor-primaria); color: var(--cor-primaria); }
+.botao-cal:focus-visible { outline: 3px solid var(--cor-foco); outline-offset: 2px; }
+
+/* Grade do mês: 7 colunas fixas (uma por dia da semana). */
+.calendario {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--espaco-1);
+}
+
+.cal-cabeca {
+  text-align: center;
+  color: var(--cor-texto-suave);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: var(--espaco-1) 0;
+}
+
+.cal-vazio { min-height: var(--alvo-toque); }
+
+.cal-dia {
+  /* FLEXBOX em coluna: o número em cima, a bolinha de eventos embaixo. */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: var(--alvo-toque);
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cal-dia:hover { border-color: var(--cor-primaria); }
+.cal-dia:focus-visible { outline: 3px solid var(--cor-foco); outline-offset: 2px; }
+
+.cal-dia.hoje {
+  border-color: var(--cor-primaria);
+  box-shadow: inset 0 0 0 1px var(--cor-primaria);
+}
+
+.cal-dia.selecionado {
+  background: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: #ffffff;
+}
+
+[data-theme="claro"] .cal-dia.selecionado { color: #ffffff; }
+
+/* Bolinha com a quantidade de atividades do dia. */
+.cal-marca {
+  min-width: 18px;
+  padding: 0 4px;
+  border-radius: var(--raio-pilula);
+  background: var(--cor-verde);
+  color: #04231a;
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
+}
+
+.cal-dia.selecionado .cal-marca { background: #ffffff; color: var(--cor-primaria-hover); }
+
+/* --- Dia aberto abaixo do calendário ----------------------------------- */
+.dia-selecionado {
+  display: grid;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-5);
+  padding: var(--espaco-4);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  scroll-margin-top: var(--espaco-4);
+}
+
+.dia-selecionado h2 {
+  color: var(--cor-primaria);
+  font-size: 1.05rem;
+  text-transform: capitalize;
+}
+
+.agenda-form { display: grid; gap: var(--espaco-2); }
+
+.agenda-form-linha {
+  /* GRID: hora e lugar lado a lado; empilham no celular. */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--espaco-2);
+}
+
+.agenda-lista {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.agenda-lista li {
+  /* FLEXBOX: o texto ocupa o espaço e o botão "Tirar" fica na ponta. */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3);
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+}
+
+.agenda-lista .destino-agenda { font-weight: 700; color: var(--cor-primaria); }
+.agenda-lista .horario { color: var(--cor-texto-suave); font-size: 0.9rem; }
+.agenda-vazio { color: var(--cor-texto-suave); font-size: 0.9rem; }
+
+.agenda-tirar {
+  flex: none;
+  padding: var(--espaco-1) var(--espaco-3);
+  background: transparent;
+  color: var(--cor-vermelho);
+  border: 1px solid var(--cor-vermelho);
+  border-radius: var(--raio-pilula);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.agenda-tirar:hover { background: var(--cor-vermelho); color: #ffffff; }
+
+/* --- Perfil: acrescentar viagem / lugar --------------------------------- */
+.campo-acrescentar { margin: 0 0 var(--espaco-2); }
+
+/* O botão largo do formulário não pode espremer o campo de texto. */
+.campo-acrescentar .campo-busca input { flex: 1 1 auto; min-width: 0; }
+.campo-acrescentar .campo-busca button { width: auto; flex: none; }
+
+.lista-simples li {
+  /* FLEXBOX: o nome da viagem e o botão "Tirar" em pontas opostas. */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2);
+}
+
+.chip-tirar {
+  margin-left: var(--espaco-1);
+  padding: 0 6px;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* --- Layouts antigos da agenda (lista por dia) -------------------------- */
 .dia {
   /* GRID: título do dia e períodos empilhados. */
   display: grid;
@@ -681,7 +944,7 @@ details > p {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   aspect-ratio: 1 / 1.1;
-  background-color: #16213a;
+  background-color: var(--cor-mapa-fundo);
   background-image:
     linear-gradient(var(--cor-borda) 1px, transparent 1px),
     linear-gradient(90deg, var(--cor-borda) 1px, transparent 1px);
@@ -711,7 +974,7 @@ details > p {
 .pino-fechado {
   background: rgba(239, 68, 68, 0.2);
   border-color: #ef4444;
-  color: #fca5a5;
+  color: var(--cor-alerta-texto);
 }
 
 .pino-1 { grid-column: 5; grid-row: 3; }
@@ -726,7 +989,7 @@ details > p {
   gap: var(--espaco-2);
   margin: var(--espaco-2);
   padding: var(--espaco-2) var(--espaco-3);
-  background: rgba(15, 23, 42, 0.92);
+  background: var(--cor-legenda-fundo);
   border-radius: var(--raio-md);
 }
 
@@ -996,22 +1259,34 @@ figure { margin: 0; }
    11. RODAPÉ
    ========================================================================== */
 footer {
-  /* GRID: menu, contato e copyright empilhados com espaçamento uniforme. */
+  /* GRID: no celular, menu, copyright e contato empilhados e centralizados.
+     No desktop vira três colunas: menu | © 2026 GoTrip | e-mail. */
   display: grid;
+  grid-template-areas:
+    "menu"
+    "copyright"
+    "contato";
+  justify-items: center;
+  text-align: center;
   gap: var(--espaco-3);
   padding: var(--espaco-5) var(--espaco-4);
   border-top: 1px solid var(--cor-borda);
   font-size: 0.9rem;
 }
 
+footer nav     { grid-area: menu; }
+footer p       { grid-area: copyright; }
+footer address { grid-area: contato; }
+
 /* No rodapé as pílulas quebram de linha em vez de rolar na horizontal */
 footer .pilulas {
   flex-wrap: wrap;
+  justify-content: center;
   overflow-x: visible;
 }
 
 footer .pilulas a,
-footer .chip { min-height: 40px; font-size: 0.85rem; }
+footer .chip { min-height: 44px; font-size: 0.9rem; }
 
 footer address {
   /* FLEXBOX: a etiqueta de e-mail fica alinhada à esquerda. */
@@ -1020,7 +1295,7 @@ footer address {
 }
 
 footer .chip { color: var(--cor-texto); }
-footer p { color: var(--cor-texto-suave); font-size: 0.8rem; }
+footer p { color: var(--cor-texto); font-size: 0.9rem; font-weight: 600; }
 
 
 /* ==========================================================================
@@ -1032,11 +1307,17 @@ footer p { color: var(--cor-texto-suave); font-size: 0.8rem; }
   body { width: 100%; max-width: none; }
 
   header {
-    /* GRID: logo à esquerda e menu à direita, em duas colunas. */
-    grid-template-columns: auto 1fr;
-    align-items: center;
+    /* GRID: logo à esquerda, menu no MEIO e botão de tema à direita.
+       As duas colunas das pontas têm o mesmo tamanho (1fr), então o
+       menu fica exatamente no centro da tela. */
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   }
-  header nav { justify-self: end; }
+  header nav {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+  }
+  .botao-tema { grid-column: 3; }
 
   main { padding: var(--espaco-6) var(--espaco-5); }
 
@@ -1061,7 +1342,17 @@ footer p { color: var(--cor-texto-suave); font-size: 0.8rem; }
   /* GRID: as duas integrantes da equipe lado a lado. */
   .equipe { grid-template-columns: repeat(2, 1fr); }
 
-  footer { padding-inline: var(--espaco-5); }
+  footer {
+    padding-inline: var(--espaco-5);
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-areas: "menu copyright contato";
+    align-items: center;
+    text-align: left;
+  }
+  footer nav     { justify-self: start; }
+  footer p       { justify-self: center; }
+  footer address { justify-self: end; }
+  footer .pilulas { justify-content: flex-start; }
 }
 
 
@@ -1180,5 +1471,147 @@ footer p { color: var(--cor-texto-suave); font-size: 0.8rem; }
   header,
   footer {
     padding-inline: 36px;
+  }
+}
+
+
+/* ==========================================================================
+   LOGO NOS DOIS TEMAS
+   O logo original tem o "Go" branco, que some no tema claro. Por isso há
+   duas imagens no cabeçalho e só uma aparece por vez.
+   ========================================================================== */
+.logo .logo-tema-claro { display: none; }
+[data-theme="claro"] .logo .logo-tema-escuro { display: none; }
+[data-theme="claro"] .logo .logo-tema-claro { display: inline-block; }
+
+/* Filtro de cidade na lista de pontos turísticos (destinos.html) */
+.campo-filtro {
+  display: grid;
+  gap: var(--espaco-2);
+  max-width: 20rem;
+  margin-bottom: var(--espaco-3);
+}
+.campo-filtro select {
+  min-height: var(--alvo-toque);
+  padding: 0 var(--espaco-3);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  border: 1.5px solid var(--cor-borda-campo);
+  border-radius: var(--raio-md);
+  font: inherit;
+}
+
+
+/* Ajuste geral de respiro nas bordas e melhor largura de leitura */
+@media (min-width: 0px) {
+  main { padding-inline: clamp(18px, 4vw, 64px); padding-block: clamp(24px, 3vw, 40px); }
+  header, footer { padding-inline: clamp(18px, 4vw, 64px); }
+}
+
+/* Sugestões de pontos turísticos na agenda */
+.sugestoes-turisticas { display: grid; gap: var(--espaco-2); padding: var(--espaco-3); border: 1px solid var(--cor-borda); border-radius: var(--raio-md); background: var(--cor-fundo); }
+.sugestoes-titulo { color: var(--cor-texto-suave); font-weight: 700; font-size: .9rem; }
+.sugestoes-lista { display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.sugestao-turistica { min-height: 40px; padding: 6px 12px; border-radius: var(--raio-pilula); background: var(--cor-superficie); color: var(--cor-texto); border: 1px solid var(--cor-borda); font-size: .88rem; font-weight: 600; }
+.sugestao-turistica:hover { border-color: var(--cor-primaria); background: rgba(56, 189, 248, .12); color: var(--cor-primaria); }
+@media (max-width: 600px) {
+  .agenda-form-linha { grid-template-columns: minmax(0, 1fr); }
+  .calendario-caixa, .dia-selecionado { padding: var(--espaco-3); }
+  .calendario-topo { flex-wrap: wrap; }
+}
+
+/* Ajustes de espaçamento para a página de perfil GoTrip */
+body:has(#titulo-perfil) main#conteudo {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding: clamp(24px, 3vw, 40px) clamp(18px, 4vw, 64px);
+  box-sizing: border-box;
+}
+body:has(#titulo-perfil) main#conteudo > section,
+body:has(#titulo-perfil) main#conteudo > .menu-perfil,
+body:has(#titulo-perfil) main#conteudo > #sair {
+  width: 100%;
+  box-sizing: border-box;
+  margin-inline: auto;
+}
+body:has(#titulo-perfil) main#conteudo > section:first-child {
+  display: grid;
+  gap: clamp(14px, 2.5vw, 24px);
+}
+body:has(#titulo-perfil) .voltar {
+  justify-self: start;
+  margin-bottom: 2px;
+}
+body:has(#titulo-perfil) .perfil-topo {
+  padding: clamp(8px, 2vw, 20px) 12px;
+}
+body:has(#titulo-perfil) .perfil-topo h1,
+body:has(#titulo-perfil) .perfil-topo p {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+body:has(#titulo-perfil) .estatisticas {
+  width: 100%;
+  gap: clamp(8px, 2vw, 16px);
+}
+body:has(#titulo-perfil) .estatisticas div {
+  min-width: 0;
+  padding: clamp(10px, 2vw, 18px);
+}
+body:has(#titulo-perfil) .menu-perfil {
+  margin-top: clamp(16px, 3vw, 28px);
+  gap: 14px;
+}
+body:has(#titulo-perfil) .menu-perfil details {
+  min-width: 0;
+  overflow: hidden;
+}
+body:has(#titulo-perfil) .menu-perfil summary {
+  padding: 16px clamp(14px, 2.5vw, 24px);
+}
+body:has(#titulo-perfil) .campo-acrescentar {
+  padding-inline: clamp(14px, 2.5vw, 24px);
+}
+body:has(#titulo-perfil) .campo-acrescentar label {
+  display: block;
+  margin-bottom: 8px;
+}
+body:has(#titulo-perfil) .campo-busca {
+  width: 100%;
+  min-width: 0;
+}
+body:has(#titulo-perfil) .lista-simples,
+body:has(#titulo-perfil) .chips {
+  padding-inline: clamp(14px, 2.5vw, 24px);
+}
+body:has(#titulo-perfil) #sair {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 18px;
+}
+@media (max-width: 480px) {
+  body:has(#titulo-perfil) main#conteudo {
+    width: calc(100% - 24px);
+  }
+  body:has(#titulo-perfil) .estatisticas {
+    gap: 6px;
+  }
+  body:has(#titulo-perfil) .estatisticas div {
+    padding: 9px 5px;
+  }
+  body:has(#titulo-perfil) .estatisticas dd {
+    font-size: 1.1rem;
+  }
+  body:has(#titulo-perfil) .campo-busca {
+    flex-wrap: wrap;
+  }
+  body:has(#titulo-perfil) .campo-busca input {
+    width: 100%;
+    flex-basis: 100%;
+  }
+  body:has(#titulo-perfil) .campo-busca button {
+    width: 100%;
   }
 }

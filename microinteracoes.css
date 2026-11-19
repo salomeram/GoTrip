@@ -46,14 +46,14 @@ a, button, .btn, summary, input, .chip,
 @media (hover: hover) {
   button:hover, .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgb(0 0 0 / .35);
+    box-shadow: 0 6px 16px var(--cor-sombra);
   }
   .atalhos a:hover,
   .card-destino:has(a):hover,
   .card-recurso:has(a):hover,
   .lista-lugares li:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgb(0 0 0 / .35);
+    box-shadow: 0 6px 16px var(--cor-sombra);
     border-color: var(--cor-primaria);
   }
   .card-destino:has(a):hover::after,
@@ -127,6 +127,8 @@ details[open] > ul { animation: abrir var(--dur) var(--curva) both; }
   /* tema escuro: inverte o mapa claro e devolve as cores */
   filter: invert(1) hue-rotate(180deg) brightness(.95) contrast(.9);
 }
+/* tema claro: o mapa fica com as cores normais */
+[data-theme="claro"] .mapa-real iframe { filter: none; }
 @media (orientation: landscape) and (max-height: 500px) {
   .mapa-real iframe { height: 240px; }
 }

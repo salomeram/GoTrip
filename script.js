@@ -1,41 +1,71 @@
 
+/* ==========================================================================
+   GO TRIP — SCRIPT PRINCIPAL
+   --------------------------------------------------------------------------
+   Este arquivo cuida de duas coisas:
+     1) O botão de tema claro / escuro, em todas as páginas.
+     2) A lista de atrações: carrega, mostra os cartões e filtra pela busca.
+   As atrações ficam no arquivo pontos.js (ou numa base de dados na internet,
+   se você apontar o endereço em base-atracoes.js).
+   ========================================================================== */
+
+/* ==========================================================================
+   1. TEMA CLARO / ESCURO
+   Cria o botão no cabeçalho de TODAS as páginas (não precisa mudar o HTML)
+   e lembra a escolha da pessoa com localStorage.
+   ========================================================================== */
 (function () {
   "use strict";
 
-  var pontosTuristicos = [
-    // ROMA
-    { nome: "Coliseu", cidade: "Roma", pais: "Itália", pagina: "coliseu.html", icone: "🏛️" },
-    { nome: "Fórum Romano", cidade: "Roma", pais: "Itália", pagina: "forumromano.html", icone: "🏛️" },
-    { nome: "Vaticano", cidade: "Roma", pais: "Itália", pagina: "vaticano.html", icone: "⛪" },
-    { nome: "Fontana di Trevi", cidade: "Roma", pais: "Itália", pagina: "fontanaditrevi.html", icone: "⛲" },
-    { nome: "Panteão", cidade: "Roma", pais: "Itália", pagina: "panteao.html", icone: "🏛️" },
-    { nome: "Trastevere", cidade: "Roma", pais: "Itália", pagina: "transtevere.html", icone: "🍝" },
-    { nome: "Trattoria do Centro", cidade: "Roma", pais: "Itália", pagina: "trattoria.html", icone: "🍽️" },
-    { nome: "Museu", cidade: "Roma", pais: "Itália", pagina: "museu.html", icone: "🖼️" },
+  var CHAVE = "gotrip-tema";
+  var raiz = document.documentElement;
 
-    // PARIS
-    { nome: "Torre Eiffel", cidade: "Paris", pais: "França", pagina: "torreeiffel.html", icone: "🗼" },
-    { nome: "Museu do Louvre", cidade: "Paris", pais: "França", pagina: "louvre.html", icone: "🖼️" },
-    { nome: "Rio Sena", cidade: "Paris", pais: "França", pagina: "riosena.html", icone: "🌊" },
+  function aplicarTema(tema) {
+    if (tema === "claro") {
+      raiz.setAttribute("data-theme", "claro");
+    } else {
+      raiz.removeAttribute("data-theme");
+    }
+  }
 
-    // LISBOA
-    { nome: "Torre de Belém", cidade: "Lisboa", pais: "Portugal", pagina: "torredebelem.html", icone: "🏰" },
-    { nome: "Elétrico 28", cidade: "Lisboa", pais: "Portugal", pagina: "eletrico28.html", icone: "🚋" },
+  aplicarTema(localStorage.getItem(CHAVE));
 
-    // TÓQUIO
-    { nome: "Templo Senso-ji", cidade: "Tóquio", pais: "Japão", pagina: "sensoji.html", icone: "⛩️" },
-    { nome: "Shibuya", cidade: "Tóquio", pais: "Japão", pagina: "shibuya.html", icone: "🌆" },
+  var cabecalho = document.querySelector("header");
+  if (!cabecalho) {
+    return;
+  }
 
-    // RIO DE JANEIRO
-    { nome: "Cristo Redentor", cidade: "Rio de Janeiro", pais: "Brasil", pagina: "cristoredentor.html", icone: "🗽" },
-    { nome: "Pão de Açúcar", cidade: "Rio de Janeiro", pais: "Brasil", pagina: "paodeacucar.html", icone: "⛰️" },
-    { nome: "Praias", cidade: "Rio de Janeiro", pais: "Brasil", pagina: "praias.html", icone: "🏖️" },
+  var botao = document.createElement("button");
+  botao.type = "button";
+  botao.className = "botao-tema";
 
-    // NOVA YORK
-    { nome: "Central Park", cidade: "Nova York", pais: "Estados Unidos", pagina: "centralpark.html", icone: "🌳" },
-    { nome: "Broadway", cidade: "Nova York", pais: "Estados Unidos", pagina: "broadway.html", icone: "🎭" },
-    { nome: "Museus de Nova York", cidade: "Nova York", pais: "Estados Unidos", pagina: "museusny.html", icone: "🖼️" }
-  ];
+  function atualizarBotao() {
+    var claro = raiz.getAttribute("data-theme") === "claro";
+    botao.innerHTML = claro
+      ? '<i class="fa-solid fa-moon" aria-hidden="true"></i>'
+      : '<i class="fa-solid fa-sun" aria-hidden="true"></i>';
+    botao.setAttribute("aria-label", claro ? "Ativar tema escuro" : "Ativar tema claro");
+    botao.setAttribute("aria-pressed", claro ? "true" : "false");
+  }
+
+  botao.addEventListener("click", function () {
+    var novoTema = raiz.getAttribute("data-theme") === "claro" ? "escuro" : "claro";
+    localStorage.setItem(CHAVE, novoTema);
+    aplicarTema(novoTema);
+    atualizarBotao();
+  });
+
+  atualizarBotao();
+  cabecalho.appendChild(botao);
+})();
+
+/* ==========================================================================
+   2. ATRAÇÕES — carrega da base, mostra os cartões e filtra
+   Funciona na página de destinos (destinos.html), onde existe a lista
+   com id="lista-pontos". Nas outras páginas o script termina aqui mesmo.
+   ========================================================================== */
+(function () {
+  "use strict";
 
   var campoBusca = document.getElementById("busca");
   var filtroCidade = document.getElementById("filtro-cidade");
@@ -48,6 +78,8 @@
     return;
   }
 
+  var pontosTuristicos = [];
+
   function normalizar(texto) {
     return String(texto || "")
       .toLowerCase()
@@ -55,9 +87,39 @@
       .replace(/[\u0300-\u036f]/g, "");
   }
 
+  /* Preenche o menu de cidades com as cidades que existem na base.
+     Assim você não precisa escrever as cidades no HTML: basta acrescentar
+     a atração no pontos.js e ela aparece aqui sozinha. */
+  function preencherCidades() {
+    if (!filtroCidade) {
+      return;
+    }
+
+    var cidades = [];
+    pontosTuristicos.forEach(function (ponto) {
+      if (cidades.indexOf(ponto.cidade) === -1) {
+        cidades.push(ponto.cidade);
+      }
+    });
+    cidades.sort();
+
+    filtroCidade.textContent = "";
+
+    var todas = document.createElement("option");
+    todas.value = "";
+    todas.textContent = "Todas as cidades";
+    filtroCidade.appendChild(todas);
+
+    cidades.forEach(function (cidade) {
+      var opcao = document.createElement("option");
+      opcao.value = cidade;
+      opcao.textContent = cidade;
+      filtroCidade.appendChild(opcao);
+    });
+  }
+
   function criarCartao(ponto) {
     var artigo = document.createElement("article");
-    var miniatura = document.createElement("span");
     var conteudo = document.createElement("div");
     var selo = document.createElement("span");
     var titulo = document.createElement("h3");
@@ -66,24 +128,36 @@
 
     artigo.className = "card-destino";
 
-    miniatura.className = "miniatura";
-    miniatura.setAttribute("aria-hidden", "true");
-    miniatura.textContent = ponto.icone || "📍";
+    if (ponto.foto) {
+      var img = document.createElement("img");
+      img.src = ponto.foto;
+      img.alt = ponto.nome + ", " + ponto.cidade;
+      img.width = 88;
+      img.height = 88;
+      img.loading = "lazy";
+      artigo.appendChild(img);
+    } else {
+      var miniatura = document.createElement("span");
+      miniatura.className = "miniatura";
+      miniatura.setAttribute("aria-hidden", "true");
+      miniatura.textContent = ponto.icone || "📍";
+      artigo.appendChild(miniatura);
+    }
 
     selo.className = "selo selo-verde";
     selo.textContent = ponto.cidade;
 
     link.href = ponto.pagina;
     link.textContent = ponto.nome;
-
-    descricao.textContent = ponto.cidade + " • " + ponto.pais;
-
     titulo.appendChild(link);
+
+    descricao.textContent = ponto.descricao
+      ? ponto.descricao + " • " + ponto.pais
+      : ponto.cidade + " • " + ponto.pais;
+
     conteudo.appendChild(selo);
     conteudo.appendChild(titulo);
     conteudo.appendChild(descricao);
-
-    artigo.appendChild(miniatura);
     artigo.appendChild(conteudo);
 
     return artigo;
@@ -148,5 +222,18 @@
     campoBusca.value = buscaInicial;
   }
 
-  filtrarPontos();
+  // Lê a base (arquivo pontos.js ou endereço na internet) e monta a lista.
+  if (typeof window.GOTRIP_CARREGAR_PONTOS === "function") {
+    window.GOTRIP_CARREGAR_PONTOS().then(function (pontos) {
+      pontosTuristicos = pontos;
+      preencherCidades();
+      filtrarPontos();
+    });
+  } else {
+    lista.textContent = "";
+    if (aviso) {
+      aviso.textContent = "Faltou carregar o arquivo base-atracoes.js ou pontos.js.";
+    }
+  }
 })();
+

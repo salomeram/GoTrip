@@ -6,31 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Veja os pontos turísticos de cada cidade no mapa GoTrip.">
   <title>GoTrip | Mapa</title>
-  <link rel="icon" type="image/png" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="microinteracoes.css">
 
   <!-- Leaflet: biblioteca do mapa -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  >
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
-
 <body id="topo">
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header>
-    <a href="home.html" class="logo">
-      <img src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
+    <a href="index.html" class="logo">
+      <img class="logo-tema-escuro" src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
+      <img class="logo-tema-claro" src="logo-gotrip-texto.svg" alt="GoTrip, página inicial" width="108" height="40">
     </a>
-
     <nav aria-label="Menu principal">
       <ul class="pilulas">
-        <li><a href="home.html">Início</a></li>
+        <li><a href="index.html">Início</a></li>
         <li><a href="destinos.html">Destinos</a></li>
         <li><a href="mapa.html" aria-current="page">Mapa</a></li>
         <li><a href="agenda.html">Agenda</a></li>
@@ -44,122 +39,31 @@
 
     <!-- ESCOLHA DA CIDADE -->
     <section id="vista-escolha">
-
-      <a class="voltar" href="home.html">
-        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-        Voltar para o início
-      </a>
-
+      <a class="voltar" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o início</a>
       <h1>Mapa</h1>
       <p>Escolha uma cidade para visualizar os pontos turísticos.</p>
-
-      <div class="lista-cartoes">
-
-        <article class="card-recurso">
-          <span class="icone icone-primaria">
-            <i class="fa-solid fa-location-dot"></i>
-          </span>
-          <div>
-            <h2><a href="mapa.html?cidade=roma">Roma, Itália</a></h2>
-            <p>8 lugares no mapa</p>
-          </div>
-        </article>
-
-        <article class="card-recurso">
-          <span class="icone icone-primaria">
-            <i class="fa-solid fa-location-dot"></i>
-          </span>
-          <div>
-            <h2><a href="mapa.html?cidade=paris">Paris, França</a></h2>
-            <p>3 lugares no mapa</p>
-          </div>
-        </article>
-
-        <article class="card-recurso">
-          <span class="icone icone-primaria">
-            <i class="fa-solid fa-location-dot"></i>
-          </span>
-          <div>
-            <h2><a href="mapa.html?cidade=lisboa">Lisboa, Portugal</a></h2>
-            <p>2 lugares no mapa</p>
-          </div>
-        </article>
-
-        <article class="card-recurso">
-          <span class="icone icone-primaria">
-            <i class="fa-solid fa-location-dot"></i>
-          </span>
-          <div>
-            <h2><a href="mapa.html?cidade=toquio">Tóquio, Japão</a></h2>
-            <p>2 lugares no mapa</p>
-          </div>
-        </article>
-
-        <article class="card-recurso">
-          <span class="icone icone-primaria">
-            <i class="fa-solid fa-location-dot"></i>
-          </span>
-          <div>
-            <h2><a href="mapa.html?cidade=rio">Rio de Janeiro, Brasil</a></h2>
-            <p>3 lugares no mapa</p>
-          </div>
-        </article>
-
-        <article class="card-recurso">
-          <span class="icone icone-primaria">
-            <i class="fa-solid fa-location-dot"></i>
-          </span>
-          <div>
-            <h2><a href="mapa.html?cidade=nova-york">Nova York, EUA</a></h2>
-            <p>3 lugares no mapa</p>
-          </div>
-        </article>
-
-      </div>
-
+      <!-- As cidades são criadas pelo mapa.js a partir do pontos.js -->
+      <div id="lista-cidades-mapa" class="lista-cartoes"></div>
     </section>
-
 
     <!-- MAPA DA CIDADE -->
     <section id="vista-cidade" hidden>
-
-      <a class="voltar" href="mapa.html">
-        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-        Escolher outra cidade
-      </a>
-
+      <a class="voltar" href="mapa.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Escolher outra cidade</a>
       <h1 id="titulo-cidade">Mapa da cidade</h1>
-
       <p>Explore os pontos turísticos e selecione um marcador para ver mais informações.</p>
-
       <div id="mapa-cidade" aria-label="Mapa interativo da cidade"></div>
-
       <p id="erro-mapa" role="status" aria-live="polite"></p>
-
       <ul class="legenda">
-        <li>
-          <span class="pin pin-azul"></span>
-          Atração
-        </li>
-        <li>
-          <span class="pin pin-verde"></span>
-          Aberto
-        </li>
-        <li>
-          <span class="pin pin-vermelho"></span>
-          Fechado
-        </li>
+        <li><span class="pin pin-azul"></span> Atração</li>
+        <li><span class="pin pin-verde"></span> Aberto</li>
+        <li><span class="pin pin-vermelho"></span> Fechado</li>
       </ul>
-
       <div id="cidade-info"></div>
-
     </section>
 
   </main>
 
-
   <footer>
-
     <nav aria-label="Menu do rodapé">
       <ul class="pilulas">
         <li><a href="comofunciona.html">Como funciona</a></li>
@@ -167,252 +71,17 @@
         <li><a href="sobre_a_equipe.html">Sobre</a></li>
       </ul>
     </nav>
-
     <address>
-      <a class="chip" href="mailto:contato@gotrip.com">
-        <i class="fa-regular fa-envelope"></i>
-        contato@gotrip.com
-      </a>
+      <a class="chip" href="mailto:contato@gotrip.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> contato@gotrip.com</a>
     </address>
-
     <p>© 2026 GoTrip. Todos os direitos reservados.</p>
-
   </footer>
-
 
   <!-- Leaflet: carregar antes do nosso código -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-
-  <script>
-    "use strict";
-
-    // DADOS DOS DESTINOS
-    var DADOS = {
-
-      "roma": {
-        nome: "Roma, Itália",
-        centro: [41.8902, 12.4922],
-        lugares: [
-          { nome: "Coliseu", lat: 41.8902, lng: 12.4922, estado: "azul", selo: "Atração", endereco: "Piazza del Colosseo, Roma", pagina: "coliseu.html" },
-          { nome: "Fórum Romano", lat: 41.8925, lng: 12.4853, estado: "azul", selo: "Atração", endereco: "Via della Salara Vecchia, Roma", pagina: "forumromano.html" },
-          { nome: "Vaticano", lat: 41.9022, lng: 12.4539, estado: "azul", selo: "Atração", endereco: "Viale Vaticano, Cidade do Vaticano", pagina: "vaticano.html" },
-          { nome: "Fontana di Trevi", lat: 41.9009, lng: 12.4833, estado: "azul", selo: "Atração", endereco: "Piazza di Trevi, Roma", pagina: "fontanaditrevi.html" },
-          { nome: "Panteão", lat: 41.8986, lng: 12.4769, estado: "azul", selo: "Atração", endereco: "Piazza della Rotonda, Roma", pagina: "panteao.html" },
-          { nome: "Trastevere", lat: 41.8869, lng: 12.4700, estado: "azul", selo: "Bairro", endereco: "Bairro de Trastevere, Roma", pagina: "transtevere.html" },
-          { nome: "Trattoria do Centro", lat: 41.8992, lng: 12.4731, estado: "verde", selo: "Aberto", endereco: "Centro histórico, Roma", pagina: "trattoria.html" },
-          { nome: "Museu", lat: 41.8934, lng: 12.4828, estado: "vermelho", selo: "Fechado", endereco: "Centro histórico, Roma", pagina: "museu.html" }
-        ]
-      },
-
-      "paris": {
-        nome: "Paris, França",
-        centro: [48.8584, 2.2945],
-        lugares: [
-          { nome: "Torre Eiffel", lat: 48.8584, lng: 2.2945, estado: "azul", selo: "Atração", endereco: "Champ de Mars, Paris", pagina: "torreeiffel.html" },
-          { nome: "Museu do Louvre", lat: 48.8606, lng: 2.3376, estado: "azul", selo: "Atração", endereco: "Rue de Rivoli, Paris", pagina: "louvre.html" },
-          { nome: "Rio Sena", lat: 48.8570, lng: 2.3413, estado: "azul", selo: "Passeio", endereco: "Margens do Sena, Paris", pagina: "riosena.html" }
-        ]
-      },
-
-      "lisboa": {
-        nome: "Lisboa, Portugal",
-        centro: [38.7172, -9.1390],
-        lugares: [
-          { nome: "Torre de Belém", lat: 38.6916, lng: -9.2160, estado: "azul", selo: "Atração", endereco: "Av. Brasília, Lisboa", pagina: "torredebelem.html" },
-          { nome: "Elétrico 28", lat: 38.7172, lng: -9.1360, estado: "azul", selo: "Passeio", endereco: "Martim Moniz, Lisboa", pagina: "eletrico28.html" }
-        ]
-      },
-
-      "toquio": {
-        nome: "Tóquio, Japão",
-        centro: [35.6870, 139.7500],
-        lugares: [
-          { nome: "Templo Senso-ji", lat: 35.7148, lng: 139.7967, estado: "azul", selo: "Atração", endereco: "2-3-1 Asakusa, Tóquio", pagina: "sensoji.html" },
-          { nome: "Shibuya", lat: 35.6595, lng: 139.7005, estado: "azul", selo: "Bairro", endereco: "Shibuya, Tóquio", pagina: "shibuya.html" }
-        ]
-      },
-
-      "rio": {
-        nome: "Rio de Janeiro, Brasil",
-        centro: [-22.9519, -43.1900],
-        lugares: [
-          { nome: "Cristo Redentor", lat: -22.9519, lng: -43.2105, estado: "azul", selo: "Atração", endereco: "Parque Nacional da Tijuca, Rio de Janeiro", pagina: "cristoredentor.html" },
-          { nome: "Pão de Açúcar", lat: -22.9496, lng: -43.1547, estado: "azul", selo: "Atração", endereco: "Av. Pasteur, Urca, Rio de Janeiro", pagina: "paodeacucar.html" },
-          { nome: "Praias de Copacabana", lat: -22.9711, lng: -43.1822, estado: "azul", selo: "Praia", endereco: "Copacabana, Rio de Janeiro", pagina: "praias.html" }
-        ]
-      },
-
-      "nova-york": {
-        nome: "Nova York, EUA",
-        centro: [40.7700, -73.9750],
-        lugares: [
-          { nome: "Central Park", lat: 40.7829, lng: -73.9654, estado: "azul", selo: "Parque", endereco: "Manhattan, Nova York", pagina: "centralpark.html" },
-          { nome: "Broadway", lat: 40.7590, lng: -73.9845, estado: "azul", selo: "Teatros", endereco: "Times Square, Manhattan", pagina: "broadway.html" },
-          { nome: "Museus de Nova York", lat: 40.7794, lng: -73.9632, estado: "azul", selo: "Atração", endereco: "Fifth Avenue, Manhattan", pagina: "museusny.html" }
-        ]
-      }
-
-    };
-
-
-    // INICIALIZAÇÃO DO MAPA
-    document.addEventListener("DOMContentLoaded", function () {
-
-      var parametros = new URLSearchParams(window.location.search);
-      var chave = parametros.get("cidade");
-
-      var vistaEscolha = document.getElementById("vista-escolha");
-      var vistaCidade = document.getElementById("vista-cidade");
-
-      // Sem cidade selecionada: mostrar a lista de cidades.
-      if (!chave) {
-        return;
-      }
-
-      // Verifica se a cidade existe.
-      if (!Object.prototype.hasOwnProperty.call(DADOS, chave)) {
-        return;
-      }
-
-      var cidade = DADOS[chave];
-      var lugarEscolhido = parametros.get("lugar");
-
-      var lugaresMostrar = cidade.lugares;
-
-      if (lugarEscolhido) {
-        lugaresMostrar = cidade.lugares.filter(function (lugar) {
-          return lugar.id === lugarEscolhido;
-        });
-      }
-
-      vistaEscolha.hidden = true;
-      vistaCidade.hidden = false;
-
-      document.getElementById("titulo-cidade").textContent = cidade.nome;
-
-      var erroMapa = document.getElementById("erro-mapa");
-      var mapaElemento = document.getElementById("mapa-cidade");
-
-      if (!window.L) {
-        erroMapa.textContent = "Não foi possível carregar o mapa. Verifique sua conexão com a internet e atualize a página.";
-        return;
-      }
-
-      // Cria o mapa.
-      var mapa = L.map("mapa-cidade", {
-        zoomControl: true,
-        scrollWheelZoom: false
-      });
-
-      // Mapa real com ruas e nomes de lugares.
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(mapa);
-
-      // Marcadores.
-      var pontos = [];
-
-      lugaresMostrar.forEach(function (lugar) {
-
-        var cor = lugar.estado;
-
-        var marcador = L.circleMarker(
-          [lugar.lat, lugar.lng],
-          {
-            radius: 9,
-            color: "#ffffff",
-            weight: 2,
-            fillColor:
-              cor === "verde" ? "#15803d" :
-              cor === "vermelho" ? "#b91c1c" :
-              "#2563eb",
-            fillOpacity: 1
-          }
-        ).addTo(mapa);
-
-        var popup =
-          "<strong>" + lugar.nome + "</strong>" +
-          "<br>" + lugar.selo +
-          "<br><a href='" + lugar.pagina + "'>Ver detalhes</a>";
-
-        marcador.bindPopup(popup);
-
-        pontos.push([lugar.lat, lugar.lng]);
-
-      });
-
-      // Ajusta o zoom para mostrar todos os marcadores.
-      if (pontos.length > 1) {
-        mapa.fitBounds(pontos, {
-          padding: [35, 35],
-          maxZoom: 15
-        });
-      } else if (pontos.length === 1) {
-        mapa.setView(pontos[0], 15);
-      } else {
-        mapa.setView(cidade.centro, 13);
-      }
-
-      // Corrige o tamanho do mapa depois de abrir a seção.
-      setTimeout(function () {
-        mapa.invalidateSize();
-      }, 300);
-
-      // Lista de lugares abaixo do mapa.
-      var info = document.getElementById("cidade-info");
-
-      var tituloLista = document.createElement("h2");
-      tituloLista.textContent = "Lugares em " + cidade.nome.split(",")[0];
-
-      info.appendChild(tituloLista);
-
-      var lista = document.createElement("ul");
-      lista.className = "lista-lugares";
-
-      lugaresMostrar.forEach(function (lugar) {
-
-        var item = document.createElement("li");
-
-        var link = document.createElement("a");
-        link.href = lugar.pagina;
-        link.textContent = lugar.nome;
-
-        var selo = document.createElement("span");
-        selo.className = "selo";
-
-        if (lugar.estado === "verde") {
-          selo.classList.add("selo-verde");
-        }
-
-        if (lugar.estado === "vermelho") {
-          selo.classList.add("selo-vermelho");
-        }
-
-        selo.textContent = lugar.selo;
-
-        item.appendChild(link);
-        item.appendChild(selo);
-
-        lista.appendChild(item);
-
-      });
-
-      info.appendChild(lista);
-
-      // Avisa caso os mapas não consigam carregar as imagens das ruas.
-      var camadaMapa = document.querySelector(".leaflet-tile-pane");
-
-      if (camadaMapa) {
-        mapa.on("tileerror", function () {
-          erroMapa.textContent = "Algumas partes do mapa não carregaram. Verifique sua conexão com a internet.";
-        });
-      }
-
-    });
-
-  </script>
-
+  <script src="pontos.js"></script>
+  <script src="base-atracoes.js"></script>
+  <script src="mapa.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
